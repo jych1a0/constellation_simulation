@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  shared_network:
+    external: true
+
+services:
+  web2:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/constellation_simulation
+    ports:
+      - "30302:30302"
+    depends_on:
+      - postgresdb
+  postgresdb:
+    image: postgres:16.0
+    environment:
+      POSTGRES_DB: agent_layer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
