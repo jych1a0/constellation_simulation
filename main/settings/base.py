@@ -41,6 +41,7 @@ ALLOWED_HOSTS = [allowed_host]
 # Application definition
 
 INSTALLED_APPS = [
+    'main.apps.meta_data_mgt',
     'main.apps.inference_layer_data_mgt',
     'main.apps.model_file_mgt',
     'main.apps.central_layer_data_mgt',
