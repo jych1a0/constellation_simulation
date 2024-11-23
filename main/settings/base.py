@@ -12,16 +12,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from dotenv import load_dotenv
 from pathlib import Path
-from mongoengine import connect
+
 
 load_dotenv()
 secret_keys = os.environ.get('SECRET_KEY')
 debug_mode = os.environ.get('DEBUG')
 allowed_host = os.environ.get('ALLOWED_HOSTS')
-mongo_path = os.environ.get('HTTP_MONGO_DATABASE_PATH')
 cors_allowed_origins=os.environ.get('CORS_ALLOWED_ORIGINS')
 
-connect(host=mongo_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,12 +37,9 @@ DEBUG = debug_mode
 ALLOWED_HOSTS = [allowed_host]
 
 # Application definition
-
+    # 'main.apps.meta_data_mgt',
 INSTALLED_APPS = [
     'main.apps.meta_data_mgt',
-    'main.apps.inference_layer_data_mgt',
-    'main.apps.model_file_mgt',
-    'main.apps.central_layer_data_mgt',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'mongoengine'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +61,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [cors_allowed_origins]
+CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_allowed_origins.split(',') if origin.strip()]
 
 ROOT_URLCONF = 'main.urls'
 

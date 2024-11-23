@@ -16,12 +16,12 @@ Including another URLconf
 import os
 from dotenv import load_dotenv
 from django.contrib import admin
-from django.urls import path, include, include
+from django.urls import path, include
 
 load_dotenv()
-data_mgt_version = os.environ.get("DATA_MGT_VERSION")
 
 urlpatterns = [
     path('api/1.0/', include('main.apps.meta_data_mgt.api.urls')),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls)
 ]
+
