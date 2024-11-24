@@ -1,5 +1,5 @@
 from django.urls import path
-from main.apps.meta_data_mgt.actors.UserManager import UserManager  # 確保導入類而不是模組
+from main.apps.meta_data_mgt.actors.UserManager import UserManager
 from main.apps.meta_data_mgt.actors.HandoverManager import HandoverManager
 
 urlpatterns = [

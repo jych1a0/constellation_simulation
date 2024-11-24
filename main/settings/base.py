@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [allowed_host]
 # Application definition
     # 'main.apps.meta_data_mgt',
 INSTALLED_APPS = [
+    'main.apps.simulation_data_mgt',
     'main.apps.meta_data_mgt',
     'django.contrib.admin',
     'django.contrib.auth',

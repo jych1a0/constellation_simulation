@@ -1,4 +1,23 @@
-# env
-.env
+# Python
 __pycache__/
 *.pyc
+
+# Virtual Environment
+.env
+
+# Package Management
+Pipfile
+Pipfile.lock
+
+# Logs
+logs/*
+
+# Database
+postgres_data/*
+
+# Django Migrations
+main/apps/meta_data_mgt/migrations/*
+main/apps/simulation_data_mgt/migrations/*
+
+# Application Data
+simulation_result/*
