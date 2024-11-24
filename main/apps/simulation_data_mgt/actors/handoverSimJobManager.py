@@ -18,7 +18,7 @@ def terminate_handover_sim_job(handover_uid):
     try:
         handover = Handover.objects.get(handover_uid=handover_uid)
 
-        # 找到所有相关的未完成模拟作业
+        # 找到所有相關的未完成模擬作業
         sim_jobs = HandoverSimJob.objects.filter(
             f_handover_uid=handover,
             handoverSimJob_end_time__isnull=True
@@ -26,17 +26,17 @@ def terminate_handover_sim_job(handover_uid):
 
         container_name = f"handoverSimulation_{handover_uid}"
 
-        # 尝试停止和移除 Docker 容器
+        # 嘗試停止和移除 Docker 容器
         try:
-            # 使用 docker stop 命令终止容器
+            # 使用 docker stop 命令終止容器
             subprocess.run(
                 ['docker', 'stop', container_name],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                timeout=30  # 设置超时时间
+                timeout=30  # 設置超時時間
             )
 
-            # 确保容器被移除
+            # 確保容器被移除
             subprocess.run(
                 ['docker', 'rm', '-f', container_name],
                 stdout=subprocess.PIPE,
@@ -44,47 +44,46 @@ def terminate_handover_sim_job(handover_uid):
                 timeout=30
             )
         except subprocess.TimeoutExpired:
-            # 如果 docker stop 超时，强制移除容器
+            # 如果 docker stop 超時，強制移除容器
             subprocess.run(
                 ['docker', 'rm', '-f', container_name],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
             )
         except Exception as e:
-            print(f"停止 Docker 容器错误: {str(e)}")
+            print(f"Docker container stop error: {str(e)}")
 
-        # 删除所有相关的未完成模拟作业
+        # 刪除所有相關的未完成模擬作業
         sim_jobs.delete()
 
-        # 更新 handover 状态
+        # 更新 handover 狀態
         handover.handover_status = "simulation fail"
         handover.save()
 
-        print(f"已终止所有相关模拟作业 handover_uid: {handover_uid}")
+        print(f"All related simulation jobs terminated for handover_uid: {handover_uid}")
         return True
 
     except Exception as e:
-        print(f"终止模拟作业错误: {str(e)}")
+        print(f"Simulation job termination error: {str(e)}")
         return False
-
 
 def run_handover_simulation_async(handover_uid):
     sim_job = None
     try:
-        # 获取 handover 实例
+        # 獲取 handover 實例
         handover = Handover.objects.get(handover_uid=handover_uid)
 
-        # 创建新的 HandoverSimJob 记录
+        # 建立新的 HandoverSimJob 記錄
         sim_job = HandoverSimJob.objects.create(
             f_handover_uid=handover,
             handoverSimJob_start_time=timezone.now()
         )
 
-        # 更新状态为执行中
+        # 更新狀態為執行中
         handover.handover_status = "processing"
         handover.save()
 
-        # 定义输出目录，包含用户UID和handover_uid
+        # 定義輸出目錄，包含使用者UID和handover_uid
         simulation_result_dir = os.path.join(
             'simulation_result', 'handover_simulation',
             str(handover.f_user_uid.user_uid),
@@ -92,13 +91,13 @@ def run_handover_simulation_async(handover_uid):
         )
         print(f"Simulation result directory: {simulation_result_dir}")
 
-        # 确保输出目录存在
+        # 確保輸出目錄存在
         os.makedirs(simulation_result_dir, exist_ok=True)
 
-        # 构建 docker run 命令
+        # 構建 docker run 命令
         container_name = f"handoverSimulation_{handover_uid}"
 
-        # 如果 handover_parameter 是字典，转换为正确格式的字符串
+        # 如果 handover_parameter 是字典，轉換為正確格式的字串
         if isinstance(handover.handover_parameter, dict):
             simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(handover.handover_parameter)}'"
         else:
@@ -110,8 +109,8 @@ def run_handover_simulation_async(handover_uid):
 
         docker_command = [
             'docker', 'run',
-            '-d',  # 在后台运行
-            '--rm',  # 容器停止后自动移除
+            '-d',  # 在背景執行
+            '--rm',  # 容器停止後自動移除
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
             'handoversimulationimage',
@@ -120,20 +119,20 @@ def run_handover_simulation_async(handover_uid):
 
         print(f"Docker command: {' '.join(docker_command)}")
 
-        # 执行 docker 命令
+        # 執行 docker 命令
         simulation_process = subprocess.Popen(
             docker_command,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
 
-        # 等待容器启动并获取容器 ID
+        # 等待容器啟動並獲取容器 ID
         stdout, stderr = simulation_process.communicate()
 
         if simulation_process.returncode != 0:
-            raise Exception(f"无法启动 Docker 容器: {stderr.decode()}")
+            raise Exception(f"Unable to start Docker container: {stderr.decode()}")
 
-        # 获取容器的进程 ID
+        # 獲取容器的程序 ID
         container_info = subprocess.run(
             ['docker', 'inspect', '--format',
                 '{{.State.Pid}}', container_name],
@@ -143,24 +142,24 @@ def run_handover_simulation_async(handover_uid):
 
         if container_info.returncode == 0:
             container_pid = int(container_info.stdout.decode().strip())
-            # 保存容器的进程 ID
+            # 儲存容器的程序 ID
             sim_job.handoverSimJob_process_id = container_pid
             sim_job.save()
         else:
-            raise Exception("无法获取容器进程 ID")
+            raise Exception("Unable to get container process ID")
 
-        # 设置超时时间（例如：60分钟）
+        # 設置超時時間（例如：60分鐘）
         timeout = 60 * 60  # 秒
         start_time = time.time()
 
         while True:
-            # 检查是否超时
+            # 檢查是否超時
             if time.time() - start_time > timeout:
-                print(f"模拟超时 handover_uid: {handover_uid}")
+                print(f"Simulation timeout for handover_uid: {handover_uid}")
                 terminate_handover_sim_job(handover_uid)
                 return
 
-            # 检查 Docker 容器是否存在
+            # 檢查 Docker 容器是否存在
             container_check = subprocess.run(
                 ['docker', 'ps', '-q', '-f', f'name={container_name}'],
                 stdout=subprocess.PIPE,
@@ -168,40 +167,38 @@ def run_handover_simulation_async(handover_uid):
             )
             container_exists = bool(container_check.stdout.decode().strip())
 
-            # 检查结果文件是否存在且有内容
+            # 檢查結果檔案是否存在且有內容
             results_exist = os.path.exists(
                 simulation_result_dir) and os.listdir(simulation_result_dir)
 
             if results_exist and not container_exists:
-                # 如果有结果文件且容器不存在，标记为完成
+                # 如果有結果檔案且容器不存在，標記為完成
                 sim_job.handoverSimJob_end_time = timezone.now()
                 sim_job.save()
                 handover.handover_status = "completed"
                 # 更新 handover_data_path
                 handover.handover_data_path = simulation_result_dir
                 handover.save()
-                print(f"模拟成功完成，结果已保存 handover_uid: {handover_uid}")
+                print(f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
                 return
 
-            # 如果容器已经停止但没有结果文件，判为失败
+            # 如果容器已經停止但沒有結果檔案，判定為失敗
             if not container_exists and not results_exist:
-                raise Exception("容器已停止但未找到结果文件，模拟失败")
+                raise Exception("Container stopped but no results found, simulation failed")
 
-            # 等待一段时间再检查
+            # 等待一段時間再檢查
             time.sleep(10)
 
-            # 重新从数据库获取 handover 状态
+            # 重新從資料庫獲取 handover 狀態
             handover.refresh_from_db()
             if handover.handover_status == "simulation fail":
                 return
 
     except Exception as e:
-        print(f"模拟错误: {str(e)}")
+        print(f"Simulation error: {str(e)}")
         if sim_job is not None:
             sim_job.delete()
         terminate_handover_sim_job(handover_uid)
-        # 不需要再次更新 handover 状态，terminate_handover_sim_job 已经处理
-
 
 class handoverSimJobManager:
     @log_trigger('INFO')
@@ -210,47 +207,47 @@ class handoverSimJobManager:
     def run_handover_sim_job(request):
         if request.method == 'POST':
             try:
-                # 解析 JSON 数据
+                # 解析 JSON 資料
                 data = json.loads(request.body)
 
-                # 获取必要的参数
+                # 獲取必要的參數
                 handover_uid = data.get('handover_uid')
 
-                # 验证必要参数
+                # 驗證必要參數
                 if not handover_uid:
                     return JsonResponse({
                         'status': 'error',
-                        'message': '缺少 handover_uid 参数'
+                        'message': '缺少 handover_uid 參數'
                     }, status=400)
 
-                # 检查 handover 是否存在
+                # 檢查 handover 是否存在
                 try:
                     handover = Handover.objects.get(handover_uid=handover_uid)
                 except Handover.DoesNotExist:
                     return JsonResponse({
                         'status': 'error',
-                        'message': '找不到对应的 Handover'
+                        'message': '找不到對應的 Handover'
                     }, status=404)
 
-                # 检查是否有 handover_parameter
+                # 檢查是否有 handover_parameter
                 if not handover.handover_parameter:
                     return JsonResponse({
                         'status': 'error',
-                        'message': 'Handover 缺少参数 handover_parameter'
+                        'message': 'Handover 缺少參數 handover_parameter'
                     }, status=400)
 
-                # 检查当前状态是否为执行中
+                # 檢查目前狀態是否為執行中
                 if handover.handover_status == "processing":
                     return JsonResponse({
                         'status': 'info',
-                        'message': '模拟正在执行中，请稍后查询结果',
+                        'message': '模擬正在執行中，請稍後查詢結果',
                         'data': {
                             'handover_uid': str(handover_uid),
                             'handover_status': handover.handover_status
                         }
                     })
 
-                # 检查是否有正在执行的模拟作业
+                # 檢查是否有正在執行的模擬作業
                 active_sim_job = HandoverSimJob.objects.filter(
                     f_handover_uid=handover,
                     handoverSimJob_end_time__isnull=True
@@ -259,19 +256,19 @@ class handoverSimJobManager:
                 if active_sim_job:
                     return JsonResponse({
                         'status': 'info',
-                        'message': '已存在正在执行的模拟作业',
+                        'message': '已存在正在執行的模擬作業',
                         'data': {
                             'handoverSimJob_uid': str(active_sim_job.handoverSimJob_uid),
                             'handover_status': handover.handover_status
                         }
                     })
 
-                # 检查当前状态和数据路径
+                # 檢查目前狀態和資料路徑
                 if handover.handover_status == "completed":
                     if handover.handover_data_path and os.path.exists(handover.handover_data_path):
                         return JsonResponse({
                             'status': 'success',
-                            'message': '模拟已经执行完成，结果可供使用',
+                            'message': '模擬已經執行完成，結果可供使用',
                             'data': {
                                 'handover_uid': str(handover_uid),
                                 'handover_status': handover.handover_status,
@@ -279,21 +276,21 @@ class handoverSimJobManager:
                             }
                         })
                     else:
-                        # 如果状态是 completed 但找不到数据，设置状态为 simulation fail 并继续
+                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation fail 並繼續
                         handover.handover_status = "simulation fail"
                         handover.save()
 
-                # 在新的线程中执行模拟
+                # 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
                     args=(handover_uid,)
                 )
                 simulation_thread.start()
 
-                # 立即返回响应
+                # 立即返回回應
                 return JsonResponse({
                     'status': 'success',
-                    'message': '模拟作业已成功启动',
+                    'message': '模擬作業已成功啟動',
                     'data': {
                         'handover_uid': str(handover_uid),
                         'handover_status': 'processing',
@@ -305,7 +302,7 @@ class handoverSimJobManager:
             except json.JSONDecodeError:
                 return JsonResponse({
                     'status': 'error',
-                    'message': '无效的 JSON 数据'
+                    'message': '無效的 JSON 資料'
                 }, status=400)
 
             except Exception as e:
@@ -319,7 +316,7 @@ class handoverSimJobManager:
     @csrf_exempt
     def delete_handover_sim_result(request):
         try:
-            # 解析請求數據
+            # 解析請求資料
             data = json.loads(request.body)
             handover_uid = data.get('handover_uid')
 
