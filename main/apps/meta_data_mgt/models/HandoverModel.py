@@ -14,6 +14,7 @@ class Handover(models.Model):
     handover_data_path = models.CharField(max_length=255)
     handover_create_time = models.DateTimeField(default=timezone.now)
     handover_update_time = models.DateTimeField(auto_now=True)  # 自動更新時間
+    handover_simulation_result = models.JSONField(null=True, blank=True)  # 新增的欄位
     f_user_uid = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

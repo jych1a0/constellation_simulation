@@ -4,6 +4,7 @@ from django.http import JsonResponse
 import json
 from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.apps.simulation_data_mgt.models.handoverSimJobModel import HandoverSimJob
+from main.apps.simulation_data_mgt.services.analyzeHandoverResult import analyzeHandoverResult
 from main.utils.logger import log_trigger, log_writer
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -14,6 +15,7 @@ import time
 import shutil
 
 
+@log_trigger('INFO')
 def terminate_handover_sim_job(handover_uid):
     try:
         handover = Handover.objects.get(handover_uid=handover_uid)
@@ -60,13 +62,16 @@ def terminate_handover_sim_job(handover_uid):
         handover.handover_status = "simulation fail"
         handover.save()
 
-        print(f"All related simulation jobs terminated for handover_uid: {handover_uid}")
+        print(
+            f"All related simulation jobs terminated for handover_uid: {handover_uid}")
         return True
 
     except Exception as e:
         print(f"Simulation job termination error: {str(e)}")
         return False
 
+
+@log_trigger('INFO')
 def run_handover_simulation_async(handover_uid):
     sim_job = None
     try:
@@ -130,7 +135,8 @@ def run_handover_simulation_async(handover_uid):
         stdout, stderr = simulation_process.communicate()
 
         if simulation_process.returncode != 0:
-            raise Exception(f"Unable to start Docker container: {stderr.decode()}")
+            raise Exception(
+                f"Unable to start Docker container: {stderr.decode()}")
 
         # 獲取容器的程序 ID
         container_info = subprocess.run(
@@ -172,6 +178,9 @@ def run_handover_simulation_async(handover_uid):
                 simulation_result_dir) and os.listdir(simulation_result_dir)
 
             if results_exist and not container_exists:
+
+                handover_simulation_result = analyzeHandoverResult(simulation_result_dir)
+                handover.handover_simulation_result = handover_simulation_result
                 # 如果有結果檔案且容器不存在，標記為完成
                 sim_job.handoverSimJob_end_time = timezone.now()
                 sim_job.save()
@@ -179,12 +188,14 @@ def run_handover_simulation_async(handover_uid):
                 # 更新 handover_data_path
                 handover.handover_data_path = simulation_result_dir
                 handover.save()
-                print(f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
+                print(
+                    f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
                 return
 
             # 如果容器已經停止但沒有結果檔案，判定為失敗
             if not container_exists and not results_exist:
-                raise Exception("Container stopped but no results found, simulation failed")
+                raise Exception(
+                    "Container stopped but no results found, simulation failed")
 
             # 等待一段時間再檢查
             time.sleep(10)
@@ -199,6 +210,7 @@ def run_handover_simulation_async(handover_uid):
         if sim_job is not None:
             sim_job.delete()
         terminate_handover_sim_job(handover_uid)
+
 
 class handoverSimJobManager:
     @log_trigger('INFO')
@@ -334,6 +346,11 @@ class handoverSimJobManager:
                     'status': 'error',
                     'message': 'Handover not found'
                 }, status=404)
+            
+            # 刪除所有關聯的 HandoverSimJob 記錄
+            HandoverSimJob.objects.filter(
+                f_handover_uid=handover  # 使用 handover 物件而不是 handover_uid 字串
+            ).delete()
 
             # 檢查是否有 handover_data_path
             if not handover.handover_data_path:
@@ -350,7 +367,7 @@ class handoverSimJobManager:
                     'message': f'Simulation result directory not found: {handover.handover_data_path}'
                 }, status=404)
 
-            # 執行刪除
+            # 執行刪除資料夾
             shutil.rmtree(full_path)
 
             # 更新狀態
@@ -359,7 +376,7 @@ class handoverSimJobManager:
 
             return JsonResponse({
                 'status': 'success',
-                'message': 'Handover simulation result deleted successfully'
+                'message': 'Handover simulation result and related jobs deleted successfully'
             })
 
         except json.JSONDecodeError:

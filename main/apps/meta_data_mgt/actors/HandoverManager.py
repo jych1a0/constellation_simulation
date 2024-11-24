@@ -132,6 +132,7 @@ class HandoverManager:
                         'handover_status': handover.handover_status,
                         'handover_parameter': handover.handover_parameter,
                         'handover_data_path': handover.handover_data_path,
+                        'handover_simulation_result': handover.handover_simulation_result,
                         'handover_create_time': handover.handover_create_time.strftime('%Y-%m-%dT%H:%M:%SZ') if handover.handover_create_time else None,
                         'handover_update_time': handover.handover_update_time.strftime('%Y-%m-%dT%H:%M:%SZ') if handover.handover_update_time else None
                     })
