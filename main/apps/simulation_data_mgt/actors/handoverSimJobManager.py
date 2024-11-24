@@ -59,7 +59,7 @@ def terminate_handover_sim_job(handover_uid):
         sim_jobs.delete()
 
         # 更新 handover 狀態
-        handover.handover_status = "simulation fail"
+        handover.handover_status = "simulation_failed"
         handover.save()
 
         print(
@@ -178,31 +178,46 @@ def run_handover_simulation_async(handover_uid):
                 simulation_result_dir) and os.listdir(simulation_result_dir)
 
             if results_exist and not container_exists:
-
-                handover_simulation_result = analyzeHandoverResult(simulation_result_dir)
-                handover.handover_simulation_result = handover_simulation_result
-                # 如果有結果檔案且容器不存在，標記為完成
-                sim_job.handoverSimJob_end_time = timezone.now()
-                sim_job.save()
-                handover.handover_status = "completed"
-                # 更新 handover_data_path
-                handover.handover_data_path = simulation_result_dir
-                handover.save()
-                print(
-                    f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
-                return
+                
+                try:
+                    handover_simulation_result = analyzeHandoverResult(simulation_result_dir)
+                    
+                    if handover_simulation_result is not None:  # 使用 is not None 更精確
+                        # 更新 handover 資料
+                        handover.handover_simulation_result = handover_simulation_result
+                        handover.handover_status = "completed"
+                        handover.handover_data_path = simulation_result_dir
+                        handover.save()
+                        
+                        # 更新模擬工作狀態
+                        sim_job.handoverSimJob_end_time = timezone.now()
+                        sim_job.save()
+                        
+                        print(f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
+                        return
+                    else:
+                        handover.handover_status = "simulation_failed"  # 使用底線分隔更一致
+                        handover.save()  # 別忘了儲存狀態改變
+                        
+                        print(f"simulation_failed: No valid results for handover_uid: {handover_uid}")
+                        
+                except Exception as e:
+                    # 錯誤處理
+                    error_message = f"Error processing simulation results: {str(e)}"
+                    handover.handover_status = "error"
+                    handover.save()
 
             # 如果容器已經停止但沒有結果檔案，判定為失敗
             if not container_exists and not results_exist:
                 raise Exception(
-                    "Container stopped but no results found, simulation failed")
+                    "Container stopped but no results found, simulation_failed")
 
             # 等待一段時間再檢查
             time.sleep(10)
 
             # 重新從資料庫獲取 handover 狀態
             handover.refresh_from_db()
-            if handover.handover_status == "simulation fail":
+            if handover.handover_status == "simulation_failed":
                 return
 
     except Exception as e:
@@ -288,8 +303,8 @@ class handoverSimJobManager:
                             }
                         })
                     else:
-                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation fail 並繼續
-                        handover.handover_status = "simulation fail"
+                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation_failed 並繼續
+                        handover.handover_status = "simulation_failed"
                         handover.save()
 
                 # 在新的執行緒中執行模擬
