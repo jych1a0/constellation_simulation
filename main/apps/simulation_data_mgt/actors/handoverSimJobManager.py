@@ -318,18 +318,8 @@ class handoverSimJobManager:
                         # 如果狀態是 completed 但找不到資料，設置狀態為 simulation_failed
                         handover.handover_status = "simulation_failed"
                         handover.save()
-
-                # 4. 建立新的 HandoverSimJob
-                new_sim_job = HandoverSimJob.objects.create(
-                    f_handover_uid=handover,
-                    handoverSimJob_start_time=timezone.now()
-                )
-
-                # 5. 更新 Handover 狀態
-                handover.handover_status = 'processing'
-                handover.save()
-
-                # 6. 在新的執行緒中執行模擬
+                        
+                # 4. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
                      args=(handover_uid,)
@@ -342,7 +332,6 @@ class handoverSimJobManager:
                     'message': '模擬作業已成功啟動',
                     'data': {
                         'handover_uid': str(handover_uid),
-                        'handoverSimJob_uid': str(new_sim_job.handoverSimJob_uid),
                         'handover_status': 'processing',
                         'handover_parameter': handover.handover_parameter,
                         'handover_data_path': handover.handover_data_path
