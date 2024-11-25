@@ -265,42 +265,43 @@ class handoverSimJobManager:
                         'message': 'Handover 缺少參數 handover_parameter'
                     }, status=400)
 
-                # 獲取使用者的所有 handover_uids
-                user_handover_uids = Handover.objects.filter(
-                    f_user_uid=handover.f_user_uid
-                ).values_list('handover_uid', flat=True)
-
-                # 檢查這些 handover_uid 是否有任何一個有尚未完成的 HandoverSimJob
-                active_sim_job = HandoverSimJob.objects.filter(
-                    f_handover_uid__handover_uid__in=user_handover_uids,
+                # 1. 檢查當前 handover 是否有正在執行的模擬作業
+                current_sim_job = HandoverSimJob.objects.filter(
+                    f_handover_uid=handover,
                     handoverSimJob_end_time__isnull=True
                 ).first()
 
-                # 如果找到正在執行的作業，返回對應訊息
-                if active_sim_job:
-                    # 如果正在執行的是當前的 handover
-                    if active_sim_job.f_handover_uid.handover_uid == handover_uid:
-                        return JsonResponse({
-                            'status': 'info',
-                            'message': '此 Handover 模擬正在執行中，請稍後查詢結果',
-                            'data': {
-                                'handover_uid': str(handover_uid),
-                                'handover_status': 'processing'
-                            }
-                        })
-                    # 如果是其他 handover 在執行
-                    else:
-                        return JsonResponse({
-                            'status': 'info',
-                            'message': '使用者已有其他正在執行的模擬作業',
-                            'data': {
-                                'handoverSimJob_uid': str(active_sim_job.handoverSimJob_uid),
-                                'handover_uid': str(active_sim_job.f_handover_uid.handover_uid),
-                                'handover_status': active_sim_job.f_handover_uid.handover_status
-                            }
-                        })
+                if current_sim_job:
+                    return JsonResponse({
+                        'status': 'info',
+                        'message': '此 Handover 正在執行模擬作業中',
+                        'data': {
+                            'handoverSimJob_uid': str(current_sim_job.handoverSimJob_uid),
+                            'handover_uid': str(handover_uid),
+                            'handover_status': handover.handover_status
+                        }
+                    })
 
-                # 檢查目前狀態和資料路徑
+                # 2. 檢查同一使用者是否有其他正在執行的模擬作業
+                other_sim_job = HandoverSimJob.objects.filter(
+                    f_handover_uid__f_user_uid=handover.f_user_uid,
+                    f_handover_uid__handover_uid__ne=handover_uid,
+                    handoverSimJob_end_time__isnull=True
+                ).select_related('f_handover_uid').first()
+
+                if other_sim_job:
+                    return JsonResponse({
+                        'status': 'info',
+                        'message': '使用者已有其他正在執行的模擬作業',
+                        'data': {
+                            'handoverSimJob_uid': str(other_sim_job.handoverSimJob_uid),
+                            'handover_uid': str(other_sim_job.f_handover_uid.handover_uid),
+                            'current_handover_uid': str(handover_uid),  # 加入當前請求的 handover_uid
+                            'handover_status': other_sim_job.f_handover_uid.handover_status
+                        }
+                    })
+
+                # 3. 檢查當前 handover 狀態
                 if handover.handover_status == "completed":
                     if handover.handover_data_path and os.path.exists(handover.handover_data_path):
                         return JsonResponse({
@@ -313,14 +314,24 @@ class handoverSimJobManager:
                             }
                         })
                     else:
-                        # 如果狀態是 completed 但找不到資料，設定狀態為 simulation_failed 並繼續
+                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation_failed
                         handover.handover_status = "simulation_failed"
                         handover.save()
 
-                # 在新的執行緒中執行模擬
+                # 4. 建立新的 HandoverSimJob
+                new_sim_job = HandoverSimJob.objects.create(
+                    f_handover_uid=handover,
+                    handoverSimJob_start_time=timezone.now()
+                )
+
+                # 5. 更新 Handover 狀態
+                handover.handover_status = 'processing'
+                handover.save()
+
+                # 6. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
-                    args=(handover_uid,)
+                    args=(handover_uid, str(new_sim_job.handoverSimJob_uid))
                 )
                 simulation_thread.start()
 
@@ -330,6 +341,7 @@ class handoverSimJobManager:
                     'message': '模擬作業已成功啟動',
                     'data': {
                         'handover_uid': str(handover_uid),
+                        'handoverSimJob_uid': str(new_sim_job.handoverSimJob_uid),
                         'handover_status': 'processing',
                         'handover_parameter': handover.handover_parameter,
                         'handover_data_path': handover.handover_data_path
@@ -347,7 +359,7 @@ class handoverSimJobManager:
                     'status': 'error',
                     'message': str(e)
                 }, status=500)
-
+        
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt
