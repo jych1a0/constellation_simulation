@@ -285,8 +285,9 @@ class handoverSimJobManager:
                 # 2. 檢查同一使用者是否有其他正在執行的模擬作業
                 other_sim_job = HandoverSimJob.objects.filter(
                     f_handover_uid__f_user_uid=handover.f_user_uid,
-                    f_handover_uid__handover_uid__ne=handover_uid,
                     handoverSimJob_end_time__isnull=True
+                ).exclude(
+                    f_handover_uid__handover_uid=handover_uid
                 ).select_related('f_handover_uid').first()
 
                 if other_sim_job:
