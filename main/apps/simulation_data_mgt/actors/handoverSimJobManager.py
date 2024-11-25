@@ -332,7 +332,7 @@ class handoverSimJobManager:
                 # 6. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
-                    args=(handover_uid, str(new_sim_job.handoverSimJob_uid))
+                     args=(handover_uid,)
                 )
                 simulation_thread.start()
 
