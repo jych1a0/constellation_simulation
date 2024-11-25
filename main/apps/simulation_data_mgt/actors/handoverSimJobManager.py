@@ -193,7 +193,7 @@ def run_handover_simulation_async(handover_uid):
                         sim_job.handoverSimJob_end_time = timezone.now()
                         sim_job.save()
                         
-                        shutil.rmtree(simulation_result_dir)
+                        # shutil.rmtree(simulation_result_dir)
 
                         print(f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
                         return
@@ -318,7 +318,7 @@ class handoverSimJobManager:
                         # 如果狀態是 completed 但找不到資料，設置狀態為 simulation_failed
                         handover.handover_status = "simulation_failed"
                         handover.save()
-                        
+
                 # 4. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
