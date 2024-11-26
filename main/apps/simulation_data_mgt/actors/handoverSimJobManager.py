@@ -5,6 +5,7 @@ import json
 from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.apps.simulation_data_mgt.models.handoverSimJobModel import HandoverSimJob
 from main.apps.simulation_data_mgt.services.analyzeHandoverResult import analyzeHandoverResult
+from main.apps.simulation_data_mgt.services.genHandoverResultPDF import genHandoverResultPDF
 from main.utils.logger import log_trigger, log_writer
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -13,6 +14,8 @@ from django.utils import timezone
 import subprocess
 import time
 import shutil
+from django.http import HttpResponse
+import os
 
 
 @log_trigger('INFO')
@@ -178,31 +181,39 @@ def run_handover_simulation_async(handover_uid):
                 simulation_result_dir) and os.listdir(simulation_result_dir)
 
             if results_exist and not container_exists:
-                
+
                 try:
-                    handover_simulation_result = analyzeHandoverResult(simulation_result_dir)
-                    
+                    handover_simulation_result = analyzeHandoverResult(
+                        simulation_result_dir)
+
                     if handover_simulation_result is not None:  # 使用 is not None 更精確
                         # 更新 handover 資料
                         handover.handover_simulation_result = handover_simulation_result
                         handover.handover_status = "completed"
                         handover.handover_data_path = simulation_result_dir
                         handover.save()
-                        
+
                         # 更新模擬工作狀態
                         sim_job.handoverSimJob_end_time = timezone.now()
                         sim_job.save()
-                        
+
                         # shutil.rmtree(simulation_result_dir)
 
-                        print(f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
+                        # 生成 PDF 報告
+                        pdf_path = genHandoverResultPDF(handover)
+
+                        print(
+                            f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
+
+                        print(f"PDF report generated at: {pdf_path}")
                         return
                     else:
                         handover.handover_status = "simulation_failed"  # 使用底線分隔更一致
                         handover.save()  # 別忘了儲存狀態改變
-                        
-                        print(f"simulation_failed: No valid results for handover_uid: {handover_uid}")
-                        
+
+                        print(
+                            f"simulation_failed: No valid results for handover_uid: {handover_uid}")
+
                 except Exception as e:
                     # 錯誤處理
                     error_message = f"Error processing simulation results: {str(e)}"
@@ -297,7 +308,8 @@ class handoverSimJobManager:
                         'data': {
                             'handoverSimJob_uid': str(other_sim_job.handoverSimJob_uid),
                             'handover_uid': str(other_sim_job.f_handover_uid.handover_uid),
-                            'current_handover_uid': str(handover_uid),  # 加入當前請求的 handover_uid
+                            # 加入當前請求的 handover_uid
+                            'current_handover_uid': str(handover_uid),
                             'handover_status': other_sim_job.f_handover_uid.handover_status
                         }
                     })
@@ -322,7 +334,7 @@ class handoverSimJobManager:
                 # 4. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
-                     args=(handover_uid,)
+                    args=(handover_uid,)
                 )
                 simulation_thread.start()
 
@@ -349,7 +361,7 @@ class handoverSimJobManager:
                     'status': 'error',
                     'message': str(e)
                 }, status=500)
-        
+
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt
@@ -373,7 +385,7 @@ class handoverSimJobManager:
                     'status': 'error',
                     'message': 'Handover not found'
                 }, status=404)
-            
+
             # 刪除所有關聯的 HandoverSimJob 記錄
             HandoverSimJob.objects.filter(
                 f_handover_uid=handover  # 使用 handover 物件而不是 handover_uid 字串
@@ -405,6 +417,70 @@ class handoverSimJobManager:
                 'status': 'success',
                 'message': 'Handover simulation result and related jobs deleted successfully'
             })
+
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Invalid JSON format'
+            }, status=400)
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_handover_sim_result(request):
+        try:
+            # 解析請求資料
+            data = json.loads(request.body)
+            handover_uid = data.get('handover_uid')
+
+            if not handover_uid:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'handover_uid is required'
+                }, status=400)
+
+            # 查找對應的 Handover 記錄
+            try:
+                handover = Handover.objects.get(handover_uid=handover_uid)
+            except Handover.DoesNotExist:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Handover not found'
+                }, status=404)
+
+            # 檢查 handover_data_path 是否存在
+            if not handover.handover_data_path:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Handover data path not found'
+                }, status=404)
+
+            # 生成 PDF 檔案路徑
+            pdf_path = os.path.join(handover.handover_data_path, 'simulation_report.pdf')
+            print(f"Attempting to download PDF from path: {pdf_path}")
+
+            if not os.path.exists(pdf_path):
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'PDF file not found'
+                }, status=404)
+
+            # 準備檔案回應
+            try:
+                with open(pdf_path, 'rb') as pdf_file:
+                    response = HttpResponse(pdf_file.read(), content_type='application/pdf')
+                    response['Content-Disposition'] = f'attachment; filename="simulation_report.pdf"'
+                    return response
+            except IOError:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Error reading PDF file'
+                }, status=500)
 
         except json.JSONDecodeError:
             return JsonResponse({
