@@ -36,7 +36,7 @@ def genHandoverResultPDF(handover):
     df_metrics = pd.DataFrame(report_metrics)
     
     # 使用 os.path.join 處理路徑
-    pdf_path = os.path.join(handover.handover_data_path, 'simulation_report.pdf')  # 假設儲存在當前目錄
+    pdf_path = os.path.join(handover.handover_data_path, 'handover_simulation_report.pdf')  # 假設儲存在當前目錄
     # print(pdf_path)
     pdf_pages = PdfPages(pdf_path)
 

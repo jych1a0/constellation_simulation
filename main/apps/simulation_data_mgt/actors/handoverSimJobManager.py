@@ -6,6 +6,8 @@ from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.apps.simulation_data_mgt.models.handoverSimJobModel import HandoverSimJob
 from main.apps.simulation_data_mgt.services.analyzeHandoverResult import analyzeHandoverResult
 from main.apps.simulation_data_mgt.services.genHandoverResultPDF import genHandoverResultPDF
+from main.apps.simulation_data_mgt.services.genISLResultPDFtmp import genISLResultPDFtmp
+from main.apps.simulation_data_mgt.services.genRoutingResultPDFtmp import genRoutingResultPDFtmp
 from main.utils.logger import log_trigger, log_writer
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -461,7 +463,8 @@ class handoverSimJobManager:
                 }, status=404)
 
             # 生成 PDF 檔案路徑
-            pdf_path = os.path.join(handover.handover_data_path, 'simulation_report.pdf')
+            pdf_path = os.path.join(
+                handover.handover_data_path, 'handover_simulation_report.pdf')
             print(f"Attempting to download PDF from path: {pdf_path}")
 
             if not os.path.exists(pdf_path):
@@ -473,8 +476,9 @@ class handoverSimJobManager:
             # 準備檔案回應
             try:
                 with open(pdf_path, 'rb') as pdf_file:
-                    response = HttpResponse(pdf_file.read(), content_type='application/pdf')
-                    response['Content-Disposition'] = f'attachment; filename="simulation_report.pdf"'
+                    response = HttpResponse(
+                        pdf_file.read(), content_type='application/pdf')
+                    response['Content-Disposition'] = f'attachment; filename="handover_simulation_report.pdf"'
                     return response
             except IOError:
                 return JsonResponse({
@@ -492,3 +496,52 @@ class handoverSimJobManager:
                 'status': 'error',
                 'message': str(e)
             }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_routing_sim_result_tmp(request):
+        # 讀取並返回PDF文件
+        genRoutingResultPDFtmp()
+        try:
+            with open("./Routing_Result.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="Routing_Result.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_isl_sim_result_tmp(request):
+        genISLResultPDFtmp()
+        # 讀取並返回PDF文件
+        try:
+            with open("./isl_simulation_report.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="isl_simulation_report.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
