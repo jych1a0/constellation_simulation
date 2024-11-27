@@ -567,3 +567,256 @@ class handoverSimJobManager:
                 'status': 'error',
                 'message': str(e)
             }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_connected_duration_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/2. connected_duration.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="2. connected_duration.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_phase_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/3. phase.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="3. phase.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_constellation_strategy_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/4. constellation_strategy.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="4. constellation_strategy.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_isl_hopping_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/5. isl_hopping.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="5. isl_hopping.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+        
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_modify_regen_routing_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/6. modify_regen_routing.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="6. modify_regen_routing.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_one_to_multi_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/7. one_to_multi.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="7. one_to_multi.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_multi_to_multi_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/8. multi_to_multi.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="8. multi_to_multi.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+        
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_save_er_routing_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/9. save_er_routing.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="9. save_er_routing.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_end_to_end_routing_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/10. end_to_end_routing.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="10. end_to_end_routing.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+        
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_single_beam_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/11. single_beam.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="11. single_beam.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+        
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_gso_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/12. gso.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="12. gso.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
