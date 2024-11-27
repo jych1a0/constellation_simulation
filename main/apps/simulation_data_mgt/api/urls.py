@@ -12,4 +12,6 @@ urlpatterns = [
          handoverSimJobManager.download_routing_sim_result_tmp, name="download_routing_sim_result_tmp"),
     path('simulation_data_mgt/handoverSimJobManager/download_isl_sim_result_tmp',
          handoverSimJobManager.download_isl_sim_result_tmp, name="download_isl_sim_result_tmp"),
+    path('simulation_data_mgt/handoverSimJobManager/download_coverage_tmp',
+         handoverSimJobManager.download_coverage_tmp, name="download_coverage_tmp"),
 ]

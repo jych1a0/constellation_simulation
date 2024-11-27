@@ -545,3 +545,25 @@ class handoverSimJobManager:
                 'message': str(e)
             }, status=500)
 
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_coverage_tmp(request):
+        # 讀取並返回PDF文件
+        try:
+            with open("./tmp/1. coverage.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="1. coverage.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
