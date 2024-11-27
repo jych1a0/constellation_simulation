@@ -37,7 +37,7 @@ urlpatterns = [
     path('simulation_data_mgt/handoverSimJobManager/download_save_er_routing_tmp',
          handoverSimJobManager.download_save_er_routing_tmp, name="download_save_er_routing_tmp"),
     path('simulation_data_mgt/handoverSimJobManager/download_single_beam_tmp',
-         handoverSimJobManager.download_gso_tmp, name="download_single_beam_tmp"),
+         handoverSimJobManager.download_single_beam_tmp, name="download_single_beam_tmp"),
     path('simulation_data_mgt/handoverSimJobManager/download_gso_tmp',
          handoverSimJobManager.download_gso_tmp, name="download_gso_tmp"),
 ]
