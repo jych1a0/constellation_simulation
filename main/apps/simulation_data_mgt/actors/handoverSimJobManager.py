@@ -5,6 +5,9 @@ import json
 from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.apps.simulation_data_mgt.models.handoverSimJobModel import HandoverSimJob
 from main.apps.simulation_data_mgt.services.analyzeHandoverResult import analyzeHandoverResult
+from main.apps.simulation_data_mgt.services.genHandoverResultPDF import genHandoverResultPDF
+from main.apps.simulation_data_mgt.services.genISLResultPDFtmp import genISLResultPDFtmp
+from main.apps.simulation_data_mgt.services.genRoutingResultPDFtmp import genRoutingResultPDFtmp
 from main.utils.logger import log_trigger, log_writer
 from django.views.decorators.csrf import csrf_exempt
 import os
@@ -13,6 +16,8 @@ from django.utils import timezone
 import subprocess
 import time
 import shutil
+from django.http import HttpResponse
+import os
 
 
 @log_trigger('INFO')
@@ -59,7 +64,7 @@ def terminate_handover_sim_job(handover_uid):
         sim_jobs.delete()
 
         # 更新 handover 狀態
-        handover.handover_status = "simulation fail"
+        handover.handover_status = "simulation_failed"
         handover.save()
 
         print(
@@ -179,30 +184,55 @@ def run_handover_simulation_async(handover_uid):
 
             if results_exist and not container_exists:
 
-                handover_simulation_result = analyzeHandoverResult(simulation_result_dir)
-                handover.handover_simulation_result = handover_simulation_result
-                # 如果有結果檔案且容器不存在，標記為完成
-                sim_job.handoverSimJob_end_time = timezone.now()
-                sim_job.save()
-                handover.handover_status = "completed"
-                # 更新 handover_data_path
-                handover.handover_data_path = simulation_result_dir
-                handover.save()
-                print(
-                    f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
-                return
+                try:
+                    handover_simulation_result = analyzeHandoverResult(
+                        simulation_result_dir)
+
+                    if handover_simulation_result is not None:  # 使用 is not None 更精確
+                        # 更新 handover 資料
+                        handover.handover_simulation_result = handover_simulation_result
+                        handover.handover_status = "completed"
+                        handover.handover_data_path = simulation_result_dir
+                        handover.save()
+
+                        # 更新模擬工作狀態
+                        sim_job.handoverSimJob_end_time = timezone.now()
+                        sim_job.save()
+
+                        # shutil.rmtree(simulation_result_dir)
+
+                        # 生成 PDF 報告
+                        pdf_path = genHandoverResultPDF(handover)
+
+                        print(
+                            f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
+
+                        print(f"PDF report generated at: {pdf_path}")
+                        return
+                    else:
+                        handover.handover_status = "simulation_failed"  # 使用底線分隔更一致
+                        handover.save()  # 別忘了儲存狀態改變
+
+                        print(
+                            f"simulation_failed: No valid results for handover_uid: {handover_uid}")
+
+                except Exception as e:
+                    # 錯誤處理
+                    error_message = f"Error processing simulation results: {str(e)}"
+                    handover.handover_status = "error"
+                    handover.save()
 
             # 如果容器已經停止但沒有結果檔案，判定為失敗
             if not container_exists and not results_exist:
                 raise Exception(
-                    "Container stopped but no results found, simulation failed")
+                    "Container stopped but no results found, simulation_failed")
 
             # 等待一段時間再檢查
             time.sleep(10)
 
             # 重新從資料庫獲取 handover 狀態
             handover.refresh_from_db()
-            if handover.handover_status == "simulation fail":
+            if handover.handover_status == "simulation_failed":
                 return
 
     except Exception as e:
@@ -248,34 +278,45 @@ class handoverSimJobManager:
                         'message': 'Handover 缺少參數 handover_parameter'
                     }, status=400)
 
-                # 檢查目前狀態是否為執行中
-                if handover.handover_status == "processing":
+                # 1. 檢查當前 handover 是否有正在執行的模擬作業
+                current_sim_job = HandoverSimJob.objects.filter(
+                    f_handover_uid=handover,
+                    handoverSimJob_end_time__isnull=True
+                ).first()
+
+                if current_sim_job:
                     return JsonResponse({
                         'status': 'info',
-                        'message': '模擬正在執行中，請稍後查詢結果',
+                        'message': '此 Handover 正在執行模擬作業中',
                         'data': {
+                            'handoverSimJob_uid': str(current_sim_job.handoverSimJob_uid),
                             'handover_uid': str(handover_uid),
                             'handover_status': handover.handover_status
                         }
                     })
 
-                # 檢查是否有正在執行的模擬作業
-                active_sim_job = HandoverSimJob.objects.filter(
-                    f_handover_uid=handover,
+                # 2. 檢查同一使用者是否有其他正在執行的模擬作業
+                other_sim_job = HandoverSimJob.objects.filter(
+                    f_handover_uid__f_user_uid=handover.f_user_uid,
                     handoverSimJob_end_time__isnull=True
-                ).first()
+                ).exclude(
+                    f_handover_uid__handover_uid=handover_uid
+                ).select_related('f_handover_uid').first()
 
-                if active_sim_job:
+                if other_sim_job:
                     return JsonResponse({
                         'status': 'info',
-                        'message': '已存在正在執行的模擬作業',
+                        'message': '使用者已有其他正在執行的模擬作業',
                         'data': {
-                            'handoverSimJob_uid': str(active_sim_job.handoverSimJob_uid),
-                            'handover_status': handover.handover_status
+                            'handoverSimJob_uid': str(other_sim_job.handoverSimJob_uid),
+                            'handover_uid': str(other_sim_job.f_handover_uid.handover_uid),
+                            # 加入當前請求的 handover_uid
+                            'current_handover_uid': str(handover_uid),
+                            'handover_status': other_sim_job.f_handover_uid.handover_status
                         }
                     })
 
-                # 檢查目前狀態和資料路徑
+                # 3. 檢查當前 handover 狀態
                 if handover.handover_status == "completed":
                     if handover.handover_data_path and os.path.exists(handover.handover_data_path):
                         return JsonResponse({
@@ -288,11 +329,11 @@ class handoverSimJobManager:
                             }
                         })
                     else:
-                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation fail 並繼續
-                        handover.handover_status = "simulation fail"
+                        # 如果狀態是 completed 但找不到資料，設置狀態為 simulation_failed
+                        handover.handover_status = "simulation_failed"
                         handover.save()
 
-                # 在新的執行緒中執行模擬
+                # 4. 在新的執行緒中執行模擬
                 simulation_thread = threading.Thread(
                     target=run_handover_simulation_async,
                     args=(handover_uid,)
@@ -346,7 +387,7 @@ class handoverSimJobManager:
                     'status': 'error',
                     'message': 'Handover not found'
                 }, status=404)
-            
+
             # 刪除所有關聯的 HandoverSimJob 記錄
             HandoverSimJob.objects.filter(
                 f_handover_uid=handover  # 使用 handover 物件而不是 handover_uid 字串
@@ -389,3 +430,118 @@ class handoverSimJobManager:
                 'status': 'error',
                 'message': str(e)
             }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_handover_sim_result(request):
+        try:
+            # 解析請求資料
+            data = json.loads(request.body)
+            handover_uid = data.get('handover_uid')
+
+            if not handover_uid:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'handover_uid is required'
+                }, status=400)
+
+            # 查找對應的 Handover 記錄
+            try:
+                handover = Handover.objects.get(handover_uid=handover_uid)
+            except Handover.DoesNotExist:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Handover not found'
+                }, status=404)
+
+            # 檢查 handover_data_path 是否存在
+            if not handover.handover_data_path:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Handover data path not found'
+                }, status=404)
+
+            # 生成 PDF 檔案路徑
+            pdf_path = os.path.join(
+                handover.handover_data_path, 'handover_simulation_report.pdf')
+            print(f"Attempting to download PDF from path: {pdf_path}")
+
+            if not os.path.exists(pdf_path):
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'PDF file not found'
+                }, status=404)
+
+            # 準備檔案回應
+            try:
+                with open(pdf_path, 'rb') as pdf_file:
+                    response = HttpResponse(
+                        pdf_file.read(), content_type='application/pdf')
+                    response['Content-Disposition'] = f'attachment; filename="handover_simulation_report.pdf"'
+                    return response
+            except IOError:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Error reading PDF file'
+                }, status=500)
+
+        except json.JSONDecodeError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Invalid JSON format'
+            }, status=400)
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_routing_sim_result_tmp(request):
+        # 讀取並返回PDF文件
+        genRoutingResultPDFtmp()
+        try:
+            with open("./Routing_Result.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="Routing_Result.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
+    @log_trigger('INFO')
+    @require_http_methods(["POST"])
+    @csrf_exempt
+    def download_isl_sim_result_tmp(request):
+        genISLResultPDFtmp()
+        # 讀取並返回PDF文件
+        try:
+            with open("./isl_simulation_report.pdf", 'rb') as pdf_file:
+                response = HttpResponse(
+                    pdf_file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename="isl_simulation_report.pdf"'
+                return response
+        except IOError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Error reading PDF file'
+            }, status=500)
+
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': str(e)
+            }, status=500)
+
