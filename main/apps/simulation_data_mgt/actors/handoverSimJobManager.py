@@ -204,7 +204,7 @@ def run_handover_simulation_async(handover_uid):
                         # 生成 PDF 報告
                         pdf_path = genHandoverResultPDF(handover)
 
-                        shutil.rmtree(simulation_result_dir)
+                        # shutil.rmtree(simulation_result_dir)
 
                         print(
                             f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
