@@ -78,23 +78,23 @@ def genHandoverResultPDF(handover):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # 第二頁：Cell Topology
-        cell_ut = handover.handover_parameter.get('cell_ut', '')
-        if cell_ut in ['28Cell_1UT', '38Cell_1UT']:
-            fig2, ax2 = plt.subplots(figsize=(12, 8))
-            assets_dir = 'main/apps/simulation_data_mgt/services/assets'
-            cell_image = f'{assets_dir}/28cell.png' if cell_ut == '28Cell_1UT' else f'{assets_dir}/38cell.png'
-            try:
-                img = mpimg.imread(cell_image)
-                ax2.imshow(img)
-                ax2.axis('off')
-                plt.title(f'Cell Topology ({cell_ut})', pad=20, size=14, weight='bold')
-                plt.tight_layout()
-                pdf_pages.savefig(fig2)
-            except FileNotFoundError:
-                print(f"Warning: {cell_image} file not found")
-            finally:
-                plt.close(fig2)
+        # # 第二頁：Cell Topology
+        # cell_ut = handover.handover_parameter.get('cell_ut', '')
+        # if cell_ut in ['28Cell_1UT', '38Cell_1UT']:
+        #     fig2, ax2 = plt.subplots(figsize=(12, 8))
+        #     assets_dir = 'main/apps/simulation_data_mgt/services/assets'
+        #     cell_image = f'{assets_dir}/28cell.png' if cell_ut == '28Cell_1UT' else f'{assets_dir}/38cell.png'
+        #     try:
+        #         img = mpimg.imread(cell_image)
+        #         ax2.imshow(img)
+        #         ax2.axis('off')
+        #         plt.title(f'Cell Topology ({cell_ut})', pad=20, size=14, weight='bold')
+        #         plt.tight_layout()
+        #         pdf_pages.savefig(fig2)
+        #     except FileNotFoundError:
+        #         print(f"Warning: {cell_image} file not found")
+        #     finally:
+        #         plt.close(fig2)
 
         # 第三頁：實驗結果
         fig3, ax3 = plt.subplots(figsize=(12, 6))

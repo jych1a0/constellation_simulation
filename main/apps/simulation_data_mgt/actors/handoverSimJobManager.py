@@ -119,11 +119,13 @@ def run_handover_simulation_async(handover_uid):
 
         docker_command = [
             'docker', 'run',
+            '--oom-kill-disable=true', # 不因未使用太多memory，而被host端砍掉
+             '-m', '28g', # 限制memory大小
             '-d',  # 在背景執行
             '--rm',  # 容器停止後自動移除
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'handoversimulationimage',
+            'handoversimulationimage_86400',
             'bash', '-c', simulation_command
         ]
 
@@ -199,10 +201,10 @@ def run_handover_simulation_async(handover_uid):
                         sim_job.handoverSimJob_end_time = timezone.now()
                         sim_job.save()
 
-                        # shutil.rmtree(simulation_result_dir)
-
                         # 生成 PDF 報告
                         pdf_path = genHandoverResultPDF(handover)
+
+                        # shutil.rmtree(simulation_result_dir)
 
                         print(
                             f"Simulation completed successfully, results saved for handover_uid: {handover_uid}")
