@@ -1,6 +1,6 @@
 from django.urls import path
 from main.apps.simulation_data_mgt.actors.handoverSimJobManager import handoverSimJobManager
-
+from main.apps.simulation_data_mgt.actors.CoverageAnalysisSimJobManager import CoverageAnalysisSimJobManager
 urlpatterns = [
     path('simulation_data_mgt/handoverSimJobManager/run_handover_sim_job',
          handoverSimJobManager.run_handover_sim_job, name="run_handover_sim_job"),
@@ -12,6 +12,12 @@ urlpatterns = [
          handoverSimJobManager.download_routing_sim_result_tmp, name="download_routing_sim_result_tmp"),
     path('simulation_data_mgt/handoverSimJobManager/download_isl_sim_result_tmp',
          handoverSimJobManager.download_isl_sim_result_tmp, name="download_isl_sim_result_tmp"),
+     path('simulation_data_mgt/CoverageAnalysisSimJobManager/test_post',
+         CoverageAnalysisSimJobManager.test_post, name="test_post"),
+     path('simulation_data_mgt/CoverageAnalysisSimJobManager/run_coverage_analysis_sim_job',
+         CoverageAnalysisSimJobManager.run_coverage_analysis_sim_job, name="run_coverage_analysis_sim_job"),
+     path('simulation_data_mgt/CoverageAnalysisSimJobManager/delete_coverage_analysis_sim_result',
+         CoverageAnalysisSimJobManager.delete_coverage_analysis_sim_result, name="delete_coverage_analysis_sim_result"),
 
 
     path('simulation_data_mgt/handoverSimJobManager/download_coverage_tmp',

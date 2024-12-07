@@ -27,5 +27,5 @@ class CoverageAnalysis(models.Model):
         # 如果是新建實例（沒有 id）或 coverage_analysis_data_path 為空
         if not self.id or not self.coverage_analysis_data_path:
             # 在儲存前自動生成 coverage_analysis_data_path
-            self.coverage_analysis_data_path = f"coverage_analysis/{self.f_user_uid.user_uid}/{self.coverage_analysis_uid}"
+            self.coverage_analysis_data_path = f"coverage_analysis_simulation/{self.f_user_uid.user_uid}/{self.coverage_analysis_uid}"
         super().save(*args, **kwargs)
