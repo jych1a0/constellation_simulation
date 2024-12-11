@@ -16,7 +16,7 @@ import time
 import shutil
 from django.http import HttpResponse
 import glob 
-
+from pathlib import Path
 @log_trigger('INFO')
 def terminate_coverage_analysis_sim_job(coverage_analysis_uid):
     try:
@@ -162,9 +162,13 @@ def run_coverage_analysis_simulation_async(coverage_analysis_uid):
                 # 在檢查結果時添加文件複製邏輯
                 if results_exist and not container_exists:
                     try:
-                        # 確保目標目錄存在
+                        # 獲取專案根目錄
+                        BASE_DIR = Path(__file__).resolve().parent.parent
+
+                        # 確保目標目錄存在（使用相對路徑）
                         target_dir = os.path.join(
-                            '/root/241124_Constellation_Simulation/constellation_simulation/simulation_result',
+                            BASE_DIR,
+                            'simulation_result',
                             'coverage_analysis_simulation',
                             str(coverage_analysis.f_user_uid.user_uid),
                             str(coverage_analysis_uid)
@@ -188,7 +192,6 @@ def run_coverage_analysis_simulation_async(coverage_analysis_uid):
                         
                         # 更新資料庫中的路徑（使用絕對路徑）
                         coverage_analysis.coverage_analysis_status = "completed"
-                        # coverage_analysis.coverage_analysis_data_path = abs_target_dir
                         coverage_analysis.save()
 
                         sim_job.coverageAnalysisSimJob_end_time = timezone.now()

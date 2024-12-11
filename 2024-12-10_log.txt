@@ -1,0 +1,465 @@
+[INFO] time: 2024-12-10 05:40:34, module: meta_data_mgt, actor: CoverageAnalysisManager, function: create_coverage_analysis, payload: {'coverage_analysis_name': 'Project A Coverage Analysis', 'coverage_analysis_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'minLatitude': '-53', 'maxLatitude': '51', 'leastSatCount': '1'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 05:40:53, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_sim_job, payload: {'coverage_analysis_uid': '4c577d8f-ad8e-4c50-980e-c8da9a5c7b1b'}
+[INFO] time: 2024-12-10 05:40:53, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 05:50:18, module: meta_data_mgt, actor: CoverageAnalysisManager, function: create_coverage_analysis, payload: {'coverage_analysis_name': 'Project A Coverage Analysis', 'coverage_analysis_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'minLatitude': '-53', 'maxLatitude': '53', 'leastSatCount': '1'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 05:50:28, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_sim_job, payload: {'coverage_analysis_uid': 'c2828735-5998-4efe-be2a-61be0021d2c0'}
+[INFO] time: 2024-12-10 05:50:28, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 05:53:58, module: meta_data_mgt, actor: CoverageAnalysisManager, function: create_coverage_analysis, payload: {'coverage_analysis_name': 'Project A Coverage Analysis', 'coverage_analysis_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'minLatitude': '-53', 'maxLatitude': '60', 'leastSatCount': '4'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 05:54:08, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_sim_job, payload: {'coverage_analysis_uid': '39d15fe7-62ba-42f1-b497-a54b59b50ebd'}
+[INFO] time: 2024-12-10 05:54:08, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 06:36:56, module: meta_data_mgt, actor: UserManager, function: login_user, payload: {'user_name': 'qweqwe', 'user_password': 'qweqweqwe'}
+[INFO] time: 2024-12-10 06:37:01, module: meta_data_mgt, actor: UserManager, function: login_user, payload: {'user_name': 'qweqwe', 'user_password': 'qweqweqwe'}
+[INFO] time: 2024-12-10 06:37:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:37:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:37:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:37:28, module: simulation_data_mgt, actor: handoverSimJobManager, function: download_single_beam_tmp, payload: {'handover_uid': 'latestAnalysis.analysis_uid'}
+[INFO] time: 2024-12-10 06:37:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:37:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:45:53, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:45:53, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:49:54, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'Project A Handover', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:50:06, module: simulation_data_mgt, actor: CoverageAnalysisSimJobManager, function: run_coverage_analysis_sim_job, payload: {'coverage_analysis_uid': '8d1cf376-d07c-42bf-b998-107de1e64163'}
+[INFO] time: 2024-12-10 06:50:16, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '8d1cf376-d07c-42bf-b998-107de1e64163'}
+[INFO] time: 2024-12-10 06:50:16, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 06:50:47, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 06:50:47, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 06:51:58, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:52:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:52:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:52:22, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:55:58, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:55:58, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:56:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:56:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:56:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:56:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:10, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:10, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 06:59:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:03:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:03:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:03:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:03:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:06:22, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:06:22, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:06:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:06:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:22, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:22, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:29, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_kqcxm03wl', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:29, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:29, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '20183c2c-ef0a-4aa3-9529-38e6203bdbb8'}
+[INFO] time: 2024-12-10 07:07:29, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:07:36, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_4k4iu3zc1', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:42, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:42, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:07:59, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:08:00, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:25:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:34, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_votf0kl46', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:25:34, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'd21a32ae-6929-48ca-b854-84cfc675e93e'}
+[INFO] time: 2024-12-10 07:25:34, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:25:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:26:15, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:26:15, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:28:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:28:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:28:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:28:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:44, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:44, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:47, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:47, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:50, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:30:50, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:31:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:31:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:33:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:34:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:34:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:35:34, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_1xyoz5djq', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:35:34, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '5ba69f77-7517-4946-8c2a-cbfa96b64fde'}
+[INFO] time: 2024-12-10 07:35:34, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:35:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:35:41, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:35:41, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:36:25, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:36:25, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:37:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:37:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:38:14, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:38:14, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:39:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:39:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:40:07, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:40:07, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:41:52, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:41:52, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:01, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:09, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '8d1cf376-d07c-42bf-b998-107de1e64163'}
+[INFO] time: 2024-12-10 07:42:09, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:12, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '20183c2c-ef0a-4aa3-9529-38e6203bdbb8'}
+[INFO] time: 2024-12-10 07:42:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:15, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'd21a32ae-6929-48ca-b854-84cfc675e93e'}
+[INFO] time: 2024-12-10 07:42:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:17, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '5ba69f77-7517-4946-8c2a-cbfa96b64fde'}
+[INFO] time: 2024-12-10 07:42:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:28, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_kt5g9r3g7', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:28, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'ab33cc9c-000e-42d9-8969-548d64e75d6d'}
+[INFO] time: 2024-12-10 07:42:28, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:42:33, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:42:59, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:42:59, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 07:43:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 07:43:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:43:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:43:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:43:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:43:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:10, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:10, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:44, module: simulation_data_mgt, actor: handoverSimJobManager, function: download_handover_sim_result, payload: {'handover_uid': 'ab33cc9c-000e-42d9-8969-548d64e75d6d'}
+[INFO] time: 2024-12-10 11:46:53, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:46:53, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:47:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:47:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:47:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:47:22, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_p0nwx0ryp', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:47:22, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '29e21200-5143-48c2-b049-c1ac9545b757'}
+[INFO] time: 2024-12-10 11:47:22, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:47:27, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:48:16, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:48:17, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:49:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:24, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:24, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:40, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:40, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:53, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:49:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:50:05, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_olpma63le', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:50:06, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '430a3e5d-b29e-41ce-8813-563a1416743a'}
+[INFO] time: 2024-12-10 11:50:06, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:50:08, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:50:08, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:51:07, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:51:07, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:53:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:53:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:54:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:54:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:54:59, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_9jas87bsw', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:54:59, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '0599d455-fd97-4f42-bc6a-e5c9982274e3'}
+[INFO] time: 2024-12-10 11:54:59, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:55:04, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:55:50, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:55:50, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 11:56:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:57:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:57:57, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:57:57, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:58:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:58:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:58:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 11:58:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:09:27, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:09:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:09:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:09:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:09:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:54, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_5scarobb2', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:10:54, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'a4dd7ce4-46fc-4ea2-aa9f-2ba2474b2c0c'}
+[INFO] time: 2024-12-10 12:10:54, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:10:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:11:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:11:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:11:34, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:11:34, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:18:45, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:18:45, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:18:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:18:59, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'ab33cc9c-000e-42d9-8969-548d64e75d6d'}
+[INFO] time: 2024-12-10 12:18:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:03, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '29e21200-5143-48c2-b049-c1ac9545b757'}
+[INFO] time: 2024-12-10 12:19:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:06, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '430a3e5d-b29e-41ce-8813-563a1416743a'}
+[INFO] time: 2024-12-10 12:19:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:09, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '0599d455-fd97-4f42-bc6a-e5c9982274e3'}
+[INFO] time: 2024-12-10 12:19:09, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:12, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'a4dd7ce4-46fc-4ea2-aa9f-2ba2474b2c0c'}
+[INFO] time: 2024-12-10 12:19:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:20, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_l9o90potb', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:20, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'd3aad3a3-7981-4d3a-b9dd-0e0d198484df'}
+[INFO] time: 2024-12-10 12:19:20, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:19:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:40, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:45, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:50, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:19:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:00, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:02, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:20:02, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:20:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:11, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:41, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:46, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:20:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:01, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:05, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:10, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:41, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:46, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:21:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:01, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:11, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:22:34, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:19, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:25, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:41, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:46, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:23:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:01, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:11, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:16, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:54, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:54, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:24:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:07, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': 'ho_c8mcp6vy9', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:07, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '4ad00be2-b585-40bc-8f60-cd47acce71fa'}
+[INFO] time: 2024-12-10 12:25:07, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:25:07, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:25:48, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:25:48, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:26:32, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:26:32, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:26:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:26:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:28:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:28:32, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:34:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:34:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:34:28, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '12x22_MinRange_Nonpreemptive_28C_28B_F1_20241210T123427', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:34:28, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '7ec7db7c-e756-49f5-9243-fb2036562aa2'}
+[INFO] time: 2024-12-10 12:34:28, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:34:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:34:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:19, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:35:19, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:35:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:33, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:33, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:42, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '6x22_MinRange_Nonpreemptive_28C_28B_F1', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:42, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'f58cbfc6-866f-4335-9663-e16baa4ccc77'}
+[INFO] time: 2024-12-10 12:35:42, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:35:42, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:35:43, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:36:23, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:36:23, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:37:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:37, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '12x22_MinRange_Preemptive_28Cell_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:37, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': 'bdbac067-bfd5-4b72-a9a5-cbfaab02b73c'}
+[INFO] time: 2024-12-10 12:37:37, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:37:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:37:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:38:27, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:38:28, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:39:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:09, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'd3aad3a3-7981-4d3a-b9dd-0e0d198484df'}
+[INFO] time: 2024-12-10 12:39:09, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:11, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '4ad00be2-b585-40bc-8f60-cd47acce71fa'}
+[INFO] time: 2024-12-10 12:39:11, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:13, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '7ec7db7c-e756-49f5-9243-fb2036562aa2'}
+[INFO] time: 2024-12-10 12:39:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:15, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'f58cbfc6-866f-4335-9663-e16baa4ccc77'}
+[INFO] time: 2024-12-10 12:39:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:18, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': 'bdbac067-bfd5-4b72-a9a5-cbfaab02b73c'}
+[INFO] time: 2024-12-10 12:39:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:39:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:40:14, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '3x22_MinRange_Preemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:40:14, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '5433c0af-4e36-4862-bece-6bf9abae724b'}
+[INFO] time: 2024-12-10 12:40:14, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:40:14, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:40:15, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '3x22_MinRange_Preemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:40:45, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:40:45, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:54:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:31, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:49, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '3x22_MinRange_Nonpreemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:49, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '1ba8862a-0324-4eda-baef-0a413781a1fd'}
+[INFO] time: 2024-12-10 12:54:49, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:54:49, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:54:54, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '3x22_MinRange_Nonpreemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_3P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:55:19, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:55:20, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:57:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:57:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:57:35, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '12x22_MinRange_Nonpreemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Nonpreemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:57:35, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '0d76adc0-12da-4bb6-bf31-3ae2126bfa27'}
+[INFO] time: 2024-12-10 12:57:35, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:57:35, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:57:48, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:57:51, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:58:26, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:58:26, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:59:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:59:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:59:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:59:32, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '12x22_MinRange_Preemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_12P_22Sats_29deg_F7', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:59:32, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '7d173481-babf-40a5-9316-3997bdfcdb54'}
+[INFO] time: 2024-12-10 12:59:32, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 12:59:32, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 12:59:38, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:00:33, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 13:00:33, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 13:10:46, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:10:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:22:01, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:22:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:32:27, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:32:46, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:33:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:45:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:45:58, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:45:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:45:59, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:02, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:03, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:06, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:46:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:47:24, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:47:27, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:47:27, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:47:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:48:04, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:48:15, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:57:22, module: meta_data_mgt, actor: UserManager, function: login_user, payload: {'user_name': 'qweqwe', 'user_password': 'qweqweqwe'}
+[INFO] time: 2024-12-10 13:57:30, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:57:50, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:20, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '7d173481-babf-40a5-9316-3997bdfcdb54'}
+[INFO] time: 2024-12-10 13:58:21, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:23, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '0d76adc0-12da-4bb6-bf31-3ae2126bfa27'}
+[INFO] time: 2024-12-10 13:58:23, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:24, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '1ba8862a-0324-4eda-baef-0a413781a1fd'}
+[INFO] time: 2024-12-10 13:58:24, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:26, module: meta_data_mgt, actor: HandoverManager, function: delete_handover, payload: {'handover_uid': '5433c0af-4e36-4862-bece-6bf9abae724b'}
+[INFO] time: 2024-12-10 13:58:26, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:28, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:33, module: meta_data_mgt, actor: HandoverManager, function: create_handover, payload: {'handover_name': '6x22_MinRange_Preemptive_28Cell_1UT_28Beam_F1', 'handover_parameter': {'constellation': 'TLE_6P_22Sats_29deg_F1', 'handover_strategy': 'MinRange', 'handover_decision': 'Preemptive', 'beam_counts': 28, 'reuse_factor': 1, 'cell_ut': '28Cell_1UT'}, 'f_user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:33, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '398201df-5ab8-4d66-a990-8c44f55b79e7'}
+[INFO] time: 2024-12-10 13:58:33, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 13:58:33, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:42, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:56, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:58:57, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:00, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:00, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:09, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:12, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:13, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:14, module: simulation_data_mgt, actor: analyzeHandoverResult, function: analyzeHandoverResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 13:59:14, module: simulation_data_mgt, actor: genHandoverResultPDF, function: genHandoverResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-10 13:59:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:17, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:20, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:52, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:57, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 13:59:57, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:00:18, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '398201df-5ab8-4d66-a990-8c44f55b79e7'}
+[INFO] time: 2024-12-10 14:00:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:00:23, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '398201df-5ab8-4d66-a990-8c44f55b79e7'}
+[INFO] time: 2024-12-10 14:00:24, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:00:48, module: simulation_data_mgt, actor: handoverSimJobManager, function: run_handover_sim_job, payload: {'handover_uid': '398201df-5ab8-4d66-a990-8c44f55b79e7'}
+[INFO] time: 2024-12-10 14:01:06, module: simulation_data_mgt, actor: handoverSimJobManager, function: download_handover_sim_result, payload: {'handover_uid': '398201df-5ab8-4d66-a990-8c44f55b79e7'}
+[INFO] time: 2024-12-10 14:01:29, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:02:07, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:08:55, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:09:18, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:09:19, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:10:33, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:10:36, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 14:10:39, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 15:06:19, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}
+[INFO] time: 2024-12-10 15:14:37, module: meta_data_mgt, actor: HandoverManager, function: query_handoverData_by_user, payload: {'user_uid': '476c9238-b02d-4212-80eb-c6d0be62b597'}

@@ -21,7 +21,7 @@ class CoverageAnalysis(models.Model):
     )
 
     class Meta:
-        db_table = 'coverage_analysis'  # 指定資料表名稱
+        db_table = 'CoverageAnalysis'  # 指定資料表名稱
 
     def save(self, *args, **kwargs):
         # 如果是新建實例（沒有 id）或 coverage_analysis_data_path 為空
