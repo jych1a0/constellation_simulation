@@ -2,6 +2,9 @@ from django.urls import path
 from main.apps.simulation_data_mgt.actors.handoverSimJobManager import handoverSimJobManager
 from main.apps.simulation_data_mgt.actors.CoverageAnalysisSimJobManager import CoverageAnalysisSimJobManager
 from main.apps.simulation_data_mgt.actors.connectionTimeSimJobManager import connectionTimeSimJobManager
+from main.apps.simulation_data_mgt.actors.phaseParameterSelectionJobManager import phaseParameterSelectionJobManager
+
+
 urlpatterns = [
     path('simulation_data_mgt/handoverSimJobManager/run_handover_sim_job',
          handoverSimJobManager.run_handover_sim_job, name="run_handover_sim_job"),
@@ -26,6 +29,18 @@ urlpatterns = [
          connectionTimeSimJobManager.delete_connection_time_sim_result, name="delete_connection_time_sim_result"),
     path('simulation_data_mgt/connectionTimeSimJobManager/download_connection_time_sim_result',
          connectionTimeSimJobManager.download_connection_time_sim_result, name="download_connection_time_sim_result"),
+
+    path('simulation_data_mgt/phaseParameterSelectionJobManager/run_phase_parameter_selection_job',
+         phaseParameterSelectionJobManager.run_phase_parameter_selection_job, 
+         name="run_phase_parameter_selection_job"),
+
+    path('simulation_data_mgt/phaseParameterSelectionJobManager/delete_phase_parameter_selection_result',
+         phaseParameterSelectionJobManager.delete_phase_parameter_selection_result, 
+         name="delete_phase_parameter_selection_result"),
+
+    path('simulation_data_mgt/phaseParameterSelectionJobManager/download_phase_parameter_selection_result',
+         phaseParameterSelectionJobManager.download_phase_parameter_selection_result, 
+         name="download_phase_parameter_selection_result"),
 
     path('simulation_data_mgt/handoverSimJobManager/download_coverage_tmp',
          handoverSimJobManager.download_coverage_tmp, name="download_coverage_tmp"),

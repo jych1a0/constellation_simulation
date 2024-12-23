@@ -3,6 +3,7 @@ from main.apps.meta_data_mgt.actors.UserManager import UserManager
 from main.apps.meta_data_mgt.actors.HandoverManager import HandoverManager
 from main.apps.meta_data_mgt.actors.CoverageAnalysisManager import CoverageAnalysisManager
 from main.apps.meta_data_mgt.actors.ConnectionTimeSimulationManager import ConnectionTimeSimulationManager
+from main.apps.meta_data_mgt.actors.PhaseParameterSelectionManager import PhaseParameterSelectionManager
 
 urlpatterns = [
     path('meta_data_mgt/userManager/get_hello_world', UserManager.get_hello_world),
@@ -18,6 +19,7 @@ urlpatterns = [
     path('meta_data_mgt/CoverageAnalysisManager/query_coverage_analysis_by_user', CoverageAnalysisManager.query_coverage_analysis_by_user, name="query_coverage_analysis_by_user"),
     path('meta_data_mgt/CoverageAnalysisManager/create_coverage_analysis', CoverageAnalysisManager.create_coverage_analysis, name="create_coverage_analysis"),
     path('meta_data_mgt/CoverageAnalysisManager/delete_coverage_analysis', CoverageAnalysisManager.delete_coverage_analysis, name="delete_coverage_analysis"),
+    path('meta_data_mgt/CoverageAnalysisManager/update_coverage_analysis', CoverageAnalysisManager.update_coverage_analysis, name="update_coverage_analysis"),
 
     # 新增 ConnectionTimeSimulationManager 路由
     path('meta_data_mgt/ConnectionTimeSimulationManager/create_connection_time_simulation', 
@@ -35,4 +37,18 @@ urlpatterns = [
     path('meta_data_mgt/ConnectionTimeSimulationManager/query_connection_time_simulation_by_user', 
          ConnectionTimeSimulationManager.query_connection_time_simulation_by_user, 
          name="query_connection_time_simulation_by_user"),
+
+    # PhaseParameterSelectionManager 路由
+    path('meta_data_mgt/PhaseParameterSelectionManager/create_phase_parameter_selection',
+         PhaseParameterSelectionManager.create_phase_parameter_selection,
+         name="create_phase_parameter_selection"),
+    path('meta_data_mgt/PhaseParameterSelectionManager/query_phase_parameter_selection_by_user',
+         PhaseParameterSelectionManager.query_phase_parameter_selection_by_user,
+         name="query_phase_parameter_selection_by_user"),
+    path('meta_data_mgt/PhaseParameterSelectionManager/delete_phase_parameter_selection',
+         PhaseParameterSelectionManager.delete_phase_parameter_selection,
+         name="delete_phase_parameter_selection"),
+    path('meta_data_mgt/PhaseParameterSelectionManager/update_phase_parameter_selection',
+         PhaseParameterSelectionManager.update_phase_parameter_selection,
+         name="update_phase_parameter_selection"),
 ]
