@@ -37,11 +37,11 @@ class CoverageAnalysisManager:
                         'message': 'Coverage analysis with the same parameters already exists',
                         'existing_coverage': {
                             'id': existing_coverage.id,
-                            'coverage_uid': str(existing_coverage.coverage_analysis_uid),
-                            'coverage_name': existing_coverage.coverage_analysis_name,
-                            'coverage_status': existing_coverage.coverage_analysis_status,
-                            'coverage_parameter': existing_coverage.coverage_analysis_parameter,
-                            'coverage_data_path': existing_coverage.coverage_analysis_data_path
+                            'coverage_analysis_uid': str(existing_coverage.coverage_analysis_uid),
+                            'coverage_analysis_name': existing_coverage.coverage_analysis_name,
+                            'coverage_analysis_status': existing_coverage.coverage_analysis_status,
+                            'coverage_analysis_parameter': existing_coverage.coverage_analysis_parameter,
+                            'coverage_analysis_data_path': existing_coverage.coverage_analysis_data_path
                         }
                     }, status=400)
 

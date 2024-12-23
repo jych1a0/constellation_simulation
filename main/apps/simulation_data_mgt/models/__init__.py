@@ -1,1 +1,3 @@
+from .handoverSimJobModel import HandoverSimJob
 from .CoverageAnalysisSimJobModel import CoverageAnalysisSimJob
+from .ConnectionTimeSimJobModel import ConnectionTimeSimJob

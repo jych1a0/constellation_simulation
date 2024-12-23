@@ -2,6 +2,7 @@ from django.urls import path
 from main.apps.meta_data_mgt.actors.UserManager import UserManager
 from main.apps.meta_data_mgt.actors.HandoverManager import HandoverManager
 from main.apps.meta_data_mgt.actors.CoverageAnalysisManager import CoverageAnalysisManager
+from main.apps.meta_data_mgt.actors.ConnectionTimeSimulationManager import ConnectionTimeSimulationManager
 
 urlpatterns = [
     path('meta_data_mgt/userManager/get_hello_world', UserManager.get_hello_world),
@@ -17,4 +18,21 @@ urlpatterns = [
     path('meta_data_mgt/CoverageAnalysisManager/query_coverage_analysis_by_user', CoverageAnalysisManager.query_coverage_analysis_by_user, name="query_coverage_analysis_by_user"),
     path('meta_data_mgt/CoverageAnalysisManager/create_coverage_analysis', CoverageAnalysisManager.create_coverage_analysis, name="create_coverage_analysis"),
     path('meta_data_mgt/CoverageAnalysisManager/delete_coverage_analysis', CoverageAnalysisManager.delete_coverage_analysis, name="delete_coverage_analysis"),
+
+    # 新增 ConnectionTimeSimulationManager 路由
+    path('meta_data_mgt/ConnectionTimeSimulationManager/create_connection_time_simulation', 
+         ConnectionTimeSimulationManager.create_connection_time_simulation, 
+         name="create_connection_time_simulation"),
+
+    path('meta_data_mgt/ConnectionTimeSimulationManager/delete_connection_time_simulation', 
+         ConnectionTimeSimulationManager.delete_connection_time_simulation, 
+         name="delete_connection_time_simulation"),
+
+    path('meta_data_mgt/ConnectionTimeSimulationManager/update_connection_time_simulation', 
+         ConnectionTimeSimulationManager.update_connection_time_simulation, 
+         name="update_connection_time_simulation"),
+
+    path('meta_data_mgt/ConnectionTimeSimulationManager/query_connection_time_simulation_by_user', 
+         ConnectionTimeSimulationManager.query_connection_time_simulation_by_user, 
+         name="query_connection_time_simulation_by_user"),
 ]

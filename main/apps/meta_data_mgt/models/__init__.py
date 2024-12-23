@@ -1,1 +1,2 @@
 from .CoverageAnalysisModel import CoverageAnalysis
+from .ConnectionTimeSimulationModel import ConnectionTimeSimulation

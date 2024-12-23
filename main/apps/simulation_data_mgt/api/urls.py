@@ -1,6 +1,7 @@
 from django.urls import path
 from main.apps.simulation_data_mgt.actors.handoverSimJobManager import handoverSimJobManager
 from main.apps.simulation_data_mgt.actors.CoverageAnalysisSimJobManager import CoverageAnalysisSimJobManager
+from main.apps.simulation_data_mgt.actors.connectionTimeSimJobManager import connectionTimeSimJobManager
 urlpatterns = [
     path('simulation_data_mgt/handoverSimJobManager/run_handover_sim_job',
          handoverSimJobManager.run_handover_sim_job, name="run_handover_sim_job"),
@@ -19,6 +20,12 @@ urlpatterns = [
      path('simulation_data_mgt/CoverageAnalysisSimJobManager/delete_coverage_analysis_sim_result',
          CoverageAnalysisSimJobManager.delete_coverage_analysis_sim_result, name="delete_coverage_analysis_sim_result"),
 
+    path('simulation_data_mgt/connectionTimeSimJobManager/run_connection_time_sim_job',
+         connectionTimeSimJobManager.run_connection_time_sim_job, name="run_connection_time_sim_job"),
+    path('simulation_data_mgt/connectionTimeSimJobManager/delete_connection_time_sim_result',
+         connectionTimeSimJobManager.delete_connection_time_sim_result, name="delete_connection_time_sim_result"),
+    path('simulation_data_mgt/connectionTimeSimJobManager/download_connection_time_sim_result',
+         connectionTimeSimJobManager.download_connection_time_sim_result, name="download_connection_time_sim_result"),
 
     path('simulation_data_mgt/handoverSimJobManager/download_coverage_tmp',
          handoverSimJobManager.download_coverage_tmp, name="download_coverage_tmp"),
