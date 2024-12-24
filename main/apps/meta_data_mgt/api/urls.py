@@ -4,6 +4,9 @@ from main.apps.meta_data_mgt.actors.HandoverManager import HandoverManager
 from main.apps.meta_data_mgt.actors.CoverageAnalysisManager import CoverageAnalysisManager
 from main.apps.meta_data_mgt.actors.ConnectionTimeSimulationManager import ConnectionTimeSimulationManager
 from main.apps.meta_data_mgt.actors.PhaseParameterSelectionManager import PhaseParameterSelectionManager
+from main.apps.meta_data_mgt.actors.ConstellationConfigurationStrategyManager import ConstellationConfigurationStrategyManager
+
+from main.apps.meta_data_mgt.actors.TestSatelliteManager import TestSatelliteManager
 
 urlpatterns = [
     path('meta_data_mgt/userManager/get_hello_world', UserManager.get_hello_world),
@@ -51,4 +54,34 @@ urlpatterns = [
     path('meta_data_mgt/PhaseParameterSelectionManager/update_phase_parameter_selection',
          PhaseParameterSelectionManager.update_phase_parameter_selection,
          name="update_phase_parameter_selection"),
+
+    # ConstellationConfigurationStrategyManager 路由
+    path('meta_data_mgt/ConstellationConfigurationStrategyManager/create_constellation_configuration_strategy',
+         ConstellationConfigurationStrategyManager.create_constellation_configuration_strategy,
+         name="create_constellation_configuration_strategy"),
+    path('meta_data_mgt/ConstellationConfigurationStrategyManager/query_constellation_configuration_strategy_by_user',
+         ConstellationConfigurationStrategyManager.query_constellation_configuration_strategy_by_user,
+         name="query_constellation_configuration_strategy_by_user"),
+    path('meta_data_mgt/ConstellationConfigurationStrategyManager/delete_constellation_configuration_strategy',
+         ConstellationConfigurationStrategyManager.delete_constellation_configuration_strategy,
+         name="delete_constellation_configuration_strategy"),
+    path('meta_data_mgt/ConstellationConfigurationStrategyManager/update_constellation_configuration_strategy',
+         ConstellationConfigurationStrategyManager.update_constellation_configuration_strategy,
+         name="update_constellation_configuration_strategy"),
+         
+
+# 以下由自動腳本插入
+path('meta_data_mgt/TestSatelliteManager/create_test_satellite',
+     TestSatelliteManager.create_test_satellite,
+     name="create_test_satellite"),
+path('meta_data_mgt/TestSatelliteManager/query_test_satellite_by_user',
+     TestSatelliteManager.query_test_satellite_by_user,
+     name="query_test_satellite_by_user"),
+path('meta_data_mgt/TestSatelliteManager/delete_test_satellite',
+     TestSatelliteManager.delete_test_satellite,
+     name="delete_test_satellite"),
+path('meta_data_mgt/TestSatelliteManager/update_test_satellite',
+     TestSatelliteManager.update_test_satellite,
+     name="update_test_satellite"),
+
 ]
