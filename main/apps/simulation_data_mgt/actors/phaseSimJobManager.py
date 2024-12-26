@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.PhaseModel import Phase
 from main.apps.simulation_data_mgt.models.PhaseSimJobModel import PhaseSimJob
-from main.apps.simulation_data_mgt.services.analyzePhaseResult import analyzePhaseResult
-from main.apps.simulation_data_mgt.services.genPhaseResultPDF import genPhaseResultPDF
+# from main.apps.simulation_data_mgt.services.analyzePhaseResult import analyzePhaseResult
+# from main.apps.simulation_data_mgt.services.genPhaseResultPDF import genPhaseResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

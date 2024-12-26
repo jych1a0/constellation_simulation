@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.GsoModel import Gso
 from main.apps.simulation_data_mgt.models.GsoSimJobModel import GsoSimJob
-from main.apps.simulation_data_mgt.services.analyzeGsoResult import analyzeGsoResult
-from main.apps.simulation_data_mgt.services.genGsoResultPDF import genGsoResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeGsoResult import analyzeGsoResult
+# from main.apps.simulation_data_mgt.services.genGsoResultPDF import genGsoResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

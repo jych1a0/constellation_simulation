@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.SaveErRoutingModel import SaveErRouting
 from main.apps.simulation_data_mgt.models.SaveErRoutingSimJobModel import SaveErRoutingSimJob
-from main.apps.simulation_data_mgt.services.analyzeSaveErRoutingResult import analyzeSaveErRoutingResult
-from main.apps.simulation_data_mgt.services.genSaveErRoutingResultPDF import genSaveErRoutingResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeSaveErRoutingResult import analyzeSaveErRoutingResult
+# from main.apps.simulation_data_mgt.services.genSaveErRoutingResultPDF import genSaveErRoutingResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

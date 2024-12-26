@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.ConnectedDurationModel import ConnectedDuration
 from main.apps.simulation_data_mgt.models.ConnectedDurationSimJobModel import ConnectedDurationSimJob
-from main.apps.simulation_data_mgt.services.analyzeConnectedDurationResult import analyzeConnectedDurationResult
-from main.apps.simulation_data_mgt.services.genConnectedDurationResultPDF import genConnectedDurationResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeConnectedDurationResult import analyzeConnectedDurationResult
+# from main.apps.simulation_data_mgt.services.genConnectedDurationResultPDF import genConnectedDurationResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

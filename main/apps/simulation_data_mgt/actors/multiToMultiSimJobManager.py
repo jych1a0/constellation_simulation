@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.MultiToMultiModel import MultiToMulti
 from main.apps.simulation_data_mgt.models.MultiToMultiSimJobModel import MultiToMultiSimJob
-from main.apps.simulation_data_mgt.services.analyzeMultiToMultiResult import analyzeMultiToMultiResult
-from main.apps.simulation_data_mgt.services.genMultiToMultiResultPDF import genMultiToMultiResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeMultiToMultiResult import analyzeMultiToMultiResult
+# from main.apps.simulation_data_mgt.services.genMultiToMultiResultPDF import genMultiToMultiResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

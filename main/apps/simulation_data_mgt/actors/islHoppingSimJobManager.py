@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.IslHoppingModel import IslHopping
 from main.apps.simulation_data_mgt.models.IslHoppingSimJobModel import IslHoppingSimJob
-from main.apps.simulation_data_mgt.services.analyzeIslHoppingResult import analyzeIslHoppingResult
-from main.apps.simulation_data_mgt.services.genIslHoppingResultPDF import genIslHoppingResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeIslHoppingResult import analyzeIslHoppingResult
+# from main.apps.simulation_data_mgt.services.genIslHoppingResultPDF import genIslHoppingResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

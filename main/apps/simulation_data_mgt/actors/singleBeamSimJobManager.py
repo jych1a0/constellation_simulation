@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.SingleBeamModel import SingleBeam
 from main.apps.simulation_data_mgt.models.SingleBeamSimJobModel import SingleBeamSimJob
-from main.apps.simulation_data_mgt.services.analyzeSingleBeamResult import analyzeSingleBeamResult
-from main.apps.simulation_data_mgt.services.genSingleBeamResultPDF import genSingleBeamResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeSingleBeamResult import analyzeSingleBeamResult
+# from main.apps.simulation_data_mgt.services.genSingleBeamResultPDF import genSingleBeamResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

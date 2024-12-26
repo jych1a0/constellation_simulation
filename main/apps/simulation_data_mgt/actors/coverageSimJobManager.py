@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.CoverageModel import Coverage
 from main.apps.simulation_data_mgt.models.CoverageSimJobModel import CoverageSimJob
-from main.apps.simulation_data_mgt.services.analyzeCoverageResult import analyzeCoverageResult
-from main.apps.simulation_data_mgt.services.genCoverageResultPDF import genCoverageResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeCoverageResult import analyzeCoverageResult
+# from main.apps.simulation_data_mgt.services.genCoverageResultPDF import genCoverageResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading

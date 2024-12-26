@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.EndToEndRoutingModel import EndToEndRouting
 from main.apps.simulation_data_mgt.models.EndToEndRoutingSimJobModel import EndToEndRoutingSimJob
-from main.apps.simulation_data_mgt.services.analyzeEndToEndRoutingResult import analyzeEndToEndRoutingResult
-from main.apps.simulation_data_mgt.services.genEndToEndRoutingResultPDF import genEndToEndRoutingResultPDF
+# from main.apps.simulation_data_mgt.services.analyzeEndToEndRoutingResult import analyzeEndToEndRoutingResult
+# from main.apps.simulation_data_mgt.services.genEndToEndRoutingResultPDF import genEndToEndRoutingResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
