@@ -164,7 +164,7 @@ def run_oneToMulti_simulation_async(oneToMulti_uid):
         terminate_oneToMulti_sim_job(oneToMulti_uid)
 
 
-class OneToMultiSimJobManager:
+class oneToMultiSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

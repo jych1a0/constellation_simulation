@@ -164,7 +164,7 @@ def run_constellationStrategy_simulation_async(constellationStrategy_uid):
         terminate_constellationStrategy_sim_job(constellationStrategy_uid)
 
 
-class ConstellationStrategySimJobManager:
+class constellationStrategySimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

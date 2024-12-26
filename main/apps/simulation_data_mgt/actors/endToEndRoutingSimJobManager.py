@@ -164,7 +164,7 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
         terminate_endToEndRouting_sim_job(endToEndRouting_uid)
 
 
-class EndToEndRoutingSimJobManager:
+class endToEndRoutingSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

@@ -164,7 +164,7 @@ def run_singleBeam_simulation_async(singleBeam_uid):
         terminate_singleBeam_sim_job(singleBeam_uid)
 
 
-class SingleBeamSimJobManager:
+class singleBeamSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

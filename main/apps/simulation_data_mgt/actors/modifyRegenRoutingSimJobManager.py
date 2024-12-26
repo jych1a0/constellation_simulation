@@ -164,7 +164,7 @@ def run_modifyRegenRouting_simulation_async(modifyRegenRouting_uid):
         terminate_modifyRegenRouting_sim_job(modifyRegenRouting_uid)
 
 
-class ModifyRegenRoutingSimJobManager:
+class modifyRegenRoutingSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

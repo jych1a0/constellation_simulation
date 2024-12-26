@@ -164,7 +164,7 @@ def run_phase_simulation_async(phase_uid):
         terminate_phase_sim_job(phase_uid)
 
 
-class PhaseSimJobManager:
+class phaseSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

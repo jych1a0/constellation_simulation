@@ -164,7 +164,7 @@ def run_islHopping_simulation_async(islHopping_uid):
         terminate_islHopping_sim_job(islHopping_uid)
 
 
-class IslHoppingSimJobManager:
+class islHoppingSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

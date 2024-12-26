@@ -164,7 +164,7 @@ def run_coverage_simulation_async(coverage_uid):
         terminate_coverage_sim_job(coverage_uid)
 
 
-class CoverageSimJobManager:
+class coverageSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

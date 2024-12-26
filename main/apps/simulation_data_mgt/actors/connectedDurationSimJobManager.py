@@ -164,7 +164,7 @@ def run_connectedDuration_simulation_async(connectedDuration_uid):
         terminate_connectedDuration_sim_job(connectedDuration_uid)
 
 
-class ConnectedDurationSimJobManager:
+class connectedDurationSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

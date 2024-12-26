@@ -164,7 +164,7 @@ def run_gso_simulation_async(gso_uid):
         terminate_gso_sim_job(gso_uid)
 
 
-class GsoSimJobManager:
+class gsoSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

@@ -164,7 +164,7 @@ def run_multiToMulti_simulation_async(multiToMulti_uid):
         terminate_multiToMulti_sim_job(multiToMulti_uid)
 
 
-class MultiToMultiSimJobManager:
+class multiToMultiSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

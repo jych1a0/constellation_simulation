@@ -164,7 +164,7 @@ def run_saveErRouting_simulation_async(saveErRouting_uid):
         terminate_saveErRouting_sim_job(saveErRouting_uid)
 
 
-class SaveErRoutingSimJobManager:
+class saveErRoutingSimJobManager:
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt
