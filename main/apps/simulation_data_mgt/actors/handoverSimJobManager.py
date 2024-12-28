@@ -120,12 +120,12 @@ def run_handover_simulation_async(handover_uid):
         docker_command = [
             'docker', 'run',
             '--oom-kill-disable=true', # 不因未使用太多memory，而被host端砍掉
-             '-m', '28g', # 限制memory大小
+             '-m', '100g', # 限制memory大小
             '-d',  # 在背景執行
             '--rm',  # 容器停止後自動移除
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'handoversimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 
