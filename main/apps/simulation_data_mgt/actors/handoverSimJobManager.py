@@ -6,8 +6,6 @@ from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.apps.simulation_data_mgt.models.handoverSimJobModel import HandoverSimJob
 from main.apps.simulation_data_mgt.services.analyzeHandoverResult import analyzeHandoverResult
 from main.apps.simulation_data_mgt.services.genHandoverResultPDF import genHandoverResultPDF
-from main.apps.simulation_data_mgt.services.genISLResultPDFtmp import genISLResultPDFtmp
-from main.apps.simulation_data_mgt.services.genRoutingResultPDFtmp import genRoutingResultPDFtmp
 from main.utils.logger import log_trigger, log_writer
 from django.views.decorators.csrf import csrf_exempt
 import os
