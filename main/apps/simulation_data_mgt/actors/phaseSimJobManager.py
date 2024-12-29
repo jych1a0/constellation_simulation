@@ -71,11 +71,11 @@ def run_phase_simulation_async(phase_uid):
         container_name = f"phaseSimulation_{phase_uid}"
 
         if isinstance(obj.phase_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.phase_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_phase_script.sh '{json.dumps(obj.phase_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.phase_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_phase_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.phase_parameter
 
@@ -87,7 +87,7 @@ def run_phase_simulation_async(phase_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'phasesimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 
