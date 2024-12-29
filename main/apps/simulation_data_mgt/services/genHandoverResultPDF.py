@@ -24,11 +24,11 @@ def genHandoverResultPDF(handover):
             'Average Distance (km)'
         ],
         'Value': [
-            f"{sim_results['handover_count']:.0f}",
-            f"{sim_results['handover_fail_count']:.0f}",
-            f"{sim_results['connection_duration_mean']:.2f}",
-            f"{sim_results['disconnect_duration_mean']:.2f}",
-            f"{sim_results['distance_of_available_gs_of_cell_mean_mean']:.2f}"
+            f"{float(sim_results['avg_cells_handover_count']):.4f}",
+            f"{float(sim_results['avg_cells_handover_fail_count']):.4f}",
+            f"{float(sim_results['avg_cells_connection_duration_mean']):.4f}",
+            f"{float(sim_results['avg_cells_disconnect_duration_mean']):.4f}",
+            f"{float(sim_results['avg_cells_distance_of_available_gs_of_cell_mean_avg']):.4f}"
         ]
     }
 
