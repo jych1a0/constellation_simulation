@@ -11,6 +11,7 @@ from main.utils.logger import log_trigger, log_writer
 from main.apps.meta_data_mgt.models.PhaseParameterSelectionModel import PhaseParameterSelection
 from main.apps.simulation_data_mgt.models.PhaseParameterSelectionJobModel import PhaseParameterSelectionJob
 
+
 @log_trigger('INFO')
 def terminate_phase_parameter_selection_job(phase_parameter_selection_uid):
     """
@@ -102,7 +103,7 @@ def run_phase_parameter_selection_async(phase_parameter_selection_uid):
             '--rm',
             '--name', container_name,
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'coverage_analysis_simulation:latest',
+            'coverage_analysis_simulation:latest',  # Demo image，可自行修改
             'bash', '-c',
             f'/root/mercury/shell/simulation_script.sh \'{json_params}\' && '
             f'cp -r /root/mercury/build/service/*.csv /root/mercury/build/service/output/'
@@ -129,8 +130,8 @@ def run_phase_parameter_selection_async(phase_parameter_selection_uid):
                 sim_job.phaseParameterSelectionJob_process_id = container_pid
                 sim_job.save()
 
-            # 設定超時
-            timeout = 60 * 60  # 1 小時
+            # 設定超時 (1 小時)
+            timeout = 60 * 60
             start_time = time.time()
 
             while True:
@@ -216,7 +217,7 @@ class phaseParameterSelectionJobManager:
                         'message': 'PhaseParameterSelection 缺少參數 phase_parameter_selection_parameter'
                     }, status=400)
 
-                # 檢查是否已有尚未結束的 job
+                # ---- [業務邏輯補足 1] 檢查是否已有尚未結束的 job ----
                 current_sim_job = PhaseParameterSelectionJob.objects.filter(
                     f_phase_parameter_selection_uid=selection_obj,
                     phaseParameterSelectionJob_end_time__isnull=True
@@ -232,7 +233,30 @@ class phaseParameterSelectionJobManager:
                         }
                     })
 
-                # 若主表狀態為 completed，且結果檔案存在，可直接回傳
+                # ---- [業務邏輯補足 2] 檢查同使用者是否已有其他模擬任務在執行（若不需要可移除） ----
+                other_sim_job = PhaseParameterSelectionJob.objects.filter(
+                    f_phase_parameter_selection_uid__f_user_uid=selection_obj.f_user_uid,
+                    phaseParameterSelectionJob_end_time__isnull=True
+                ).exclude(
+                    f_phase_parameter_selection_uid__phase_parameter_selection_uid=phase_parameter_selection_uid
+                ).select_related('f_phase_parameter_selection_uid').first()
+
+                if other_sim_job:
+                    return JsonResponse({
+                        'status': 'info',
+                        'message': '使用者已有其他正在執行的模擬作業',
+                        'data': {
+                            'phaseParameterSelectionJob_uid': str(other_sim_job.phaseParameterSelectionJob_uid),
+                            'phase_parameter_selection_uid': str(
+                                other_sim_job.f_phase_parameter_selection_uid.phase_parameter_selection_uid
+                            ),
+                            'current_phase_parameter_selection_uid': str(phase_parameter_selection_uid),
+                            'phase_parameter_selection_status':
+                                other_sim_job.f_phase_parameter_selection_uid.phase_parameter_selection_status
+                        }
+                    })
+
+                # ---- [業務邏輯補足 3] 若主表狀態為 completed，且結果檔案存在，就直接回傳 ----
                 if selection_obj.phase_parameter_selection_status == "completed":
                     data_path = selection_obj.phase_parameter_selection_data_path
                     if data_path and os.path.exists(data_path):

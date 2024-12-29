@@ -5,6 +5,8 @@ from main.apps.simulation_data_mgt.actors.connectionTimeSimJobManager import con
 from main.apps.simulation_data_mgt.actors.phaseParameterSelectionJobManager import phaseParameterSelectionJobManager
 
 
+
+
 from main.apps.simulation_data_mgt.actors.TestSatelliteSimJobManager import TestSatelliteSimJobManager
 
 urlpatterns = [
@@ -72,15 +74,15 @@ urlpatterns = [
          handoverSimJobManager.download_gso_tmp, name="download_gso_tmp"),
 
 # 以下由腳本插入 TestSatelliteSimJob
-path('simulation_data_mgt/test_satellite_sim_jobManager/run_test_satellite_sim_job',
+path('simulation_data_mgt/TestSatelliteSimJobManager/run_test_satellite_sim_job',
      TestSatelliteSimJobManager.run_test_satellite_sim_job,
      name="run_test_satellite_sim_job"),
 
-path('simulation_data_mgt/test_satellite_sim_jobManager/delete_test_satellite_sim_job_result',
+path('simulation_data_mgt/TestSatelliteSimJobManager/delete_test_satellite_sim_job_result',
      TestSatelliteSimJobManager.delete_test_satellite_sim_job_result,
      name="delete_test_satellite_sim_job_result"),
 
-path('simulation_data_mgt/test_satellite_sim_jobManager/download_test_satellite_sim_job_result',
+path('simulation_data_mgt/TestSatelliteSimJobManager/download_test_satellite_sim_job_result',
      TestSatelliteSimJobManager.download_test_satellite_sim_job_result,
      name="download_test_satellite_sim_job_result"),
 

@@ -109,7 +109,7 @@ def run_connection_time_simulation_async(connection_time_simulation_uid):
             except json.JSONDecodeError:
                 json_params = sim_obj.connection_time_simulation_parameter
 
-        # Docker 命令示範
+        # Docker 命令示範（可自行修改 image 名稱或 script）
         docker_cmd = [
             'docker', 'run',
             '--oom-kill-disable=true',
@@ -117,7 +117,7 @@ def run_connection_time_simulation_async(connection_time_simulation_uid):
             '--rm',
             '--name', container_name,
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'coverage_analysis_simulation:latest',
+            'coverage_analysis_simulation:latest',  # 此處只是示範，可替換為實際 image
             'bash', '-c',
             f'/root/mercury/shell/simulation_script.sh \'{json_params}\' && '
             f'cp -r /root/mercury/build/service/*.csv /root/mercury/build/service/output/'
@@ -152,6 +152,7 @@ def run_connection_time_simulation_async(connection_time_simulation_uid):
             start_time = time.time()
 
             while True:
+                # 超時檢查
                 if time.time() - start_time > timeout:
                     print(f"Simulation timeout for connection_time_simulation_uid: {connection_time_simulation_uid}")
                     terminate_connection_time_sim_job(connection_time_simulation_uid)
@@ -240,7 +241,7 @@ class connectionTimeSimJobManager:
                         'message': '缺少 connection_time_simulation_parameter'
                     }, status=400)
 
-                # 檢查是否有正在執行的 job
+                # 1. 檢查是否已有同一模擬任務正在執行
                 current_sim_job = ConnectionTimeSimJob.objects.filter(
                     f_connection_time_simulation_uid=sim_obj,
                     connectionTimeSimJob_end_time__isnull=True
@@ -257,23 +258,54 @@ class connectionTimeSimJobManager:
                         }
                     })
 
-                # 如有其他判斷條件，視情況加入（例如同使用者其他模擬任務不能同時進行等）
-                # ...
+                # 2. 檢查同使用者是否有其他模擬任務正在執行 (若不需要可移除)
+                other_sim_job = ConnectionTimeSimJob.objects.filter(
+                    f_connection_time_simulation_uid__f_user_uid=sim_obj.f_user_uid,
+                    connectionTimeSimJob_end_time__isnull=True
+                ).exclude(
+                    f_connection_time_simulation_uid__connection_time_simulation_uid=connection_time_simulation_uid
+                ).select_related('f_connection_time_simulation_uid').first()
 
-                # 如果已完成但有舊的結果檔，可直接返回
-                if sim_obj.connection_time_simulation_status == "completed":
-                    # TODO: 依需求檢查結果路徑是否存在
+                if other_sim_job:
                     return JsonResponse({
-                        'status': 'success',
-                        'message': '模擬已經執行完成，結果可供使用',
+                        'status': 'info',
+                        'message': '使用者已有其他正在執行的模擬作業',
                         'data': {
-                            'connection_time_simulation_uid': str(connection_time_simulation_uid),
-                            'connection_time_simulation_status': sim_obj.connection_time_simulation_status,
-                            'connection_time_simulation_data_path': sim_obj.connection_time_simulation_data_path
+                            'connectionTimeSimJob_uid': str(other_sim_job.connectionTimeSimJob_uid),
+                            'connection_time_simulation_uid': str(
+                                other_sim_job.f_connection_time_simulation_uid.connection_time_simulation_uid
+                            ),
+                            'current_connection_time_simulation_uid': str(connection_time_simulation_uid),
+                            'connection_time_simulation_status':
+                                other_sim_job.f_connection_time_simulation_uid.connection_time_simulation_status
                         }
                     })
 
-                # 啟動執行緒進行模擬
+                # 3. 如果已完成但有舊的結果檔，可直接回傳；若結果檔不存在則標為 simulation_failed
+                if sim_obj.connection_time_simulation_status == "completed":
+                    if sim_obj.connection_time_simulation_data_path:
+                        full_path = os.path.join(
+                            'simulation_result',
+                            'connection_time_simulation',
+                            str(sim_obj.f_user_uid.user_uid),
+                            str(connection_time_simulation_uid)
+                        )
+                        if os.path.exists(full_path):
+                            return JsonResponse({
+                                'status': 'success',
+                                'message': '模擬已經執行完成，結果可供使用',
+                                'data': {
+                                    'connection_time_simulation_uid': str(connection_time_simulation_uid),
+                                    'connection_time_simulation_status': sim_obj.connection_time_simulation_status,
+                                    'connection_time_simulation_data_path': sim_obj.connection_time_simulation_data_path
+                                }
+                            })
+                        else:
+                            # 若 DB 狀態為 completed 但檔案實際不存在，則視需求將狀態改為失敗
+                            sim_obj.connection_time_simulation_status = "simulation_failed"
+                            sim_obj.save()
+
+                # 4. 啟動執行緒進行模擬
                 simulation_thread = threading.Thread(
                     target=run_connection_time_simulation_async,
                     args=(connection_time_simulation_uid,)
@@ -326,10 +358,12 @@ class connectionTimeSimJobManager:
                     'message': '找不到對應的 Connection_Time_Simulation'
                 }, status=404)
 
+            # 刪除所有相關的 Job
             ConnectionTimeSimJob.objects.filter(
                 f_connection_time_simulation_uid=sim_obj
             ).delete()
 
+            # 檢查模擬結果路徑
             if not sim_obj.connection_time_simulation_data_path:
                 return JsonResponse({
                     'status': 'error',
@@ -382,8 +416,7 @@ class connectionTimeSimJobManager:
                     'message': 'connection_time_simulation_uid is required'
                 }, status=400)
 
-            # 假設需要傳回 PDF 或 CSV 檔：
-            # 此處舉例為 PDF
+            # 假設需要傳回 PDF 或 CSV 檔：此處舉例為 PDF
             pdf_path = os.path.join(
                 'simulation_result',
                 'connection_time_simulation',
@@ -419,4 +452,3 @@ class connectionTimeSimJobManager:
                 'status': 'error',
                 'message': str(e)
             }, status=500)
-
