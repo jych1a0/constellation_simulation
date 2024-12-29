@@ -28,5 +28,5 @@ class SaveErRouting(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.saveErRouting_data_path:
-            self.saveErRouting_data_path = f"saveErRouting/{{self.f_user_uid.user_uid}}/{{self.saveErRouting_uid}}"
+            self.saveErRouting_data_path = f"saveErRouting/{self.f_user_uid.user_uid}/{self.saveErRouting_uid}"
         super().save(*args, **kwargs)

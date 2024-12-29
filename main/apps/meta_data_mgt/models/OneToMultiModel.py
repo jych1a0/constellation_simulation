@@ -28,5 +28,5 @@ class OneToMulti(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.oneToMulti_data_path:
-            self.oneToMulti_data_path = f"oneToMulti/{{self.f_user_uid.user_uid}}/{{self.oneToMulti_uid}}"
+            self.oneToMulti_data_path = f"oneToMulti/{self.f_user_uid.user_uid}/{self.oneToMulti_uid}"
         super().save(*args, **kwargs)

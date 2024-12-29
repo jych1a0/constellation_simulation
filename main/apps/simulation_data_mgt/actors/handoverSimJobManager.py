@@ -107,11 +107,11 @@ def run_handover_simulation_async(handover_uid):
 
         # 如果 handover_parameter 是字典，轉換為正確格式的字串
         if isinstance(handover.handover_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(handover.handover_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_handover_script.sh '{json.dumps(handover.handover_parameter)}'"
         else:
             try:
                 param_dict = json.loads(handover.handover_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_handover_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = handover.handover_parameter
 

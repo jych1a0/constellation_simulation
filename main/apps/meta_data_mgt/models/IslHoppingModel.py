@@ -28,5 +28,5 @@ class IslHopping(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.islHopping_data_path:
-            self.islHopping_data_path = f"islHopping/{{self.f_user_uid.user_uid}}/{{self.islHopping_uid}}"
+            self.islHopping_data_path = f"islHopping/{self.f_user_uid.user_uid}/{self.islHopping_uid}"
         super().save(*args, **kwargs)

@@ -71,11 +71,11 @@ def run_coverage_simulation_async(coverage_uid):
         container_name = f"coverageSimulation_{coverage_uid}"
 
         if isinstance(obj.coverage_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.coverage_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_coverage_script.sh '{json.dumps(obj.coverage_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.coverage_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_coverage_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.coverage_parameter
 
@@ -87,7 +87,7 @@ def run_coverage_simulation_async(coverage_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'coveragesimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 

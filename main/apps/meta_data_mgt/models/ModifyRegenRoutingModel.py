@@ -28,5 +28,5 @@ class ModifyRegenRouting(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.modifyRegenRouting_data_path:
-            self.modifyRegenRouting_data_path = f"modifyRegenRouting/{{self.f_user_uid.user_uid}}/{{self.modifyRegenRouting_uid}}"
+            self.modifyRegenRouting_data_path = f"modifyRegenRouting/{self.f_user_uid.user_uid}/{self.modifyRegenRouting_uid}"
         super().save(*args, **kwargs)

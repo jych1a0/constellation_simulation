@@ -28,5 +28,5 @@ class Coverage(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.coverage_data_path:
-            self.coverage_data_path = f"coverage/{{self.f_user_uid.user_uid}}/{{self.coverage_uid}}"
+            self.coverage_data_path = f"coverage/{self.f_user_uid.user_uid}/{self.coverage_uid}"
         super().save(*args, **kwargs)

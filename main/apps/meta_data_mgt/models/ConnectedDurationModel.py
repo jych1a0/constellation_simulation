@@ -28,5 +28,5 @@ class ConnectedDuration(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.connectedDuration_data_path:
-            self.connectedDuration_data_path = f"connectedDuration/{{self.f_user_uid.user_uid}}/{{self.connectedDuration_uid}}"
+            self.connectedDuration_data_path = f"connectedDuration/{self.f_user_uid.user_uid}/{self.connectedDuration_uid}"
         super().save(*args, **kwargs)
