@@ -28,5 +28,5 @@ class Phase(models.Model):
     def save(self, *args, **kwargs):
         # 如果是新建或 data_path 為空，就自動生成
         if not self.id or not self.phase_data_path:
-            self.phase_data_path = f"phase/{{self.f_user_uid.user_uid}}/{{self.phase_uid}}"
+            self.phase_data_path = f"phase/{self.f_user_uid.user_uid}/{self.phase_uid}"
         super().save(*args, **kwargs)
