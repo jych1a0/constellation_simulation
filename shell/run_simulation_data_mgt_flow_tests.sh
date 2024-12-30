@@ -13,5 +13,8 @@ set -e  # 遇到錯誤即停止
 # echo "=== Running connectedDurationSimJobManager tests ==="
 # python main/apps/simulation_data_mgt/tests/flow/test_connectedDurationSimJobManager_flow.py
 
-echo "=== Running constellationStrategySimJobManager tests ==="
-python main/apps/simulation_data_mgt/tests/flow/test_constellationStrategySimJobManager_flow.py
+# echo "=== Running constellationStrategySimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_constellationStrategySimJobManager_flow.py
+
+echo "=== Running singleBeamSimJobManager tests ==="
+python main/apps/simulation_data_mgt/tests/flow/test_singleBeamSimJobManager_flow.py

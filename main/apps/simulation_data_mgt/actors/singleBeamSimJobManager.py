@@ -71,11 +71,11 @@ def run_singleBeam_simulation_async(singleBeam_uid):
         container_name = f"singleBeamSimulation_{singleBeam_uid}"
 
         if isinstance(obj.singleBeam_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.singleBeam_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_singleBeam_script.sh '{json.dumps(obj.singleBeam_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.singleBeam_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_singleBeam_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.singleBeam_parameter
 
@@ -87,7 +87,7 @@ def run_singleBeam_simulation_async(singleBeam_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'singleBeamsimulationimage_86400',
+            'handoversimulationimage_test:latest',
             'bash', '-c', simulation_command
         ]
 
