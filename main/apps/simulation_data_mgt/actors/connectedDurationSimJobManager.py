@@ -71,11 +71,11 @@ def run_connectedDuration_simulation_async(connectedDuration_uid):
         container_name = f"connectedDurationSimulation_{connectedDuration_uid}"
 
         if isinstance(obj.connectedDuration_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.connectedDuration_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_connectedDuration_script.sh '{json.dumps(obj.connectedDuration_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.connectedDuration_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_connectedDuration_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.connectedDuration_parameter
 
@@ -87,7 +87,7 @@ def run_connectedDuration_simulation_async(connectedDuration_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'connectedDurationsimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 
