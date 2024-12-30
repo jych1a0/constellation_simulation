@@ -120,12 +120,11 @@ def run_coverage_simulation_async(coverage_uid):
                                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             container_exists = bool(container_check.stdout.decode().strip())
 
-            results_exist = os.path.exists(simulation_result_dir)
-            
-            if results_exist:
+            results_exist = os.path.exists(simulation_result_dir) and os.listdir(simulation_result_dir)
+
+            if results_exist and not container_exists:
                 try:
                     sim_result = analyzeCoverageAnalysisResult(simulation_result_dir)
-                    print(f'coverage sim_result: {sim_result}')
                     if sim_result is not None:
                         obj.coverage_simulation_result = sim_result
                         obj.coverage_status = "completed"
