@@ -299,3 +299,10 @@
 [INFO] time: 2024-12-30 09:03:07, module: meta_data_mgt, actor: PhaseManager, function: delete_phase, payload: {'phase_uid': '980062a9-da3d-4b05-81a7-349b95e15723'}
 [INFO] time: 2024-12-30 09:03:07, module: meta_data_mgt, actor: UserManager, function: delete_user, payload: {'user_uid': '6871cb45-d4bd-42d2-82f3-bcc13eacf66b'}
 [INFO] time: 2024-12-30 09:03:07, module: simulation_data_mgt, actor: phaseSimJobManager, function: terminate_phase_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 10:02:45, module: simulation_data_mgt, actor: phaseSimJobManager, function: terminate_phase_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 15:55:08, module: simulation_data_mgt, actor: analyzeConnectedDurationResult, function: analyzeConnectedDurationResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 15:56:43, module: simulation_data_mgt, actor: analyzeConnectedDurationResult, function: analyzeConnectedDurationResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 15:56:43, module: simulation_data_mgt, actor: genConnectedDurationResultPDF, function: genConnectedDurationResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 15:59:13, module: simulation_data_mgt, actor: analyzeConnectedDurationResult, function: analyzeConnectedDurationResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 16:00:37, module: simulation_data_mgt, actor: analyzeConnectedDurationResult, function: analyzeConnectedDurationResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-30 16:00:37, module: simulation_data_mgt, actor: genConnectedDurationResultPDF, function: genConnectedDurationResultPDF, payload: Not a Django WSGI Request
