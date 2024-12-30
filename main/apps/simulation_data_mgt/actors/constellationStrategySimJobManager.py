@@ -71,11 +71,11 @@ def run_constellationStrategy_simulation_async(constellationStrategy_uid):
         container_name = f"constellationStrategySimulation_{constellationStrategy_uid}"
 
         if isinstance(obj.constellationStrategy_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.constellationStrategy_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_constellationStrategy_script.sh '{json.dumps(obj.constellationStrategy_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.constellationStrategy_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_constellationStrategy_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.constellationStrategy_parameter
 
@@ -87,7 +87,7 @@ def run_constellationStrategy_simulation_async(constellationStrategy_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'constellationStrategysimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 
