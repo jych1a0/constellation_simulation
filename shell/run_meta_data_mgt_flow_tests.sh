@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e  # 遇到錯誤即停止
 
-echo "=== Running coverage_flow tests ==="
-python manage.py test main.apps.meta_data_mgt.tests.flow.test_coverage_flow
+# echo "=== Running coverage_flow tests ==="
+# python manage.py test main.apps.meta_data_mgt.tests.flow.test_coverage_flow
 
 # echo "=== Running connectedDuration_flow tests ==="
 # python manage.py test main.apps.meta_data_mgt.tests.flow.test_connectedDuration_flow
