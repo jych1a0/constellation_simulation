@@ -3,37 +3,46 @@ import pandas as pd
 import os
 
 @log_trigger('INFO')
-def analyzeConnectedDurationResult(csv_file_path):
-    """
-    讀取 time,coverSatCount 兩欄位的 CSV，
-    並回傳 connectedDuration_simulation_result (dict).
-    """
-    if not os.path.exists(csv_file_path):
-        print(f"[ERROR] CSV does not exist: {csv_file_path}")
-        return None
+def analyzeConnectedDurationResult(simulation_result_dir):
+    if not os.path.exists(simulation_result_dir):
+        print(f"Path does not exist: {simulation_result_dir}")
+        return
+
+    csv_files_fullpath = []
+    for root, dirs, files in os.walk(simulation_result_dir):
+        for f in files:
+            if f.lower().endswith('.csv'):
+                csv_files_fullpath.append(os.path.join(root, f))
+
+    if len(csv_files_fullpath) == 0:
+        print(f"No CSV file found in directory or subdirectories: {simulation_result_dir}")
+        return
+    elif len(csv_files_fullpath) > 1:
+        print(f"More than one CSV file found. Found files: {csv_files_fullpath}")
+        return
+
+    simulation_result_file = csv_files_fullpath[0]
 
     try:
-        df = pd.read_csv(csv_file_path)
+        df = pd.read_csv(simulation_result_file)
 
-        # 確認欄位
         required_cols = ['time', 'coverSatCount']
         for col in required_cols:
             if col not in df.columns:
                 print(f"[ERROR] Missing column: {col}")
                 return None
 
-        # 做一些簡單的統計 (可依需求調整)
-        coverSatCount_mean = df['coverSatCount'].mean()
-        coverSatCount_max = df['coverSatCount'].max()
-        coverSatCount_min = df['coverSatCount'].min()
+        coverSatCount_mean = float(df['coverSatCount'].mean())
+        coverSatCount_max  = int(df['coverSatCount'].max())
+        coverSatCount_min  = int(df['coverSatCount'].min())
+        data_count         = int(len(df))
 
-        # 回傳的結果可自行設計
         result_json = {
             "connectedDuration_simulation_result": {
                 "coverSatCount_mean": coverSatCount_mean,
                 "coverSatCount_max": coverSatCount_max,
                 "coverSatCount_min": coverSatCount_min,
-                "data_count": len(df)
+                "data_count": data_count
             }
         }
         print(f"[INFO] analyzeConnectedDurationResult => {result_json}")

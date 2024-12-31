@@ -86,36 +86,36 @@ def main():
     time.sleep(20)  # 後端執行需要等待時間，可自行調整
 
     # 4) 下載模擬結果 (download_connectedDuration_sim_result)
-    download_cd_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/connectedDurationSimJobManager/download_connectedDuration_sim_result"
-    download_cd_payload = {
-        "connectedDuration_uid": connectedDuration_uid
-    }
-    resp_download_cd = requests.post(download_cd_url, json=download_cd_payload)
-    print_response("4) Download ConnectedDuration Sim Result", resp_download_cd)
+    # download_cd_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/connectedDurationSimJobManager/download_connectedDuration_sim_result"
+    # download_cd_payload = {
+    #     "connectedDuration_uid": connectedDuration_uid
+    # }
+    # resp_download_cd = requests.post(download_cd_url, json=download_cd_payload)
+    # print_response("4) Download ConnectedDuration Sim Result", resp_download_cd)
 
-    # 5) 刪除模擬結果 (delete_connectedDuration_sim_result)
-    delete_cd_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/connectedDurationSimJobManager/delete_connectedDuration_sim_result"
-    delete_cd_result_payload = {
-        "connectedDuration_uid": connectedDuration_uid
-    }
-    resp_delete_cd_result = requests.post(delete_cd_result_url, json=delete_cd_result_payload)
-    print_response("5) Delete ConnectedDuration Sim Result", resp_delete_cd_result)
+    # # 5) 刪除模擬結果 (delete_connectedDuration_sim_result)
+    # delete_cd_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/connectedDurationSimJobManager/delete_connectedDuration_sim_result"
+    # delete_cd_result_payload = {
+    #     "connectedDuration_uid": connectedDuration_uid
+    # }
+    # resp_delete_cd_result = requests.post(delete_cd_result_url, json=delete_cd_result_payload)
+    # print_response("5) Delete ConnectedDuration Sim Result", resp_delete_cd_result)
 
-    # 6) 刪除 connectedDuration (delete_connectedDuration)
-    delete_cd_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/connectedDurationManager/delete_connectedDuration"
-    delete_cd_payload = {
-        "connectedDuration_uid": connectedDuration_uid
-    }
-    resp_delete_cd = requests.post(delete_cd_url, json=delete_cd_payload)
-    print_response("6) Delete ConnectedDuration", resp_delete_cd)
+    # # 6) 刪除 connectedDuration (delete_connectedDuration)
+    # delete_cd_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/connectedDurationManager/delete_connectedDuration"
+    # delete_cd_payload = {
+    #     "connectedDuration_uid": connectedDuration_uid
+    # }
+    # resp_delete_cd = requests.post(delete_cd_url, json=delete_cd_payload)
+    # print_response("6) Delete ConnectedDuration", resp_delete_cd)
 
-    # 7) 刪除使用者 (delete_user)
-    delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
-    delete_user_payload = {
-        "user_uid": user_uid
-    }
-    resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
-    print_response("7) Delete User", resp_delete_user)
+    # # 7) 刪除使用者 (delete_user)
+    # delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
+    # delete_user_payload = {
+    #     "user_uid": user_uid
+    # }
+    # resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
+    # print_response("7) Delete User", resp_delete_user)
 
 if __name__ == "__main__":
     main()
