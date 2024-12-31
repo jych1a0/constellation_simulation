@@ -1,0 +1,27 @@
+[INFO] time: 2024-12-31 09:32:57, module: meta_data_mgt, actor: UserManager, function: create_user, payload: {'user_name': 'test5678', 'user_password': 'password3339', 'user_email': 'test6511@example.com'}
+[INFO] time: 2024-12-31 09:32:57, module: meta_data_mgt, actor: PhaseManager, function: create_phase, payload: {'phase_name': 'Project A Phase', 'phase_parameter': {'ISLLinkMethod': 'minMaxR', 'TLE_inputFileName': 'TLE_6P_22Sats_29deg_F1.txt'}, 'f_user_uid': '108ed274-34df-442c-9516-fae1559bdf9c'}
+[INFO] time: 2024-12-31 09:32:57, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_sim_job, payload: {'phase_uid': 'fc691499-6a98-468d-9f65-78afa8ca4d27'}
+[INFO] time: 2024-12-31 09:32:57, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:33:17, module: simulation_data_mgt, actor: phaseSimJobManager, function: download_phase_sim_result, payload: {'phase_uid': 'fc691499-6a98-468d-9f65-78afa8ca4d27'}
+[INFO] time: 2024-12-31 09:33:17, module: simulation_data_mgt, actor: phaseSimJobManager, function: delete_phase_sim_result, payload: {'phase_uid': 'fc691499-6a98-468d-9f65-78afa8ca4d27'}
+[INFO] time: 2024-12-31 09:33:17, module: meta_data_mgt, actor: PhaseManager, function: delete_phase, payload: {'phase_uid': 'fc691499-6a98-468d-9f65-78afa8ca4d27'}
+[INFO] time: 2024-12-31 09:33:17, module: meta_data_mgt, actor: UserManager, function: delete_user, payload: {'user_uid': '108ed274-34df-442c-9516-fae1559bdf9c'}
+[INFO] time: 2024-12-31 09:33:18, module: simulation_data_mgt, actor: phaseSimJobManager, function: terminate_phase_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:36:10, module: meta_data_mgt, actor: UserManager, function: create_user, payload: {'user_name': 'test1567', 'user_password': 'password7824', 'user_email': 'test5623@example.com'}
+[INFO] time: 2024-12-31 09:36:10, module: meta_data_mgt, actor: PhaseManager, function: create_phase, payload: {'phase_name': 'Project A Phase', 'phase_parameter': {'ISLLinkMethod': 'minMaxR', 'TLE_inputFileName': 'TLE_6P_22Sats_29deg_F1.txt'}, 'f_user_uid': 'c02684ce-22bf-4976-842b-38c49093196e'}
+[INFO] time: 2024-12-31 09:36:10, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_sim_job, payload: {'phase_uid': 'ba1d5180-9ebe-4be8-bdb9-9ecdc0bef542'}
+[INFO] time: 2024-12-31 09:36:10, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:36:30, module: simulation_data_mgt, actor: phaseSimJobManager, function: download_phase_sim_result, payload: {'phase_uid': 'ba1d5180-9ebe-4be8-bdb9-9ecdc0bef542'}
+[INFO] time: 2024-12-31 09:36:30, module: simulation_data_mgt, actor: phaseSimJobManager, function: delete_phase_sim_result, payload: {'phase_uid': 'ba1d5180-9ebe-4be8-bdb9-9ecdc0bef542'}
+[INFO] time: 2024-12-31 09:36:30, module: meta_data_mgt, actor: PhaseManager, function: delete_phase, payload: {'phase_uid': 'ba1d5180-9ebe-4be8-bdb9-9ecdc0bef542'}
+[INFO] time: 2024-12-31 09:36:30, module: meta_data_mgt, actor: UserManager, function: delete_user, payload: {'user_uid': 'c02684ce-22bf-4976-842b-38c49093196e'}
+[INFO] time: 2024-12-31 09:36:31, module: simulation_data_mgt, actor: phaseSimJobManager, function: terminate_phase_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:38:54, module: meta_data_mgt, actor: UserManager, function: create_user, payload: {'user_name': 'test8066', 'user_password': 'password4402', 'user_email': 'test3394@example.com'}
+[INFO] time: 2024-12-31 09:38:54, module: meta_data_mgt, actor: ConstellationStrategyManager, function: create_constellationStrategy, payload: {'constellationStrategy_name': 'Project A ConstellationStrategy', 'constellationStrategy_parameter': {'observerId': '101', 'TLE_inputFileName': 'TLE_6P_22Sats_29deg_F1.txt', 'ISLLinkMethod': 'minAERRange'}, 'f_user_uid': 'dd979758-28bf-4d25-b3a7-74e6ad787217'}
+[INFO] time: 2024-12-31 09:38:54, module: simulation_data_mgt, actor: constellationStrategySimJobManager, function: run_constellationStrategy_sim_job, payload: {'constellationStrategy_uid': '0f4e70e7-eb77-4f62-a0da-a6611d1b6017'}
+[INFO] time: 2024-12-31 09:38:54, module: simulation_data_mgt, actor: constellationStrategySimJobManager, function: run_constellationStrategy_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:39:04, module: simulation_data_mgt, actor: constellationStrategySimJobManager, function: terminate_constellationStrategy_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 09:39:14, module: simulation_data_mgt, actor: constellationStrategySimJobManager, function: download_constellationStrategy_sim_result, payload: {'constellationStrategy_uid': '0f4e70e7-eb77-4f62-a0da-a6611d1b6017'}
+[INFO] time: 2024-12-31 09:39:14, module: simulation_data_mgt, actor: constellationStrategySimJobManager, function: delete_constellationStrategy_sim_result, payload: {'constellationStrategy_uid': '0f4e70e7-eb77-4f62-a0da-a6611d1b6017'}
+[INFO] time: 2024-12-31 09:39:14, module: meta_data_mgt, actor: ConstellationStrategyManager, function: delete_constellationStrategy, payload: {'constellationStrategy_uid': '0f4e70e7-eb77-4f62-a0da-a6611d1b6017'}
+[INFO] time: 2024-12-31 09:39:14, module: meta_data_mgt, actor: UserManager, function: delete_user, payload: {'user_uid': 'dd979758-28bf-4d25-b3a7-74e6ad787217'}

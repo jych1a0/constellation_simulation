@@ -24,7 +24,7 @@ urlpatterns = [
     path('meta_data_mgt/handoverManager/delete_handover', HandoverManager.delete_handover, name="delete_handover"),
     path('meta_data_mgt/handoverManager/update_handover', HandoverManager.update_handover, name="update_handover"),
     path('meta_data_mgt/handoverManager/query_handoverData_by_user', HandoverManager.query_handoverData_by_user, name="query_handoverData_by_user"),
-
+    
     path('meta_data_mgt/coverageManager/create_coverage', CoverageManager.create_coverage, name="create_coverage"),
     path('meta_data_mgt/coverageManager/delete_coverage', CoverageManager.delete_coverage, name="delete_coverage"),
     path('meta_data_mgt/coverageManager/update_coverage', CoverageManager.update_coverage, name="update_coverage"),

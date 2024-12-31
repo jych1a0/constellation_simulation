@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.CoverageModel import Coverage
 from main.apps.simulation_data_mgt.models.CoverageSimJobModel import CoverageSimJob
-# from main.apps.simulation_data_mgt.services.analyzeCoverageResult import analyzeCoverageResult
-# from main.apps.simulation_data_mgt.services.genCoverageResultPDF import genCoverageResultPDF
+from main.apps.simulation_data_mgt.services.analyzeCoverageAnalysisResult import analyzeCoverageAnalysisResult
+from main.apps.simulation_data_mgt.services.genCoverageAnalysisResultPDF import genCoverageAnalysisResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
@@ -124,7 +124,7 @@ def run_coverage_simulation_async(coverage_uid):
 
             if results_exist and not container_exists:
                 try:
-                    sim_result = analyzeCoverageResult(simulation_result_dir)
+                    sim_result = analyzeCoverageAnalysisResult(simulation_result_dir)
                     if sim_result is not None:
                         obj.coverage_simulation_result = sim_result
                         obj.coverage_status = "completed"
@@ -134,7 +134,7 @@ def run_coverage_simulation_async(coverage_uid):
                         sim_job.coverageSimJob_end_time = timezone.now()
                         sim_job.save()
 
-                        pdf_path = genCoverageResultPDF(obj)
+                        pdf_path = genCoverageAnalysisResultPDF(obj)
                         print(f"Simulation completed successfully, results saved for coverage_uid: {coverage_uid}")
                         print(f"PDF report generated at: {pdf_path}")
                         return
