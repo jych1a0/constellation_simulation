@@ -85,36 +85,36 @@ def main():
     time.sleep(20)  # 後端執行需要等待時間，可自行調整
 
     # 4) 下載模擬結果 (download_constellationStrategy_sim_result)
-    download_cs_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/constellationStrategySimJobManager/download_constellationStrategy_sim_result"
-    download_cs_payload = {
-        "constellationStrategy_uid": constellationStrategy_uid
-    }
-    resp_download_cs = requests.post(download_cs_url, json=download_cs_payload)
-    print_response("4) Download ConstellationStrategy Sim Result", resp_download_cs)
+    # download_cs_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/constellationStrategySimJobManager/download_constellationStrategy_sim_result"
+    # download_cs_payload = {
+    #     "constellationStrategy_uid": constellationStrategy_uid
+    # }
+    # resp_download_cs = requests.post(download_cs_url, json=download_cs_payload)
+    # print_response("4) Download ConstellationStrategy Sim Result", resp_download_cs)
 
-    # 5) 刪除模擬結果 (delete_constellationStrategy_sim_result)
-    delete_cs_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/constellationStrategySimJobManager/delete_constellationStrategy_sim_result"
-    delete_cs_result_payload = {
-        "constellationStrategy_uid": constellationStrategy_uid
-    }
-    resp_delete_cs_result = requests.post(delete_cs_result_url, json=delete_cs_result_payload)
-    print_response("5) Delete ConstellationStrategy Sim Result", resp_delete_cs_result)
+    # # 5) 刪除模擬結果 (delete_constellationStrategy_sim_result)
+    # delete_cs_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/constellationStrategySimJobManager/delete_constellationStrategy_sim_result"
+    # delete_cs_result_payload = {
+    #     "constellationStrategy_uid": constellationStrategy_uid
+    # }
+    # resp_delete_cs_result = requests.post(delete_cs_result_url, json=delete_cs_result_payload)
+    # print_response("5) Delete ConstellationStrategy Sim Result", resp_delete_cs_result)
 
-    # 6) 刪除 constellationStrategy (delete_constellationStrategy)
-    delete_cs_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/constellationStrategyManager/delete_constellationStrategy"
-    delete_cs_payload = {
-        "constellationStrategy_uid": constellationStrategy_uid
-    }
-    resp_delete_cs = requests.post(delete_cs_url, json=delete_cs_payload)
-    print_response("6) Delete ConstellationStrategy", resp_delete_cs)
+    # # 6) 刪除 constellationStrategy (delete_constellationStrategy)
+    # delete_cs_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/constellationStrategyManager/delete_constellationStrategy"
+    # delete_cs_payload = {
+    #     "constellationStrategy_uid": constellationStrategy_uid
+    # }
+    # resp_delete_cs = requests.post(delete_cs_url, json=delete_cs_payload)
+    # print_response("6) Delete ConstellationStrategy", resp_delete_cs)
 
-    # 7) 刪除使用者 (delete_user)
-    delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
-    delete_user_payload = {
-        "user_uid": user_uid
-    }
-    resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
-    print_response("7) Delete User", resp_delete_user)
+    # # 7) 刪除使用者 (delete_user)
+    # delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
+    # delete_user_payload = {
+    #     "user_uid": user_uid
+    # }
+    # resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
+    # print_response("7) Delete User", resp_delete_user)
 
 if __name__ == "__main__":
     main()

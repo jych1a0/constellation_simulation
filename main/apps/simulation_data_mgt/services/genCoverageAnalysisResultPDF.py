@@ -17,8 +17,8 @@ def genCoverageAnalysisResultPDF(coverage):
     pdf_pages = PdfPages(pdf_path)
 
     try:
-        # ========== 第一頁：實驗條件 ========== #
-        fig1, ax1 = plt.subplots(figsize=(12, 6))
+        # ========== 第一頁：實驗條件 (統一尺寸 -> figsize=(10, 6)) ========== #
+        fig1, ax1 = plt.subplots(figsize=(10, 6))
         ax1.axis('off')
 
         # 第一頁右上角顯示時間戳記
@@ -55,7 +55,7 @@ def genCoverageAnalysisResultPDF(coverage):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第二頁：Coverage 圖表 ========== #
+        # ========== 第二頁：Coverage 圖表 (同樣大小 -> figsize=(10, 6)) ========== #
         # 1) 收集該路徑下所有 csv
         csv_list = [f for f in os.listdir(coverage.coverage_data_path) if f.lower().endswith('.csv')]
         if not csv_list:
@@ -71,40 +71,42 @@ def genCoverageAnalysisResultPDF(coverage):
                     df['coverage_seconds'] = df['coverage'] * 86400
 
                     sns.set_style("whitegrid")
-                    fig2, ax1 = plt.subplots(figsize=(16, 10))
-                    line1, = ax1.plot(
+
+                    # 第二頁圖表：統一改成 (10, 6)
+                    fig2, ax2 = plt.subplots(figsize=(10, 6)) 
+                    line1, = ax2.plot(
                         df['latitude'], df['coverage_seconds'],
                         color='blue', linewidth=2, label='Coverage Time'
                     )
 
-                    ax1.set_xlabel('Latitude (°)', fontsize=14)
-                    ax1.set_ylabel('Daily Coverage Time (seconds)', fontsize=14)
-                    ax1.tick_params(axis='both', labelsize=12)
-                    ax1.set_xticks(np.arange(-50, 51, 2))
+                    ax2.set_xlabel('Latitude (°)', fontsize=14)
+                    ax2.set_ylabel('Daily Coverage Time (seconds)', fontsize=14)
+                    ax2.tick_params(axis='both', labelsize=12)
+                    ax2.set_xticks(np.arange(-50, 51, 2))
 
                     # 加上台灣緯度範圍
                     taiwan_south = 22
                     taiwan_north = 25.3
-                    ax1.axvline(x=taiwan_south, color='red', linestyle='--', alpha=0.5)
-                    ax1.axvline(x=taiwan_north, color='red', linestyle='--', alpha=0.5)
-                    ax1.axvspan(taiwan_south, taiwan_north, alpha=0.1, color='red')
+                    ax2.axvline(x=taiwan_south, color='red', linestyle='--', alpha=0.5)
+                    ax2.axvline(x=taiwan_north, color='red', linestyle='--', alpha=0.5)
+                    ax2.axvspan(taiwan_south, taiwan_north, alpha=0.1, color='red')
 
                     # 標註
-                    y_pos = ax1.get_ylim()[1] * 0.95
-                    ax1.annotate('Taiwan\nLatitude\nRange',
+                    y_pos = ax2.get_ylim()[1] * 0.95
+                    ax2.annotate('Taiwan\nLatitude\nRange',
                                  xy=((taiwan_south + taiwan_north)/2, y_pos),
                                  xytext=(0, 10), textcoords='offset points',
                                  ha='center', va='bottom',
                                  color='red', fontsize=12)
 
                     # 第二軸（小時）
-                    ax2 = ax1.twinx()
-                    ax2.set_ylabel('Time (hours)', fontsize=14)
-                    ax2.tick_params(axis='y', labelsize=12)
-                    ax2.set_ylim(0, 24)
+                    ax3 = ax2.twinx()
+                    ax3.set_ylabel('Time (hours)', fontsize=14)
+                    ax3.tick_params(axis='y', labelsize=12)
+                    ax3.set_ylim(0, 24)
 
                     plt.title('Satellite Coverage Time vs Latitude', fontsize=16, pad=15)
-                    ax1.legend([line1], ['Coverage Time'], loc='upper right', fontsize=12)
+                    ax2.legend([line1], ['Coverage Time'], loc='upper right', fontsize=12)
 
                     plt.tight_layout()
                     pdf_pages.savefig(fig2)

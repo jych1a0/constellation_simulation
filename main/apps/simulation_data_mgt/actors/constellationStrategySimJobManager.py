@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.ConstellationStrategyModel import ConstellationStrategy
 from main.apps.simulation_data_mgt.models.ConstellationStrategySimJobModel import ConstellationStrategySimJob
-# from main.apps.simulation_data_mgt.services.analyzeConstellationStrategyResult import analyzeConstellationStrategyResult
-# from main.apps.simulation_data_mgt.services.genConstellationStrategyResultPDF import genConstellationStrategyResultPDF
+from main.apps.simulation_data_mgt.services.analyzeConstellationStrategyResult import analyzeConstellationStrategyResult
+from main.apps.simulation_data_mgt.services.genConstellationStrategyResultPDF import genConstellationStrategyResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
