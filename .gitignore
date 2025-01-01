@@ -11,6 +11,7 @@ Pipfile.lock
 
 # Logs
 logs/*
+*.txt
 
 # Database
 postgres_data/*
