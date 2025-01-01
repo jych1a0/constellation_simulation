@@ -62,10 +62,11 @@ def main():
     mrr_payload = {
         "modifyRegenRouting_name": "Project A MRR",
         "modifyRegenRouting_parameter": {
+            "Action":"Recover",
             "ISLLinkMethod":"minMaxR",
             "TLE_inputFileName":"TLE_3P_22Sats_29deg_F1.txt",
-            "avgISLPerSat":"2.5",
-            "degreeConstraint":"3"
+            "avgISLPerSat":"2.5", 
+            "degreeConstraint":"3" 
         },
         "f_user_uid": user_uid
     }
