@@ -146,3 +146,14 @@
 [INFO] time: 2024-12-31 12:59:23, module: simulation_data_mgt, actor: coverageSimJobManager, function: run_coverage_simulation_async, payload: Not a Django WSGI Request
 [INFO] time: 2024-12-31 12:59:33, module: simulation_data_mgt, actor: analyzeCoverageAnalysisResult, function: analyzeCoverageAnalysisResult, payload: Not a Django WSGI Request
 [INFO] time: 2024-12-31 12:59:33, module: simulation_data_mgt, actor: genCoverageAnalysisResultPDF, function: genCoverageAnalysisResultPDF, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 13:22:13, module: meta_data_mgt, actor: UserManager, function: create_user, payload: {'user_name': 'test1546', 'user_password': 'password8862', 'user_email': 'test6230@example.com'}
+[INFO] time: 2024-12-31 13:22:13, module: meta_data_mgt, actor: PhaseManager, function: create_phase, payload: {'phase_name': 'Project A Phase', 'phase_parameter': {'ISLLinkMethod': 'minMaxR', 'TLE_inputFileName': 'TLE_6P_22Sats_29deg_F1.txt'}, 'f_user_uid': '14b6be08-0dc9-49fc-8bb4-2691662c50e1'}
+[INFO] time: 2024-12-31 13:22:13, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_sim_job, payload: {'phase_uid': '61d4ef12-441a-438f-85b7-0b999e3dd3e3'}
+[INFO] time: 2024-12-31 13:22:13, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 13:43:37, module: simulation_data_mgt, actor: phaseSimJobManager, function: terminate_phase_sim_job, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 13:44:33, module: meta_data_mgt, actor: UserManager, function: create_user, payload: {'user_name': 'test6820', 'user_password': 'password9105', 'user_email': 'test4206@example.com'}
+[INFO] time: 2024-12-31 13:44:33, module: meta_data_mgt, actor: PhaseManager, function: create_phase, payload: {'phase_name': 'Project A Phase', 'phase_parameter': {'ISLLinkMethod': 'minMaxR', 'TLE_inputFileName': 'TLE_6P_22Sats_29deg_F1.txt'}, 'f_user_uid': 'ce02e828-f2d7-4bbd-a544-56d19e861f5d'}
+[INFO] time: 2024-12-31 13:44:33, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_sim_job, payload: {'phase_uid': '9d99b298-ab50-4a0b-9332-87da79e98c1a'}
+[INFO] time: 2024-12-31 13:44:33, module: simulation_data_mgt, actor: phaseSimJobManager, function: run_phase_simulation_async, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 14:13:49, module: simulation_data_mgt, actor: analyzePhaseResult, function: analyzePhaseResult, payload: Not a Django WSGI Request
+[INFO] time: 2024-12-31 14:13:49, module: simulation_data_mgt, actor: genPhaseResultPDF, function: genPhaseResultPDF, payload: Not a Django WSGI Request
