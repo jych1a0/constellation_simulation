@@ -1,5 +1,0 @@
-[INFO] time: 2024-12-30 08:28:57, module: simulation_data_mgt, actor: analyzeCoverageAnalysisResult, function: analyzeCoverageAnalysisResult, payload: Not a Django WSGI Request
-[INFO] time: 2024-12-30 08:29:32, module: simulation_data_mgt, actor: analyzeCoverageAnalysisResult, function: analyzeCoverageAnalysisResult, payload: Not a Django WSGI Request
-[INFO] time: 2024-12-30 08:33:11, module: simulation_data_mgt, actor: analyzeCoverageAnalysisResult, function: analyzeCoverageAnalysisResult, payload: Not a Django WSGI Request
-[INFO] time: 2024-12-30 08:33:46, module: simulation_data_mgt, actor: analyzeCoverageAnalysisResult, function: analyzeCoverageAnalysisResult, payload: Not a Django WSGI Request
-[INFO] time: 2024-12-30 08:33:46, module: simulation_data_mgt, actor: genCoverageAnalysisResultPDF, function: genCoverageAnalysisResultPDF, payload: Not a Django WSGI Request
