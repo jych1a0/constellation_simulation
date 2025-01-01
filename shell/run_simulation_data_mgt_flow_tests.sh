@@ -19,5 +19,8 @@ set -e  # 遇到錯誤即停止
 # echo "=== Running singleBeamSimJobManager tests ==="
 # python main/apps/simulation_data_mgt/tests/flow/test_singleBeamSimJobManager_flow.py
 
-echo "=== Running modifyRegenRoutingSimJobManager tests ==="
-python main/apps/simulation_data_mgt/tests/flow/test_modifyRegenRoutingSimJobManager_flow.py
+# echo "=== Running modifyRegenRoutingSimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_modifyRegenRoutingSimJobManager_flow.py
+
+echo "=== Running islHoppingSimJobManager tests ==="
+python main/apps/simulation_data_mgt/tests/flow/test_islHoppingSimJobManager_flow.py

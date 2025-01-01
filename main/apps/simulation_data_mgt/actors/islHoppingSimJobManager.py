@@ -71,11 +71,11 @@ def run_islHopping_simulation_async(islHopping_uid):
         container_name = f"islHoppingSimulation_{islHopping_uid}"
 
         if isinstance(obj.islHopping_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.islHopping_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_islHopping_script.sh '{json.dumps(obj.islHopping_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.islHopping_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_islHopping_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.islHopping_parameter
 
@@ -87,7 +87,7 @@ def run_islHopping_simulation_async(islHopping_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'islHoppingsimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 
