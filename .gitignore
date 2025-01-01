@@ -21,3 +21,6 @@ main/apps/simulation_data_mgt/migrations/*
 
 # Application Data
 simulation_result/*
+
+# IDE
+.vscode
