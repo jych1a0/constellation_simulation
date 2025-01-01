@@ -38,13 +38,15 @@ def genConstellationStrategyResultPDF(constellationStrategy):
         plt.close(fig1)
 
         # ========== 第 2 頁：Adjacent Orbit Satellites AER Variation Range ========== #
-        csv_path = os.path.join(
-            constellationStrategy.constellationStrategy_data_path,
-            "satToAllRightSatAER-101-TLE_6P_22Sats_29deg_F1.csv"
-        )
-        if os.path.exists(csv_path):
+        csv_list = [f for f in os.listdir(constellationStrategy.constellationStrategy_data_path) if f.lower().endswith('.csv')]
+        if not csv_list:
+            print(f"[WARN] No CSV files found in: {constellationStrategy.constellationStrategy_data_path}")
+        else:
+            constellationStrategy_csv_path = os.path.join(constellationStrategy.constellationStrategy_data_path, csv_list[0])
+            print(f"[INFO] Using coverage CSV: {constellationStrategy_csv_path}")
+        if os.path.exists(constellationStrategy_csv_path):
             try:
-                df = pd.read_csv(csv_path)
+                df = pd.read_csv(constellationStrategy_csv_path)
 
                 fig2, ax2 = plt.subplots(figsize=(10, 6))
                 sns.set_style("whitegrid")
@@ -78,7 +80,7 @@ def genConstellationStrategyResultPDF(constellationStrategy):
             except Exception as e:
                 print(f"[WARN] Failed to plot AER Variation Range. Error: {str(e)}")
         else:
-            print(f"[WARN] CSV not found => {csv_path}")
+            print(f"[WARN] CSV not found => {constellationStrategy_csv_path}")
 
     except Exception as e:
         print(f"[ERROR] genConstellationStrategyResultPDF => {str(e)}")

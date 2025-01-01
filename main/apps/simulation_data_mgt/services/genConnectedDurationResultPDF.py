@@ -49,15 +49,15 @@ def genConnectedDurationResultPDF(connectedDuration):
         plt.close(fig1)
 
         # ========== 第 2 頁：折線圖 (10x6) ========== #
-        csv_filename = "groundStationCoverSat-TLE_6P_22Sats_29deg_F1.csv"
-        csv_path = os.path.join(
-            connectedDuration.connectedDuration_data_path, 
-            csv_filename
-        )
-
-        if os.path.exists(csv_path):
+        csv_list = [f for f in os.listdir(connectedDuration.connectedDuration_data_path) if f.lower().endswith('.csv')]
+        if not csv_list:
+            print(f"[WARN] No CSV files found in: {connectedDuration.connectedDuration_data_path}")
+        else:
+            connectedDuration_csv_path = os.path.join(connectedDuration.connectedDuration_data_path, csv_list[0])
+            print(f"[INFO] Using coverage CSV: {connectedDuration_csv_path}")
+        if os.path.exists(connectedDuration_csv_path):
             try:
-                df = pd.read_csv(csv_path)
+                df = pd.read_csv(connectedDuration_csv_path)
                 if not {'time', 'coverSatCount'}.issubset(df.columns):
                     print(f"[WARN] CSV columns not match. Need 'time' & 'coverSatCount'. Found: {list(df.columns)}")
                 else:
@@ -78,7 +78,7 @@ def genConnectedDurationResultPDF(connectedDuration):
                         label='CoverSatCount'
                     )
 
-                    ax2.set_xlabel('Time (HH:MM:SS)', fontsize=14)
+                    ax2.set_xlabel('Time', fontsize=14)
                     ax2.set_ylabel('Number of Satellites', fontsize=14)
                     ax2.tick_params(axis='both', labelsize=12)
                     ax2.set_ylim(bottom=0)
@@ -98,7 +98,7 @@ def genConnectedDurationResultPDF(connectedDuration):
                     ax2.grid(True, which='major', linestyle='-', alpha=0.6)
                     ax2.grid(True, which='minor', linestyle=':', alpha=0.3)
 
-                    plt.title('Satellite Count Over Time (HH:MM:SS)', fontsize=16, pad=15)
+                    plt.title('Satellite Count Over Time', fontsize=16, pad=15)
                     ax2.legend(loc='upper left', fontsize=12)
 
                     plt.tight_layout()
@@ -107,7 +107,7 @@ def genConnectedDurationResultPDF(connectedDuration):
             except Exception as e:
                 print(f"[WARN] Failed to generate line chart. Detail: {str(e)}")
         else:
-            print(f"[WARN] CSV file not found => {csv_path}")
+            print(f"[WARN] CSV file not found => {connectedDuration_csv_path}")
 
     except Exception as e:
         print(f"[ERROR] genConnectedDurationResultPDF => {str(e)}")

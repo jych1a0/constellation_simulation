@@ -56,10 +56,10 @@ def main():
     cd_payload = {
         "connectedDuration_name": "Project A ConnectedDuration",
         "connectedDuration_parameter": {
-            "TLE_inputFileName":"TLE_6P_22Sats_29deg_F1.txt",
-            "stationLatitude":"25.0",
-            "stationLongitude":"121.0",
-            "stationAltitude":"100"},
+            "TLE_inputFileName":"TLE_12P_22Sats_29deg_F7.txt",
+            "stationLatitude":"26.0",
+            "stationLongitude":"122.0",
+            "stationAltitude":"101"},
         "f_user_uid": user_uid
     }
     resp_create_cd = requests.post(create_cd_url, json=cd_payload)

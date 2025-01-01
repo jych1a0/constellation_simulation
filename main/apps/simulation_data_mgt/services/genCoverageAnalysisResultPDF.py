@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import os
+import math  # <-- 新增 math
 
 @log_trigger('INFO')
 def genCoverageAnalysisResultPDF(coverage):
@@ -17,17 +18,14 @@ def genCoverageAnalysisResultPDF(coverage):
     pdf_pages = PdfPages(pdf_path)
 
     try:
-        # ========== 第一頁：實驗條件 (統一尺寸 -> figsize=(10, 6)) ========== #
+        # ========== 第一頁：實驗條件 ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))
         ax1.axis('off')
-
-        # 第一頁右上角顯示時間戳記
         plt.figtext(0.95, 0.95, f'Generated: {timestamp}',
                     ha='right', va='top', fontsize=10)
 
-        # 將 coverage.coverage_parameter 轉為表格
         condition_data = [
-            [k, str(v)]  # 若要替換字串，可自行在這裡 .replace(...)
+            [k, str(v)]
             for k, v in coverage.coverage_parameter.items()
         ]
         table1 = ax1.table(
@@ -38,12 +36,9 @@ def genCoverageAnalysisResultPDF(coverage):
             colWidths=[0.4, 0.4]
         )
 
-        # 設定表格樣式
         table1.auto_set_font_size(False)
         table1.set_fontsize(12)
         table1.scale(1.2, 2)
-
-        # 強調標題列
         for (row, col), cell in table1.get_celld().items():
             if row == 0:
                 cell.set_text_props(weight='bold')
@@ -55,13 +50,11 @@ def genCoverageAnalysisResultPDF(coverage):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第二頁：Coverage 圖表 (同樣大小 -> figsize=(10, 6)) ========== #
-        # 1) 收集該路徑下所有 csv
+        # ========== 第二頁：Coverage 圖表 ========== #
         csv_list = [f for f in os.listdir(coverage.coverage_data_path) if f.lower().endswith('.csv')]
         if not csv_list:
             print(f"[WARN] No CSV files found in: {coverage.coverage_data_path}")
         else:
-            # 2) 取第一個 CSV (若有多個可看需求處理)
             coverage_csv_path = os.path.join(coverage.coverage_data_path, csv_list[0])
             print(f"[INFO] Using coverage CSV: {coverage_csv_path}")
 
@@ -72,17 +65,29 @@ def genCoverageAnalysisResultPDF(coverage):
 
                     sns.set_style("whitegrid")
 
-                    # 第二頁圖表：統一改成 (10, 6)
-                    fig2, ax2 = plt.subplots(figsize=(10, 6)) 
+                    fig2, ax2 = plt.subplots(figsize=(10, 6))
                     line1, = ax2.plot(
-                        df['latitude'], df['coverage_seconds'],
-                        color='blue', linewidth=2, label='Coverage Time'
+                        df['latitude'], 
+                        df['coverage_seconds'],
+                        color='blue', 
+                        linewidth=2, 
+                        label='Coverage Time'
                     )
 
                     ax2.set_xlabel('Latitude (°)', fontsize=14)
                     ax2.set_ylabel('Daily Coverage Time (seconds)', fontsize=14)
                     ax2.tick_params(axis='both', labelsize=12)
-                    ax2.set_xticks(np.arange(-50, 51, 2))
+
+                    # 1) 根據檔案動態決定刻度範圍
+                    min_lat = df['latitude'].min()
+                    max_lat = df['latitude'].max()
+
+                    # 2) 以 5 度為刻度，向下/向上取整至最接近的5度倍數
+                    tick_start = math.floor(min_lat / 5) * 5
+                    tick_end = math.ceil(max_lat / 5) * 5
+
+                    # 3) 設定 x 軸刻度
+                    ax2.set_xticks(np.arange(tick_start, tick_end + 1, 5))
 
                     # 加上台灣緯度範圍
                     taiwan_south = 22
@@ -91,13 +96,13 @@ def genCoverageAnalysisResultPDF(coverage):
                     ax2.axvline(x=taiwan_north, color='red', linestyle='--', alpha=0.5)
                     ax2.axvspan(taiwan_south, taiwan_north, alpha=0.1, color='red')
 
-                    # 標註
+                    # 標註台灣範圍
                     y_pos = ax2.get_ylim()[1] * 0.95
-                    ax2.annotate('Taiwan\nLatitude\nRange',
-                                 xy=((taiwan_south + taiwan_north)/2, y_pos),
-                                 xytext=(0, 10), textcoords='offset points',
-                                 ha='center', va='bottom',
-                                 color='red', fontsize=12)
+                    # ax2.annotate('',
+                    #              xy=((taiwan_south + taiwan_north)/2, y_pos),
+                    #              xytext=(0, 10), textcoords='offset points',
+                    #              ha='center', va='bottom',
+                    #              color='red', fontsize=12)
 
                     # 第二軸（小時）
                     ax3 = ax2.twinx()

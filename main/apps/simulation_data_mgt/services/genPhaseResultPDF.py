@@ -45,15 +45,13 @@ def genPhaseResultPDF(phase):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第 2 頁：Orbit vs MinDist 散點圖 (動態讀取 CSV) ========== #
-        # 1) 取得目錄下所有 CSV
+        # ========== 第 2 頁：Orbit vs MinDist 散點圖 ========== #
         csv_files = [f for f in os.listdir(phase.phase_data_path) if f.lower().endswith('.csv')]
         if not csv_files:
             print(f"[WARN] No CSV files found in {phase.phase_data_path}.")
         elif len(csv_files) > 1:
             print(f"[WARN] More than one CSV found, skipping chart. CSV list: {csv_files}")
         else:
-            # 剛好唯一 CSV
             csv_filename = csv_files[0]
             csv_path = os.path.join(phase.phase_data_path, csv_filename)
             print(f"[INFO] Using CSV => {csv_path}")
@@ -65,7 +63,7 @@ def genPhaseResultPDF(phase):
                     if 'satId1' in df.columns and 'minDist' in df.columns:
                         df['orbit'] = df['satId1'] // 100
 
-                        # groupby 找 minDist 最小筆
+                        # groupby orbit，找出 minDist 最小那筆資料
                         idx_min = df.groupby('orbit')['minDist'].idxmin()
                         df_min = df.loc[idx_min].reset_index(drop=True)
 
@@ -88,25 +86,33 @@ def genPhaseResultPDF(phase):
 
                         ax2.set_xlabel("Orbit Number", fontsize=14)
                         ax2.set_ylabel("Min Distance", fontsize=14)
-                        ax2.set_title("Minimum Distance per Orbit (Dynamic)", fontsize=16, pad=15)
+                        ax2.set_title("Minimum Distance per Orbit", fontsize=16, pad=15)
 
                         # x 軸刻度依 df_min['orbit'].unique() 而定
                         unique_orbits = sorted(df_min['orbit'].unique())
                         ax2.set_xticks(unique_orbits)
 
-                        # 註解 satId1, time
+                        # === 重點：同時顯示 satId1 與 satId2 === #
                         for i, row in df_min.iterrows():
-                            label_str = f"satId1={row['satId1']}"
-                            if 'observedTime_hms' in row:
-                                label_str += f"\nT={row['observedTime_hms']}"
-                            ax2.annotate(
-                                label_str,
-                                xy=(row['orbit'], row['minDist']),
-                                xytext=(5, 10),
-                                textcoords='offset points',
-                                fontsize=10,
-                                arrowprops=dict(arrowstyle='-', color='gray', alpha=0.5)
-                            )
+                            # 先組裝 satId1、satId2 字串
+                            # if 'satId2' in df_min.columns:
+                            #     label_str = f"satId1={row['satId1']}, satId2={row['satId2']}"
+                            # else:
+                            #     label_str = f"satId1={row['satId1']}"
+
+                            # # 若有時間欄位，再額外加上
+                            # if 'observedTime_hms' in row:
+                            #     label_str += f"\nT={row['observedTime_hms']}"
+
+                            # ax2.annotate(
+                            #     label_str,
+                            #     xy=(row['orbit'], row['minDist']),
+                            #     xytext=(5, 10),
+                            #     textcoords='offset points',
+                            #     fontsize=10,
+                            #     arrowprops=dict(arrowstyle='-', color='gray', alpha=0.5)
+                            # )
+                            pass
 
                         plt.tight_layout()
                         pdf_pages.savefig(fig2)

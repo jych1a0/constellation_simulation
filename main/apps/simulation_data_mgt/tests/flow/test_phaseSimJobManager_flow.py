@@ -57,7 +57,7 @@ def main():
         "phase_name": "Project A Phase",
         "phase_parameter": {
             "ISLLinkMethod": "minMaxR",
-            "TLE_inputFileName": "TLE_6P_22Sats_29deg_F1.txt"
+            "TLE_inputFileName": "TLE_12P_22Sats_29deg_F7.txt"
         },
         "f_user_uid": user_uid
     }

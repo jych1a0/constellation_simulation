@@ -56,9 +56,9 @@ def main():
     coverage_payload = {
         "coverage_name": "Project A Coverage",
         "coverage_parameter": {
-            "TLE_inputFileName": "TLE_6P_22Sats_29deg_F1.txt",
-            "minLatitude": "-50",
-            "maxLatitude": "50",
+            "TLE_inputFileName": "TLE_12P_22Sats_29deg_F7.txt",
+            "minLatitude": "-60",
+            "maxLatitude": "60",
             "leastSatCount": "3",
             "simStartTime": "0",
             "simEndTime": "600",

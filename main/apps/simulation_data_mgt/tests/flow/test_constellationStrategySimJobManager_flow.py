@@ -56,8 +56,8 @@ def main():
     cs_payload = {
         "constellationStrategy_name": "Project A ConstellationStrategy",
         "constellationStrategy_parameter": {
-            "observerId":"101",
-            "TLE_inputFileName":"TLE_6P_22Sats_29deg_F1.txt",
+            "observerId":"102",
+            "TLE_inputFileName":"TLE_12P_22Sats_29deg_F7.txt",
             "ISLLinkMethod":"minAERRange"},
         "f_user_uid": user_uid
     }
