@@ -98,35 +98,35 @@ def main():
     resp_download_oneToMulti = requests.post(download_oneToMulti_url, json=download_oneToMulti_payload)
     print_response("4) Download oneToMulti Sim Result", resp_download_oneToMulti)
 
-    # ---------------------------------------------------------------------
-    # 5) 刪除模擬結果 (delete_oneToMulti_sim_result)
-    # ---------------------------------------------------------------------
-    delete_oneToMulti_result_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/simulation_data_mgt/oneToMultiSimJobManager/delete_oneToMulti_sim_result"
-    delete_oneToMulti_result_payload = {
-        "oneToMulti_uid": oneToMulti_uid
-    }
-    resp_delete_oneToMulti_result = requests.post(delete_oneToMulti_result_url, json=delete_oneToMulti_result_payload)
-    print_response("5) Delete oneToMulti Sim Result", resp_delete_oneToMulti_result)
+    # # ---------------------------------------------------------------------
+    # # 5) 刪除模擬結果 (delete_oneToMulti_sim_result)
+    # # ---------------------------------------------------------------------
+    # delete_oneToMulti_result_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/simulation_data_mgt/oneToMultiSimJobManager/delete_oneToMulti_sim_result"
+    # delete_oneToMulti_result_payload = {
+    #     "oneToMulti_uid": oneToMulti_uid
+    # }
+    # resp_delete_oneToMulti_result = requests.post(delete_oneToMulti_result_url, json=delete_oneToMulti_result_payload)
+    # print_response("5) Delete oneToMulti Sim Result", resp_delete_oneToMulti_result)
 
-    # ---------------------------------------------------------------------
-    # 6) 刪除 oneToMulti (delete_oneToMulti)
-    # ---------------------------------------------------------------------
-    delete_oneToMulti_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/oneToMultiManager/delete_oneToMulti"
-    delete_oneToMulti_payload = {
-        "oneToMulti_uid": oneToMulti_uid
-    }
-    resp_delete_oneToMulti = requests.post(delete_oneToMulti_url, json=delete_oneToMulti_payload)
-    print_response("6) Delete oneToMulti", resp_delete_oneToMulti)
+    # # ---------------------------------------------------------------------
+    # # 6) 刪除 oneToMulti (delete_oneToMulti)
+    # # ---------------------------------------------------------------------
+    # delete_oneToMulti_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/oneToMultiManager/delete_oneToMulti"
+    # delete_oneToMulti_payload = {
+    #     "oneToMulti_uid": oneToMulti_uid
+    # }
+    # resp_delete_oneToMulti = requests.post(delete_oneToMulti_url, json=delete_oneToMulti_payload)
+    # print_response("6) Delete oneToMulti", resp_delete_oneToMulti)
 
-    # ---------------------------------------------------------------------
-    # 7) 刪除使用者 (delete_user)
-    # ---------------------------------------------------------------------
-    delete_user_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
-    delete_user_payload = {
-        "user_uid": user_uid
-    }
-    resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
-    print_response("7) Delete User", resp_delete_user)
+    # # ---------------------------------------------------------------------
+    # # 7) 刪除使用者 (delete_user)
+    # # ---------------------------------------------------------------------
+    # delete_user_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
+    # delete_user_payload = {
+    #     "user_uid": user_uid
+    # }
+    # resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
+    # print_response("7) Delete User", resp_delete_user)
 
 if __name__ == "__main__":
     main()
