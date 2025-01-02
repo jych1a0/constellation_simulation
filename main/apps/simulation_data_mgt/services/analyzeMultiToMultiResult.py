@@ -3,9 +3,9 @@ import os
 import pandas as pd
 
 @log_trigger('INFO')
-def analyzeOneToMultiResult(simulation_result_dir):
+def analyzeMultiToMultiResult(simulation_result_dir):
     """
-    讀取 one-to-multi 模式產生的 output_build.csv，並將其轉為 JSON 後回傳。
+    讀取 multi-to-multi 模式產生的 output_build.csv，並將其轉為 JSON 後回傳。
     最終輸出的 JSON 裡面將不包含 filename 欄位。
     """
     # 如果傳進來的是目錄，就把路徑改成該資料夾下的 output_build.csv
@@ -28,6 +28,7 @@ def analyzeOneToMultiResult(simulation_result_dir):
         for record in result_json:
             record.pop('filename', None)
 
+        # 只印出並回傳第一筆資料
         print(result_json[0])
         return result_json[0]
     except Exception as e:
