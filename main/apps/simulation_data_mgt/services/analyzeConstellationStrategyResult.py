@@ -7,7 +7,8 @@ def analyzeConstellationStrategyResult(simulation_result_dir):
     """
     功能：
       1. 掃描 simulation_result_dir 目錄下，找唯一的 CSV (例如 satToAllRightSatAER-101-xxx.csv)。
-      2. 讀取後檢查是否含 satId, stdDiffA, stdDiffE, stdDiffR 四欄位。
+      2. 優先檢查是否含 satId, stdDiffA, stdDiffE, stdDiffR 四欄位並進行分析，
+         若沒有，則改為檢查 satId, minDist, maxDist, meanDist。
       3. 進行簡易分析 (max, min, mean ...等)。
       4. 回傳 {"constellationStrategy_simulation_result": {...}} 格式的 JSON (dict)。
     """
@@ -34,35 +35,67 @@ def analyzeConstellationStrategyResult(simulation_result_dir):
     try:
         df = pd.read_csv(csv_path)
         required_cols = {'satId', 'stdDiffA', 'stdDiffE', 'stdDiffR'}
-        
-        # 檢查是否有缺漏欄位
-        if not required_cols.issubset(df.columns):
-            print(f"[ERROR] Missing required columns. Need {required_cols}, found {list(df.columns)}")
-            return None
+        df_cols = set(df.columns)
 
-        # 找最大值
-        max_stdDiffR = float(df['stdDiffR'].max())  # 轉 float
-        idx_of_maxR = int(df['stdDiffR'].idxmax())  # 轉 int
-        satId_of_maxR = int(df.loc[idx_of_maxR, 'satId'])  # 轉 int
+        # 檢查是否包含原先需要的欄位
+        if required_cols.issubset(df_cols):
+            # ========== 原邏輯：分析 stdDiffA, stdDiffE, stdDiffR 等 ========== #
+            max_stdDiffR = float(df['stdDiffR'].max())
+            idx_of_maxR = int(df['stdDiffR'].idxmax())
+            satId_of_maxR = int(df.loc[idx_of_maxR, 'satId'])
 
-        mean_stdDiffA = float(df['stdDiffA'].mean())
-        mean_stdDiffE = float(df['stdDiffE'].mean())
-        mean_stdDiffR = float(df['stdDiffR'].mean())
+            mean_stdDiffA = float(df['stdDiffA'].mean())
+            mean_stdDiffE = float(df['stdDiffE'].mean())
+            mean_stdDiffR = float(df['stdDiffR'].mean())
 
-        result_json = {
-            "constellationStrategy_simulation_result": {
-                "csv_used": csv_filename,
-                "count": int(len(df)),  # 轉 int
-                "max_stdDiffR": max_stdDiffR,
-                "satId_of_maxR": satId_of_maxR,
-                "mean_stdDiffA": mean_stdDiffA,
-                "mean_stdDiffE": mean_stdDiffE,
-                "mean_stdDiffR": mean_stdDiffR
+            result_json = {
+                "constellationStrategy_simulation_result": {
+                    "csv_used": csv_filename,
+                    "count": int(len(df)),
+                    "max_stdDiffR": max_stdDiffR,
+                    "satId_of_maxR": satId_of_maxR,
+                    "mean_stdDiffA": mean_stdDiffA,
+                    "mean_stdDiffE": mean_stdDiffE,
+                    "mean_stdDiffR": mean_stdDiffR
+                }
             }
-        }
-        
-        print("[INFO] analyzeConstellationStrategyResult =>", result_json)
-        return result_json
+            print("[INFO] analyzeConstellationStrategyResult =>", result_json)
+            return result_json
+
+        else:
+            # ========== 新邏輯：換用 minDist, maxDist, meanDist 等資訊 ========== #
+            print(f"[ERROR] Missing required columns. Need {required_cols}, found {list(df.columns)}")
+            
+            alt_required_cols = {'satId', 'minDist', 'maxDist', 'meanDist'}
+            if alt_required_cols.issubset(df_cols):
+                # 做類似的分析，如最大/最小/平均距離等
+                max_maxDist = float(df['maxDist'].max())
+                idx_of_maxDist = int(df['maxDist'].idxmax())
+                satId_of_maxDist = int(df.loc[idx_of_maxDist, 'satId'])
+
+                min_minDist = float(df['minDist'].min())
+                idx_of_minDist = int(df['minDist'].idxmin())
+                satId_of_minDist = int(df.loc[idx_of_minDist, 'satId'])
+
+                mean_meanDist = float(df['meanDist'].mean())
+
+                alt_result_json = {
+                    "constellationStrategy_simulation_result": {
+                        "csv_used": csv_filename,
+                        "count": int(len(df)),
+                        "max_maxDist": max_maxDist,
+                        "satId_of_maxDist": satId_of_maxDist,
+                        "min_minDist": min_minDist,
+                        "satId_of_minDist": satId_of_minDist,
+                        "mean_meanDist": mean_meanDist
+                    }
+                }
+                print("[INFO] analyzeConstellationStrategyResult =>", alt_result_json)
+                return alt_result_json
+            else:
+                # 連替代欄位也不完整的話就直接結束
+                print(f"[ERROR] CSV also does not contain the alternate required columns => {alt_required_cols}")
+                return None
 
     except Exception as e:
         print(f"[ERROR] Exception in analyzeConstellationStrategyResult: {str(e)}")
