@@ -100,29 +100,29 @@ def main():
     resp_download_saveErRouting = requests.post(download_saveErRouting_url, json=download_saveErRouting_payload)
     print_response("4) Download saveErRouting Sim Result", resp_download_saveErRouting)
 
-    # 5) 刪除模擬結果 (delete_saveErRouting_sim_result)
-    delete_saveErRouting_result_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/simulation_data_mgt/saveErRoutingSimJobManager/delete_saveErRouting_sim_result"
-    delete_saveErRouting_result_payload = {
-        "saveErRouting_uid": saveErRouting_uid
-    }
-    resp_delete_saveErRouting_result = requests.post(delete_saveErRouting_result_url, json=delete_saveErRouting_result_payload)
-    print_response("5) Delete saveErRouting Sim Result", resp_delete_saveErRouting_result)
+    # # 5) 刪除模擬結果 (delete_saveErRouting_sim_result)
+    # delete_saveErRouting_result_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/simulation_data_mgt/saveErRoutingSimJobManager/delete_saveErRouting_sim_result"
+    # delete_saveErRouting_result_payload = {
+    #     "saveErRouting_uid": saveErRouting_uid
+    # }
+    # resp_delete_saveErRouting_result = requests.post(delete_saveErRouting_result_url, json=delete_saveErRouting_result_payload)
+    # print_response("5) Delete saveErRouting Sim Result", resp_delete_saveErRouting_result)
 
-    # 6) 刪除 saveErRouting (delete_saveErRouting)
-    delete_saveErRouting_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/saveErRoutingManager/delete_saveErRouting"
-    delete_saveErRouting_payload = {
-        "saveErRouting_uid": saveErRouting_uid
-    }
-    resp_delete_saveErRouting = requests.post(delete_saveErRouting_url, json=delete_saveErRouting_payload)
-    print_response("6) Delete saveErRouting", resp_delete_saveErRouting)
+    # # 6) 刪除 saveErRouting (delete_saveErRouting)
+    # delete_saveErRouting_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/saveErRoutingManager/delete_saveErRouting"
+    # delete_saveErRouting_payload = {
+    #     "saveErRouting_uid": saveErRouting_uid
+    # }
+    # resp_delete_saveErRouting = requests.post(delete_saveErRouting_url, json=delete_saveErRouting_payload)
+    # print_response("6) Delete saveErRouting", resp_delete_saveErRouting)
 
-    # 7) 刪除使用者 (delete_user)
-    delete_user_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
-    delete_user_payload = {
-        "user_uid": user_uid
-    }
-    resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
-    print_response("7) Delete User", resp_delete_user)
+    # # 7) 刪除使用者 (delete_user)
+    # delete_user_url = f"http://{DJANGO_SERVER}:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
+    # delete_user_payload = {
+    #     "user_uid": user_uid
+    # }
+    # resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
+    # print_response("7) Delete User", resp_delete_user)
 
 if __name__ == "__main__":
     main()
