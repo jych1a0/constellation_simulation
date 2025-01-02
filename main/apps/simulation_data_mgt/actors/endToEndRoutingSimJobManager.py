@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.EndToEndRoutingModel import EndToEndRouting
 from main.apps.simulation_data_mgt.models.EndToEndRoutingSimJobModel import EndToEndRoutingSimJob
-# from main.apps.simulation_data_mgt.services.analyzeEndToEndRoutingResult import analyzeEndToEndRoutingResult
-# from main.apps.simulation_data_mgt.services.genEndToEndRoutingResultPDF import genEndToEndRoutingResultPDF
+from main.apps.simulation_data_mgt.services.analyzeEndToEndRoutingResult import analyzeEndToEndRoutingResult
+from main.apps.simulation_data_mgt.services.genEndToEndRoutingResultPDF import genEndToEndRoutingResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
@@ -71,11 +71,11 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
         container_name = f"endToEndRoutingSimulation_{endToEndRouting_uid}"
 
         if isinstance(obj.endToEndRouting_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.endToEndRouting_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_endToEndRouting_script.sh '{json.dumps(obj.endToEndRouting_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.endToEndRouting_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_endToEndRouting_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.endToEndRouting_parameter
 
@@ -87,7 +87,7 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'endToEndRoutingsimulationimage_86400',
+            'chiao2',
             'bash', '-c', simulation_command
         ]
 

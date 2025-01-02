@@ -96,29 +96,29 @@ def main():
     resp_download_sb = requests.post(download_sb_url, json=download_sb_payload)
     print_response("4) Download SingleBeam Sim Result", resp_download_sb)
 
-    # 5) 刪除模擬結果 (delete_singleBeam_sim_result)
-    delete_sb_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/singleBeamSimJobManager/delete_singleBeam_sim_result"
-    delete_sb_result_payload = {
-        "singleBeam_uid": singleBeam_uid
-    }
-    resp_delete_sb_result = requests.post(delete_sb_result_url, json=delete_sb_result_payload)
-    print_response("5) Delete SingleBeam Sim Result", resp_delete_sb_result)
+    # # 5) 刪除模擬結果 (delete_singleBeam_sim_result)
+    # delete_sb_result_url = f"http://127.0.0.1:8000/api/{API_VERSION}/simulation_data_mgt/singleBeamSimJobManager/delete_singleBeam_sim_result"
+    # delete_sb_result_payload = {
+    #     "singleBeam_uid": singleBeam_uid
+    # }
+    # resp_delete_sb_result = requests.post(delete_sb_result_url, json=delete_sb_result_payload)
+    # print_response("5) Delete SingleBeam Sim Result", resp_delete_sb_result)
 
-    # 6) 刪除 singleBeam (delete_singleBeam)
-    delete_sb_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/singleBeamManager/delete_singleBeam"
-    delete_sb_payload = {
-        "singleBeam_uid": singleBeam_uid
-    }
-    resp_delete_sb = requests.post(delete_sb_url, json=delete_sb_payload)
-    print_response("6) Delete SingleBeam", resp_delete_sb)
+    # # 6) 刪除 singleBeam (delete_singleBeam)
+    # delete_sb_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/singleBeamManager/delete_singleBeam"
+    # delete_sb_payload = {
+    #     "singleBeam_uid": singleBeam_uid
+    # }
+    # resp_delete_sb = requests.post(delete_sb_url, json=delete_sb_payload)
+    # print_response("6) Delete SingleBeam", resp_delete_sb)
 
-    # 7) 刪除使用者 (delete_user)
-    delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
-    delete_user_payload = {
-        "user_uid": user_uid
-    }
-    resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
-    print_response("7) Delete User", resp_delete_user)
+    # # 7) 刪除使用者 (delete_user)
+    # delete_user_url = f"http://127.0.0.1:8000/api/{API_VERSION}/meta_data_mgt/userManager/delete_user"
+    # delete_user_payload = {
+    #     "user_uid": user_uid
+    # }
+    # resp_delete_user = requests.post(delete_user_url, json=delete_user_payload)
+    # print_response("7) Delete User", resp_delete_user)
 
 if __name__ == "__main__":
     main()

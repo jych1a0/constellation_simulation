@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.OneToMultiModel import OneToMulti
 from main.apps.simulation_data_mgt.models.OneToMultiSimJobModel import OneToMultiSimJob
-# from main.apps.simulation_data_mgt.services.analyzeOneToMultiResult import analyzeOneToMultiResult
-# from main.apps.simulation_data_mgt.services.genOneToMultiResultPDF import genOneToMultiResultPDF
+from main.apps.simulation_data_mgt.services.analyzeOneToMultiResult import analyzeOneToMultiResult
+from main.apps.simulation_data_mgt.services.genOneToMultiResultPDF import genOneToMultiResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
@@ -71,11 +71,11 @@ def run_oneToMulti_simulation_async(oneToMulti_uid):
         container_name = f"oneToMultiSimulation_{oneToMulti_uid}"
 
         if isinstance(obj.oneToMulti_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.oneToMulti_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_oneToMulti_script.sh '{json.dumps(obj.oneToMulti_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.oneToMulti_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_oneToMulti_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.oneToMulti_parameter
 
@@ -87,7 +87,7 @@ def run_oneToMulti_simulation_async(oneToMulti_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'oneToMultisimulationimage_86400',
+            'chiao2',
             'bash', '-c', simulation_command
         ]
 
