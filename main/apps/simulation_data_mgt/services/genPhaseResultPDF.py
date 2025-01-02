@@ -7,6 +7,7 @@ import numpy as np
 import os
 
 def sec_to_hms(seconds: float) -> str:
+    """將秒數轉為 HH:MM:SS 字串"""
     hh = int(seconds // 3600)
     mm = int((seconds % 3600) // 60)
     ss = int(seconds % 60)
@@ -16,8 +17,7 @@ def sec_to_hms(seconds: float) -> str:
 def genPhaseResultPDF(phase):
     """
     1. 第一頁：phase.phase_parameter 表格 (size: 10x6)
-    2. 第二頁：掃描 phase.phase_data_path 下唯一的 CSV，畫出 orbit vs minDist (散點圖)
-       （不再硬寫死檔名）
+    2. 第二頁：掃描 phase.phase_data_path 下唯一的 CSV，畫出 orbit vs minDist (散點圖 + 連線)
     """
     pdf_path = os.path.join(phase.phase_data_path, "phase_result_report.pdf")
     pdf_pages = PdfPages(pdf_path)
@@ -45,7 +45,7 @@ def genPhaseResultPDF(phase):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第 2 頁：Orbit vs MinDist 散點圖 ========== #
+        # ========== 第 2 頁：Orbit vs MinDist 散點圖 + 連線 ========== #
         csv_files = [f for f in os.listdir(phase.phase_data_path) if f.lower().endswith('.csv')]
         if not csv_files:
             print(f"[WARN] No CSV files found in {phase.phase_data_path}.")
@@ -71,15 +71,28 @@ def genPhaseResultPDF(phase):
                         if 'observedTime' in df_min.columns:
                             df_min['observedTime_hms'] = df_min['observedTime'].apply(sec_to_hms)
 
+                        # 為了讓連線正確依 orbit 由小到大順序繪製
+                        df_min.sort_values(by='orbit', inplace=True)
+
                         sns.set_style("whitegrid")
                         fig2, ax2 = plt.subplots(figsize=(10, 6))
 
+                        # 先畫散點圖
                         sns.scatterplot(
                             data=df_min,
                             x='orbit',
                             y='minDist',
                             s=150,
                             alpha=0.9,
+                            color='blue',
+                            ax=ax2
+                        )
+
+                        # 再畫連線
+                        sns.lineplot(
+                            data=df_min,
+                            x='orbit',
+                            y='minDist',
                             color='blue',
                             ax=ax2
                         )
@@ -92,27 +105,24 @@ def genPhaseResultPDF(phase):
                         unique_orbits = sorted(df_min['orbit'].unique())
                         ax2.set_xticks(unique_orbits)
 
-                        # === 重點：同時顯示 satId1 與 satId2 === #
-                        for i, row in df_min.iterrows():
-                            # 先組裝 satId1、satId2 字串
-                            # if 'satId2' in df_min.columns:
-                            #     label_str = f"satId1={row['satId1']}, satId2={row['satId2']}"
-                            # else:
-                            #     label_str = f"satId1={row['satId1']}"
-
-                            # # 若有時間欄位，再額外加上
-                            # if 'observedTime_hms' in row:
-                            #     label_str += f"\nT={row['observedTime_hms']}"
-
-                            # ax2.annotate(
-                            #     label_str,
-                            #     xy=(row['orbit'], row['minDist']),
-                            #     xytext=(5, 10),
-                            #     textcoords='offset points',
-                            #     fontsize=10,
-                            #     arrowprops=dict(arrowstyle='-', color='gray', alpha=0.5)
-                            # )
-                            pass
+                        # === 範例：若想顯示 satId1 / satId2 / observedTime，可用 annotate() ===
+                        # for i, row in df_min.iterrows():
+                        #     if 'satId2' in df_min.columns:
+                        #         label_str = f"satId1={row['satId1']}, satId2={row['satId2']}"
+                        #     else:
+                        #         label_str = f"satId1={row['satId1']}"
+                        #
+                        #     if 'observedTime_hms' in row:
+                        #         label_str += f"\nT={row['observedTime_hms']}"
+                        #
+                        #     ax2.annotate(
+                        #         label_str,
+                        #         xy=(row['orbit'], row['minDist']),
+                        #         xytext=(5, 10),
+                        #         textcoords='offset points',
+                        #         fontsize=10,
+                        #         arrowprops=dict(arrowstyle='-', color='gray', alpha=0.5)
+                        #     )
 
                         plt.tight_layout()
                         pdf_pages.savefig(fig2)
