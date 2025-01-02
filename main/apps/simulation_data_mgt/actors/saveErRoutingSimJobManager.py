@@ -71,11 +71,11 @@ def run_saveErRouting_simulation_async(saveErRouting_uid):
         container_name = f"saveErRoutingSimulation_{saveErRouting_uid}"
 
         if isinstance(obj.saveErRouting_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.saveErRouting_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_saveErRouting_script.sh '{json.dumps(obj.saveErRouting_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.saveErRouting_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_saveErRouting_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.saveErRouting_parameter
 
@@ -87,7 +87,7 @@ def run_saveErRouting_simulation_async(saveErRouting_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'saveErRoutingsimulationimage_86400',
+            'chiao2',
             'bash', '-c', simulation_command
         ]
 
