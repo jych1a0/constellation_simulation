@@ -19,7 +19,7 @@ def genPhaseResultPDF(phase):
     2. 第二頁：掃描 phase.phase_data_path 下唯一的 CSV，畫出 orbit vs minDist (散點圖)
        （不再硬寫死檔名）
     """
-    pdf_path = os.path.join(phase.phase_data_path, "phase_result_report.pdf")
+    pdf_path = os.path.join(phase.phase_data_path, "phase_simulation_report.pdf")
     pdf_pages = PdfPages(pdf_path)
 
     try:
