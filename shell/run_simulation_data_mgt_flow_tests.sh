@@ -22,5 +22,17 @@ set -e  # 遇到錯誤即停止
 # echo "=== Running modifyRegenRoutingSimJobManager tests ==="
 # python main/apps/simulation_data_mgt/tests/flow/test_modifyRegenRoutingSimJobManager_flow.py
 
-echo "=== Running islHoppingSimJobManager tests ==="
-python main/apps/simulation_data_mgt/tests/flow/test_islHoppingSimJobManager_flow.py
+# echo "=== Running islHoppingSimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_islHoppingSimJobManager_flow.py
+
+# echo "=== Running oneToMultiSimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_oneToMultiSimJobManager_flow.py
+
+# echo "=== Running multiToMultiSimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_multiToMultiSimJobManager_flow.py
+
+# echo "=== Running saveErRoutingSimJobManager tests ==="
+# python main/apps/simulation_data_mgt/tests/flow/test_saveErRoutingSimJobManager_flow.py
+
+echo "=== Running endToEndRoutingSimJobManager tests ==="
+python main/apps/simulation_data_mgt/tests/flow/test_endToEndRoutingSimJobManager_flow.py
