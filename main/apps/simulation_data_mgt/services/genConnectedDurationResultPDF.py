@@ -21,7 +21,7 @@ def genConnectedDurationResultPDF(connectedDuration):
     """
     pdf_path = os.path.join(
         connectedDuration.connectedDuration_data_path, 
-        "connectedDuration_report.pdf"
+        "connectedDuration_simulation_report.pdf"
     )
     pdf_pages = PdfPages(pdf_path)
 
