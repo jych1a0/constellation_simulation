@@ -71,11 +71,11 @@ def run_multiToMulti_simulation_async(multiToMulti_uid):
         container_name = f"multiToMultiSimulation_{multiToMulti_uid}"
 
         if isinstance(obj.multiToMulti_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.multiToMulti_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_multiToMulti_script.sh '{json.dumps(obj.multiToMulti_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.multiToMulti_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_multiToMulti_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.multiToMulti_parameter
 
@@ -87,7 +87,7 @@ def run_multiToMulti_simulation_async(multiToMulti_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'multiToMultisimulationimage_86400',
+            'chiao2',
             'bash', '-c', simulation_command
         ]
 
