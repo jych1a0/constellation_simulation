@@ -70,7 +70,7 @@ def main():
             "frequencies_per_satellite": "10",
             "cell_ut": "35Cell_300UT",
             "simStartTime": "0",
-            "simEndTime": "0",
+            "simEndTime": "600",
             "cell_topology_mode": "dynamic",
             "reuse_factor": "None"
         },
