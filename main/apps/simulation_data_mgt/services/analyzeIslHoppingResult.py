@@ -4,11 +4,19 @@ import pandas as pd
 def analyzeIslHoppingResult(simulation_result_dir):
     """
     在 simulation_result_dir 路徑下，搜尋唯一的 .csv 檔，
-    讀取後僅擷取 `ISLBreak`、`avgHopCount` 兩欄位並將其轉成單一 dict:
+    讀取後僅擷取 `ISLBreak`, `avgDistance`, `avgHopCount`, `runtime` 四欄位，
+    並將其轉成單一 dict，結構如下：
         {
-          "1": 6.30862,
-          "2": 6.36131,
-          "3": 6.39907,
+          "1": {
+            "avgDistance": 14078.1,
+            "avgHopCount": 6.30862,
+            "runtime": 0
+          },
+          "2": {
+            "avgDistance": 14310.9,
+            "avgHopCount": 6.36131,
+            "runtime": 0
+          },
           ...
         }
     """
@@ -40,23 +48,26 @@ def analyzeIslHoppingResult(simulation_result_dir):
         df = pd.read_csv(csv_path)
 
         # 檢查 CSV 是否包含所需欄位
-        required_cols = {"ISLBreak", "avgHopCount"}
+        required_cols = {"ISLBreak", "avgDistance", "avgHopCount", "runtime"}
         if not required_cols.issubset(df.columns):
             print(f"[ERROR] CSV 欄位不足，需要 {required_cols}，實際為 {list(df.columns)}")
             return None
 
-        # 只保留 `ISLBreak` 和 `avgHopCount` 這兩欄
-        df_filtered = df[["ISLBreak", "avgHopCount"]]
+        # 只保留這四欄
+        df_filtered = df[["ISLBreak", "avgDistance", "avgHopCount", "runtime"]]
 
         # 將 DataFrame 轉為 list[dict] 格式
         list_of_dict = df_filtered.to_dict(orient="records")
 
-        # 轉成單一 dict：key = ISLBreak (字串), value = avgHopCount
+        # 將資料組成單一 dict：key = ISLBreak(字串)，value = 其他三欄
         dict_data = {}
         for row in list_of_dict:
             isl_break = str(row["ISLBreak"])  # 轉字串以作為 dict key
-            avg_hop = row["avgHopCount"]
-            dict_data[isl_break] = avg_hop
+            dict_data[isl_break] = {
+                "avgDistance": row["avgDistance"],
+                "avgHopCount": row["avgHopCount"],
+                "runtime": row["runtime"]
+            }
 
         print("[INFO] 轉換後結構:", dict_data)
         return dict_data

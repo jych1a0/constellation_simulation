@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import os
-import math  # <-- 如果日後需要以 5 度或類似計算，可留著此匯入
+import math  # <-- 若有需要以 5 度等做刻度計算，可留著
 
 @log_trigger('INFO')
 def genIslHoppingResultPDF(islHopping):
@@ -13,6 +13,8 @@ def genIslHoppingResultPDF(islHopping):
     產生 islHopping 的報告 PDF：
       - 第一頁：islHopping.islHopping_parameter 表格 + 右上角時間戳記
       - 第二頁：ISLBreak vs avgHopCount 的折線圖
+      - 第三頁：ISLBreak vs avgDistance 的折線圖 (若有該欄位)
+      - 第四頁：ISLBreak vs runtime 的折線圖 (若有該欄位)
     """
 
     # 1. 取得當下時間（用在第一頁右上角的時間戳記）
@@ -71,16 +73,14 @@ def genIslHoppingResultPDF(islHopping):
                 try:
                     df = pd.read_csv(isl_csv_path)
 
-                    # 確保必須欄位存在
+                    # 第 2 頁需要的欄位
                     required_cols = {"ISLBreak", "avgHopCount"}
                     if not required_cols.issubset(df.columns):
                         print(f"[WARN] CSV 欄位不足，需要 {required_cols}, 但實際為 {df.columns.tolist()}")
                     else:
                         sns.set_style("whitegrid")
-
                         fig2, ax2 = plt.subplots(figsize=(10, 6))
 
-                        # 繪製折線圖: x = ISLBreak, y = avgHopCount
                         ax2.plot(
                             df["ISLBreak"],
                             df["avgHopCount"],
@@ -96,12 +96,64 @@ def genIslHoppingResultPDF(islHopping):
                         ax2.legend(loc='upper left', fontsize=12)
 
                         plt.title('ISLBreak vs. avgHopCount', fontsize=16, pad=15)
-
                         plt.tight_layout()
                         pdf_pages.savefig(fig2)
                         plt.close(fig2)
+
+                    # ========== 第三頁：ISLBreak vs avgDistance ========== #
+                    required_cols_3 = {"ISLBreak", "avgDistance"}
+                    if required_cols_3.issubset(df.columns):
+                        fig3, ax3 = plt.subplots(figsize=(10, 6))
+                        sns.set_style("whitegrid")
+
+                        ax3.plot(
+                            df["ISLBreak"],
+                            df["avgDistance"],
+                            color='green',
+                            marker='o',
+                            linewidth=2,
+                            label='avgDistance'
+                        )
+                        ax3.set_xlabel('ISLBreak', fontsize=14)
+                        ax3.set_ylabel('Average Distance', fontsize=14)
+                        ax3.tick_params(axis='both', labelsize=12)
+                        ax3.legend(loc='upper left', fontsize=12)
+
+                        plt.title('ISLBreak vs. avgDistance', fontsize=16, pad=15)
+                        plt.tight_layout()
+                        pdf_pages.savefig(fig3)
+                        plt.close(fig3)
+                    else:
+                        print(f"[WARN] 缺少欄位: {required_cols_3}, 無法生成第 3 頁圖表。")
+
+                    # ========== 第四頁：ISLBreak vs runtime ========== #
+                    required_cols_4 = {"ISLBreak", "runtime"}
+                    if required_cols_4.issubset(df.columns):
+                        fig4, ax4 = plt.subplots(figsize=(10, 6))
+                        sns.set_style("whitegrid")
+
+                        ax4.plot(
+                            df["ISLBreak"],
+                            df["runtime"],
+                            color='red',
+                            marker='o',
+                            linewidth=2,
+                            label='runtime'
+                        )
+                        ax4.set_xlabel('ISLBreak', fontsize=14)
+                        ax4.set_ylabel('Runtime', fontsize=14)
+                        ax4.tick_params(axis='both', labelsize=12)
+                        ax4.legend(loc='upper left', fontsize=12)
+
+                        plt.title('ISLBreak vs. runtime', fontsize=16, pad=15)
+                        plt.tight_layout()
+                        pdf_pages.savefig(fig4)
+                        plt.close(fig4)
+                    else:
+                        print(f"[WARN] 缺少欄位: {required_cols_4}, 無法生成第 4 頁圖表。")
+
                 except Exception as e:
-                    print(f"[WARN] Failed to generate ISL Hopping chart. Detail: {str(e)}")
+                    print(f"[WARN] Failed to generate ISL Hopping charts. Detail: {str(e)}")
 
     except Exception as e:
         print(f"[ERROR] Error generating PDF: {str(e)}")
