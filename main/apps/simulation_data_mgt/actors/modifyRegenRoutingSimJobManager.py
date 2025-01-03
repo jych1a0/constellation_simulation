@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.ModifyRegenRoutingModel import ModifyRegenRouting
 from main.apps.simulation_data_mgt.models.ModifyRegenRoutingSimJobModel import ModifyRegenRoutingSimJob
-# from main.apps.simulation_data_mgt.services.analyzeModifyRegenRoutingResult import analyzeModifyRegenRoutingResult
-# from main.apps.simulation_data_mgt.services.genModifyRegenRoutingResultPDF import genModifyRegenRoutingResultPDF
+from main.apps.simulation_data_mgt.services.analyzeModifyRegenRoutingResult import analyzeModifyRegenRoutingResult
+from main.apps.simulation_data_mgt.services.genModifyRegenRoutingResultPDF import genModifyRegenRoutingResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
