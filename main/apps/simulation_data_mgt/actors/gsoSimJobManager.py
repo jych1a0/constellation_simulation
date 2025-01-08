@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponse
 import json
 from main.apps.meta_data_mgt.models.GsoModel import Gso
 from main.apps.simulation_data_mgt.models.GsoSimJobModel import GsoSimJob
-# from main.apps.simulation_data_mgt.services.analyzeGsoResult import analyzeGsoResult
-# from main.apps.simulation_data_mgt.services.genGsoResultPDF import genGsoResultPDF
+from main.apps.simulation_data_mgt.services.analyzeGsoResult import analyzeGsoResult
+from main.apps.simulation_data_mgt.services.genGsoResultPDF import genGsoResultPDF
 from main.utils.logger import log_trigger, log_writer
 import os
 import threading
@@ -71,23 +71,23 @@ def run_gso_simulation_async(gso_uid):
         container_name = f"gsoSimulation_{gso_uid}"
 
         if isinstance(obj.gso_parameter, dict):
-            simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(obj.gso_parameter)}'"
+            simulation_command = f"/root/mercury/shell/simulation_gso_script.sh '{json.dumps(obj.gso_parameter)}'"
         else:
             try:
                 param_dict = json.loads(obj.gso_parameter)
-                simulation_command = f"/root/mercury/shell/simulation_script.sh '{json.dumps(param_dict)}'"
+                simulation_command = f"/root/mercury/shell/simulation_gso_script.sh '{json.dumps(param_dict)}'"
             except json.JSONDecodeError:
                 simulation_command = obj.gso_parameter
 
         docker_command = [
             'docker', 'run',
             '--oom-kill-disable=true',
-            '-m', '28g',
+            '-m', '100g',
             '-d',
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'gsosimulationimage_86400',
+            'handoversimulationimage_test',
             'bash', '-c', simulation_command
         ]
 

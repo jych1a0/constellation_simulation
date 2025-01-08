@@ -65,7 +65,7 @@ def main():
             "constellation": "TLE_6P_22Sats_29deg_F1",
             "handover_strategy": "MinRange",
             "handover_decision": "Nonpreemptive",
-            "gsoProtectionMode": "false",
+            "gsoProtectionMode": "0",
             "beams_per_satellite": "28",
             "frequencies_per_satellite": "10",
             "cell_ut": "35Cell_300UT",
