@@ -63,15 +63,15 @@ def main():
     gso_payload = {
         "gso_name": "Project A GSO",
         "gso_parameter": {
-            "constellation": "TLE_12P_22Sats_29deg_F7",
+            "constellation": "TLE_6P_22Sats_29deg_F1",
             "handover_strategy": "MinRange",
             "handover_decision": "Nonpreemptive",
             "gsoProtectionMode": "1",
             "beams_per_satellite": "28",
-            "frequencies_per_satellite": "10",
+            "frequencies_per_satellite": "4",
             "cell_ut": "28Cell_220UT",
             "simStartTime": "0",
-            "simEndTime": "60",
+            "simEndTime": "86399",
             "cell_topology_mode": "static",
             "reuse_factor": "4"
         },
