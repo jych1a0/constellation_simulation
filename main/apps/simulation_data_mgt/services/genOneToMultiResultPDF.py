@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import pandas as pd
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genOneToMultiResultPDF(oneToMulti):
     """
@@ -43,6 +43,13 @@ def genOneToMultiResultPDF(oneToMulti):
     # 建立 PDF 路徑 (ex: oneToMulti_simulation_report.pdf)
     pdf_path = os.path.join(oneToMulti.oneToMulti_data_path, 'oneToMulti_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    oneToMulti.oneToMulti_parameter = update_parameter(
+        oneToMulti.oneToMulti_parameter,
+        config_path=config_path,
+        process_name="oneToMulti_process"
+    )
 
     try:
         # 第一頁：實驗條件
