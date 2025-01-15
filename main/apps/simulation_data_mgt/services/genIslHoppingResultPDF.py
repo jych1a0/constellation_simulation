@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 import os
 import math  # <-- 若有需要以 5 度等做刻度計算，可留著
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genIslHoppingResultPDF(islHopping):
     """
@@ -23,6 +23,13 @@ def genIslHoppingResultPDF(islHopping):
     # 2. 生成 PDF 路徑
     pdf_path = os.path.join(islHopping.islHopping_data_path, 'islHopping_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    islHopping.islHopping_parameter = update_parameter(
+        islHopping.islHopping_parameter,
+        config_path=config_path,
+        process_name="islHopping_process"
+    )
 
     try:
         # ========== 第一頁：實驗條件（Parameter Table） ========== #
