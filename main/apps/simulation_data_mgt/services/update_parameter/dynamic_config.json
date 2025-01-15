@@ -77,5 +77,15 @@
         "remove_keys": [],
         "rename_keys": {},
         "override_values": {}
+    },
+    "gso_process": {
+        "remove_keys": [
+            "simEndTime",
+            "simStartTime"
+        ],
+        "rename_keys": {
+            "constellation": "TLE_inputFileName"
+        },
+        "override_values": {}
     }
 }
