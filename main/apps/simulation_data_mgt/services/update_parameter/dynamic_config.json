@@ -14,5 +14,12 @@
         ],
         "rename_keys": {},
         "override_values": {}
+    },
+    "constellationStrategy_process": {
+        "remove_keys": [
+            "ISLLinkMethod"
+        ],
+        "rename_keys": {},
+        "override_values": {}
     }
 }
