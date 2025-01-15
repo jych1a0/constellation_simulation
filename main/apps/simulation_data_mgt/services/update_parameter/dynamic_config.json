@@ -72,5 +72,10 @@
         "remove_keys": [],
         "rename_keys": {},
         "override_values": {}
+    },
+    "singleBeam_process": {
+        "remove_keys": [],
+        "rename_keys": {},
+        "override_values": {}
     }
 }
