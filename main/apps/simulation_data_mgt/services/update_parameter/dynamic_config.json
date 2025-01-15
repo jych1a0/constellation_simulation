@@ -9,7 +9,9 @@
         "override_values": {}
     },
     "phase_process": {
-        "remove_keys": [],
+        "remove_keys": [
+            "ISLLinkMethod"
+        ],
         "rename_keys": {},
         "override_values": {}
     }
