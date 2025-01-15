@@ -5,7 +5,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 import os
-
+from main.utils.update_parameter import update_parameter
 def sec_to_hms(seconds):
     hh = seconds // 3600
     mm = (seconds % 3600) // 60
@@ -24,7 +24,13 @@ def genConnectedDurationResultPDF(connectedDuration):
         "connectedDuration_simulation_report.pdf"
     )
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    connectedDuration.connectedDuration_parameter = update_parameter(
+        connectedDuration.connectedDuration_parameter,
+        config_path=config_path,
+        process_name="connectedDuration_process"
+    )
     try:
         # ========== 第 1 頁：connectedDuration_parameter 表格 (10x6) ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))

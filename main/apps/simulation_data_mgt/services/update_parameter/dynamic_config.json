@@ -8,6 +8,11 @@
         "rename_keys": {},
         "override_values": {}
     },
+    "connectedDuration_process": {
+        "remove_keys": [],
+        "rename_keys": {},
+        "override_values": {}
+    },
     "phase_process": {
         "remove_keys": [
             "ISLLinkMethod"
@@ -19,6 +24,52 @@
         "remove_keys": [
             "ISLLinkMethod"
         ],
+        "rename_keys": {},
+        "override_values": {}
+    },
+    "islHopping_process": {
+        "remove_keys": [],
+        "rename_keys": {
+            "degreeConstraint": "maxISLConnections"
+        },
+        "override_values": {}
+    },
+    "modifyRegenRouting_process": {
+        "remove_keys": [],
+        "rename_keys": {
+            "Action": "action",
+            "degreeConstraint": "maxISLConnections"
+        },
+        "override_values": {}
+    },
+    "oneToMulti_process": {
+        "remove_keys": [],
+        "rename_keys": {
+            "ratio": "transmissionVolumeRatio",
+            "multiPathCriteria": "transmissionPathDecision"
+        },
+        "override_values": {}
+    },
+    "multiToMulti_process": {
+        "remove_keys": [],
+        "rename_keys": {
+            "ratio": "transmissionVolumeRatio",
+            "multiPathCriteria": "transmissionPathDecision"
+        },
+        "override_values": {}
+    },
+    "saveErRouting_process": {
+        "remove_keys": [],
+        "rename_keys": {
+            "ratio": "transmissionVolumeRatio",
+            "multiPathCriteria": "transmissionPathDecision",
+            "blccVersion": "TLE_inputFileName",
+            "globalIslPacketDropRate": "ISLPacketLossRate"
+        },
+        "override_values": {}
+    },
+    "endToEndRouting_process": {
+        "remove_keys": [],
         "rename_keys": {},
         "override_values": {}
     }
