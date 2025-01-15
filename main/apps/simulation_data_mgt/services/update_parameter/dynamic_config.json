@@ -87,5 +87,15 @@
             "constellation": "TLE_inputFileName"
         },
         "override_values": {}
+    },
+    "handover_process": {
+        "remove_keys": [
+            "simEndTime",
+            "simStartTime"
+        ],
+        "rename_keys": {
+            "constellation": "TLE_inputFileName"
+        },
+        "override_values": {}
     }
 }

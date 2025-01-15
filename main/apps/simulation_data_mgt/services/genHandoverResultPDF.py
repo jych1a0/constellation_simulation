@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import pandas as pd
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genHandoverResultPDF(handover):
     # 獲取當前時間
@@ -39,7 +39,13 @@ def genHandoverResultPDF(handover):
     pdf_path = os.path.join(handover.handover_data_path, 'handover_simulation_report.pdf')  # 假設儲存在當前目錄
     # print(pdf_path)
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    handover.handover_parameter = update_parameter(
+        handover.handover_parameter,
+        config_path=config_path,
+        process_name="handover_process"
+    )
     try:
         # 第一頁：實驗條件
         fig1, ax1 = plt.subplots(figsize=(12, 6))
@@ -50,9 +56,12 @@ def genHandoverResultPDF(handover):
                     ha='right', va='top', fontsize=10)
 
         # 創建實驗條件表格
-        condition_data = [[k, str(v).replace('TLE_6P_22Sats_29deg_F1', '6x22')
-                     .replace('TLE_3P_22Sats_29deg_F1', '3x22')
-                     .replace('TLE_12P_22Sats_29deg_F7', '12x22')] 
+        condition_data = [[k, str(v).replace('TLE_6P_22Sats_29deg_F1', '6 * 22')
+                     .replace('TLE_3P_22Sats_29deg_F1', '3 * 22')
+                     .replace('TLE_12P_22Sats_29deg_F7', '12 * 22')
+                     .replace('35Cell_237UT','38Cell_237UT')
+                     .replace('35Cell_300UT','38Cell_300UT')
+                     ] 
                  for k, v in handover.handover_parameter.items()]
         
         table1 = ax1.table(cellText=condition_data,
