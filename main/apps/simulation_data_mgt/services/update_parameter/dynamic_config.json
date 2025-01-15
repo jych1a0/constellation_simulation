@@ -1,0 +1,16 @@
+{
+    "coverage_process": {
+        "remove_keys": [
+            "simEndTime",
+            "simStartTime",
+            "leastSatCount"
+        ],
+        "rename_keys": {},
+        "override_values": {}
+    },
+    "phase_process": {
+        "remove_keys": [],
+        "rename_keys": {},
+        "override_values": {}
+    }
+}
