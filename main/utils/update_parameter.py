@@ -53,12 +53,16 @@ def update_parameter(params, config_path=None,process_name=None):
         # (b) 針對 TLE_inputFileName 做特殊處理
         if new_key == "TLE_inputFileName" and isinstance(new_value, str):
             # 可以用正則取得前面幾位數字
-            match = re.search(r'TLE_(\d+)P', new_value)  
-            if match:
-                number_str = match.group(1)  # 6 / 12 / ...
+            match_tle  = re.search(r'TLE_(\d+)P', new_value) 
+            match_blcc = re.search(r'blcc(\d+)x22', new_value)
+            if match_tle :
+                number_str = match_tle .group(1)  # 6 / 12 / ...
                 if number_str.isdigit():
                     new_value = f'{number_str} * 22'
-
+            elif match_blcc:
+                number_str = match_blcc.group(1)  # 6 / 12 / ...
+                if number_str.isdigit():
+                    new_value = f'{number_str} * 22'
         # (c) 若此(新)key 在 override_values 中，則直接覆蓋
         if new_key in override_values:
             new_value = override_values[new_key]
