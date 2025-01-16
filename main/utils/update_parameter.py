@@ -50,8 +50,8 @@ def update_parameter(params, config_path=None,process_name=None):
         if k in rename_keys:
             new_key = rename_keys[k]
 
-        # (b) 針對 TLE_inputFileName 做特殊處理
-        if new_key == "TLE_inputFileName" and isinstance(new_value, str):
+        # (b) 針對 constellation 做特殊處理
+        if new_key == "constellation" and isinstance(new_value, str):
             # 可以用正則取得前面幾位數字
             match_tle  = re.search(r'TLE_(\d+)P', new_value) 
             match_blcc = re.search(r'blcc(\d+)x22', new_value)
