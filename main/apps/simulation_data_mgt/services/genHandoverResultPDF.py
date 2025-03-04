@@ -56,14 +56,19 @@ def genHandoverResultPDF(handover):
                     ha='right', va='top', fontsize=10)
 
         # 創建實驗條件表格
-        condition_data = [[k, str(v).replace('TLE_6P_22Sats_29deg_F1', '6 * 22')
-                     .replace('TLE_3P_22Sats_29deg_F1', '3 * 22')
-                     .replace('TLE_12P_22Sats_29deg_F7', '12 * 22')
-                     .replace('35Cell_237UT','38Cell_237UT')
-                     .replace('35Cell_300UT','38Cell_300UT')
-                     ] 
-                 for k, v in handover.handover_parameter.items()]
-        
+        condition_data = [
+            [k,
+            str(v)
+            .replace('TLE_6P_22Sats_29deg_F1', '6 * 22')
+            .replace('TLE_3P_22Sats_29deg_F1', '3 * 22')
+            .replace('TLE_12P_22Sats_29deg_F7', '12 * 22')
+            .replace('35Cell_237UT', '38Cell_237UT')
+            .replace('35Cell_300UT', '38Cell_300UT')
+            ]
+            for k, v in handover.handover_parameter.items()
+            if not (k == "gso_protection_csv" and not v)  # 直接跳過空的 gso_protection_csv
+        ]
+
         table1 = ax1.table(cellText=condition_data,
                           colLabels=['Parameter', 'Value'],
                           cellLoc='center',
