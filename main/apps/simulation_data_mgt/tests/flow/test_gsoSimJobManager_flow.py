@@ -67,6 +67,7 @@ def main():
             "handover_strategy": "MinRange",
             "handover_decision": "Nonpreemptive",
             "gsoProtectionMode": "1",
+            "gso_protection_csv": "38cell_6x22.csv",
             "beams_per_satellite": "28",
             "frequencies_per_satellite": "4",
             "cell_ut": "28Cell_220UT",
