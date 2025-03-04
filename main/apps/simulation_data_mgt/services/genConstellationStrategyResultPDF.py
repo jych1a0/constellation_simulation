@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genConstellationStrategyResultPDF(constellationStrategy):
     pdf_path = os.path.join(
@@ -12,7 +12,13 @@ def genConstellationStrategyResultPDF(constellationStrategy):
         "constellationStrategy_simulation_report.pdf"
     )
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    constellationStrategy.constellationStrategy_parameter = update_parameter(
+        constellationStrategy.constellationStrategy_parameter,
+        config_path=config_path,
+        process_name="constellationStrategy_process"
+    )
     try:
         # ========== 第 1 頁：Parameters ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))

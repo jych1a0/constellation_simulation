@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import pandas as pd
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genMultiToMultiResultPDF(multiToMulti):
     """
@@ -43,7 +43,13 @@ def genMultiToMultiResultPDF(multiToMulti):
     # 建立 PDF 路徑 (ex: multiToMulti_simulation_report.pdf)
     pdf_path = os.path.join(multiToMulti.multiToMulti_data_path, 'multiToMulti_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    multiToMulti.multiToMulti_parameter = update_parameter(
+        multiToMulti.multiToMulti_parameter,
+        config_path=config_path,
+        process_name="multiToMulti_process"
+    )
     try:
         # 第一頁：實驗條件
         fig1, ax1 = plt.subplots(figsize=(12, 6))

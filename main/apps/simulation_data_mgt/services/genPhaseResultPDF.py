@@ -5,7 +5,7 @@ import seaborn as sns
 import pandas as pd
 import numpy as np
 import os
-
+from main.utils.update_parameter import update_parameter
 def sec_to_hms(seconds: float) -> str:
     """將秒數轉為 HH:MM:SS 字串"""
     hh = int(seconds // 3600)
@@ -21,7 +21,13 @@ def genPhaseResultPDF(phase):
     """
     pdf_path = os.path.join(phase.phase_data_path, "phase_simulation_report.pdf")
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    phase.phase_parameter = update_parameter(
+        phase.phase_parameter,
+        config_path=config_path,
+        process_name="phase_process"
+    )
     try:
         # ========== 第 1 頁：參數表 (10 x 6) ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))
@@ -31,6 +37,7 @@ def genPhaseResultPDF(phase):
             [k, str(v)]
             for k, v in phase.phase_parameter.items()
         ]
+        
         table1 = ax1.table(
             cellText=param_data,
             colLabels=['Parameter', 'Value'],

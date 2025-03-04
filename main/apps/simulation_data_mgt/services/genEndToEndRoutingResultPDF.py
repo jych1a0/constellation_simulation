@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import pandas as pd
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genEndToEndRoutingResultPDF(endToEndRouting):
     """
@@ -57,7 +57,13 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
     # 建立 PDF 路徑 (ex: endToEndRouting_simulation_report.pdf)
     pdf_path = os.path.join(endToEndRouting.endToEndRouting_data_path, 'endToEndRouting_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    endToEndRouting.endToEndRouting_parameter = update_parameter(
+        endToEndRouting.endToEndRouting_parameter,
+        config_path=config_path,
+        process_name="endToEndRouting_process"
+    )
     try:
         # 第一頁：實驗條件
         fig1, ax1 = plt.subplots(figsize=(12, 6))

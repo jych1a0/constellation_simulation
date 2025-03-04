@@ -6,7 +6,7 @@ import pandas as pd
 import seaborn as sns
 import os
 import math  # 若未使用可移除
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genModifyRegenRoutingResultPDF(modifyRegenRouting):
     """
@@ -26,7 +26,13 @@ def genModifyRegenRoutingResultPDF(modifyRegenRouting):
         'modifyRegenRouting_simulation_report.pdf'
     )
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    modifyRegenRouting.modifyRegenRouting_parameter = update_parameter(
+        modifyRegenRouting.modifyRegenRouting_parameter,
+        config_path=config_path,
+        process_name="modifyRegenRouting_process"
+    )
     try:
         # ========== 第一頁：實驗條件（Parameter Table） ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))

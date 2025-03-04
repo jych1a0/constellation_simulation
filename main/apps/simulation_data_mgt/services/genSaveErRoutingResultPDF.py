@@ -4,7 +4,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genSaveErRoutingResultPDF(saveErRouting):
     """
@@ -67,7 +67,13 @@ def genSaveErRoutingResultPDF(saveErRouting):
     # 建立 PDF 路徑
     pdf_path = os.path.join(saveErRouting.saveErRouting_data_path, 'saveErRouting_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    saveErRouting.saveErRouting_parameter = update_parameter(
+        saveErRouting.saveErRouting_parameter,
+        config_path=config_path,
+        process_name="saveErRouting_process"
+    )
     try:
         # 第一頁：實驗條件
         fig1, ax1 = plt.subplots(figsize=(12, 6))

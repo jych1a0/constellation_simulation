@@ -7,7 +7,7 @@ import numpy as np
 import seaborn as sns
 import os
 import math  # <-- 新增 math
-
+from main.utils.update_parameter import update_parameter
 @log_trigger('INFO')
 def genCoverageAnalysisResultPDF(coverage):
     # 1. 取得當下時間（用在第一頁右上角的時間戳記）
@@ -16,7 +16,14 @@ def genCoverageAnalysisResultPDF(coverage):
     # 2. 生成 PDF 路徑
     pdf_path = os.path.join(coverage.coverage_data_path, 'coverage_simulation_report.pdf')
     pdf_pages = PdfPages(pdf_path)
-
+    base_dir = os.path.dirname(os.path.abspath(__file__))  
+    config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+    coverage.coverage_parameter = update_parameter(
+        coverage.coverage_parameter,
+        config_path=config_path,
+        process_name="coverage_process"
+    )
+    # 3. 開始生成 PDF 內容
     try:
         # ========== 第一頁：實驗條件 ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))

@@ -1,0 +1,88 @@
+{
+  "coverage_process": {
+    "remove_keys": ["simEndTime", "simStartTime", "leastSatCount"],
+    "rename_keys": { "TLE_inputFileName": "constellation" },
+    "override_values": {}
+  },
+  "connectedDuration_process": {
+    "remove_keys": [],
+    "rename_keys": { "TLE_inputFileName": "constellation" },
+    "override_values": {}
+  },
+  "phase_process": {
+    "remove_keys": ["ISLLinkMethod"],
+    "rename_keys": {},
+    "override_values": {}
+  },
+  "constellationStrategy_process": {
+    "remove_keys": ["ISLLinkMethod"],
+    "rename_keys": { "TLE_inputFileName": "constellation" },
+    "override_values": {}
+  },
+  "islHopping_process": {
+    "remove_keys": [],
+    "rename_keys": {
+      "degreeConstraint": "maxISLConnections",
+      "TLE_inputFileName": "constellation"
+    },
+    "override_values": {}
+  },
+  "modifyRegenRouting_process": {
+    "remove_keys": [],
+    "rename_keys": {
+      "Action": "action",
+      "degreeConstraint": "maxISLConnections",
+      "TLE_inputFileName": "constellation"
+    },
+    "override_values": {}
+  },
+  "oneToMulti_process": {
+    "remove_keys": [],
+    "rename_keys": {
+      "ratio": "transmissionVolumeRatio",
+      "multiPathCriteria": "transmissionPathDecision",
+      "TLE_inputFileName": "constellation"
+    },
+    "override_values": {}
+  },
+  "multiToMulti_process": {
+    "remove_keys": [],
+    "rename_keys": {
+      "ratio": "transmissionVolumeRatio",
+      "multiPathCriteria": "transmissionPathDecision",
+      "TLE_inputFileName": "constellation"
+    },
+    "override_values": {}
+  },
+  "saveErRouting_process": {
+    "remove_keys": [],
+    "rename_keys": {
+      "ratio": "transmissionVolumeRatio",
+      "multiPathCriteria": "transmissionPathDecision",
+      "blccVersion": "TLE_inputFileName",
+      "globalIslPacketDropRate": "ISLPacketLossRate",
+      "TLE_inputFileName": "constellation"
+    },
+    "override_values": {}
+  },
+  "endToEndRouting_process": {
+    "remove_keys": [],
+    "rename_keys": { "TLE_inputFileName": "constellation" },
+    "override_values": {}
+  },
+  "singleBeam_process": {
+    "remove_keys": [],
+    "rename_keys": { "TLE_inputFileName": "constellation" },
+    "override_values": {}
+  },
+  "gso_process": {
+    "remove_keys": ["simEndTime", "simStartTime"],
+    "rename_keys": {},
+    "override_values": {}
+  },
+  "handover_process": {
+    "remove_keys": ["simEndTime", "simStartTime"],
+    "rename_keys": {},
+    "override_values": {}
+  }
+}
