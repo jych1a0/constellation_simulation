@@ -82,7 +82,7 @@ def run_gso_simulation_async(gso_uid):
         docker_command = [
             'docker', 'run',
             '--oom-kill-disable=true',
-            '-m', '100g',
+            '-m', '150g',
             '-d',
             '--rm',
             f'--name={container_name}',
@@ -107,7 +107,7 @@ def run_gso_simulation_async(gso_uid):
         else:
             raise Exception("Unable to get container process ID")
 
-        timeout = 60 * 60
+        timeout = 60 * 60 * 8
         start_time = time.time()
 
         while True:

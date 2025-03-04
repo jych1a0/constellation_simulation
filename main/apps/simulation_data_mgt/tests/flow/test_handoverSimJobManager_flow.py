@@ -62,17 +62,17 @@ def main():
     handover_payload = {
         "handover_name": "Project A Handover",
         "handover_parameter": {
-            "constellation": "TLE_6P_22Sats_29deg_F1",
-            "handover_strategy": "MinRange",
-            "handover_decision": "Nonpreemptive",
-            "gsoProtectionMode": "0",
-            "beams_per_satellite": "28",
-            "frequencies_per_satellite": "10",
-            "cell_ut": "35Cell_300UT",
-            "simStartTime": "0",
-            "simEndTime": "600",
-            "cell_topology_mode": "dynamic",
-            "reuse_factor": "None"
+        "constellation": "TLE_6P_22Sats_29deg_F1",
+        "handover_strategy": "MinRange",
+        "handover_decision": "Nonpreemptive",
+        "gsoProtectionMode": "1",
+        "beams_per_satellite": "4",
+        "frequencies_per_satellite": "8",
+        "cell_ut": "31Cell_223UT",
+        "simStartTime": "0",
+        "simEndTime": "1",
+        "cell_topology_mode": "static",
+        "replacement_mode": "0"
         },
         "f_user_uid": user_uid
     }
