@@ -160,7 +160,7 @@ def run_handover_simulation_async(handover_uid):
             raise Exception("Unable to get container process ID")
 
         # 設置超時時間（例如：60分鐘）
-        timeout = 60 * 60  # 秒
+        timeout = 60 * 60 * 8
         start_time = time.time()
 
         while True:

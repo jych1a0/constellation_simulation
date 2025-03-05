@@ -107,7 +107,7 @@ def run_oneToMulti_simulation_async(oneToMulti_uid):
         else:
             raise Exception("Unable to get container process ID")
 
-        timeout = 60 * 60
+        timeout = 60 * 60 * 8
         start_time = time.time()
 
         while True:
