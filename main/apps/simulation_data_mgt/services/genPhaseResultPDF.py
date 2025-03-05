@@ -3,40 +3,34 @@ from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-import numpy as np
 import os
+import re
 from main.utils.update_parameter import update_parameter
-def sec_to_hms(seconds: float) -> str:
-    """將秒數轉為 HH:MM:SS 字串"""
-    hh = int(seconds // 3600)
-    mm = int((seconds % 3600) // 60)
-    ss = int(seconds % 60)
-    return f"{hh:02d}:{mm:02d}:{ss:02d}"
 
 @log_trigger('INFO')
 def genPhaseResultPDF(phase):
     """
     1. 第一頁：phase.phase_parameter 表格 (size: 10x6)
-    2. 第二頁：掃描 phase.phase_data_path 下唯一的 CSV，畫出 orbit vs minDist (散點圖 + 連線)
+    2. 第二頁：從 phase.phase_simulation_result['multiCsvResult'] 取得 {F→MinDist}，
+       用折線 (lineplot) + 點 (marker='o') 的方式繪圖，並在每個點上方顯示數值。
     """
     pdf_path = os.path.join(phase.phase_data_path, "phase_simulation_report.pdf")
     pdf_pages = PdfPages(pdf_path)
-    base_dir = os.path.dirname(os.path.abspath(__file__))  
+
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
     phase.phase_parameter = update_parameter(
         phase.phase_parameter,
         config_path=config_path,
         process_name="phase_process"
     )
+
     try:
-        # ========== 第 1 頁：參數表 (10 x 6) ========== #
+        # ========== 第 1 頁：列出參數表 ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))
         ax1.axis('off')
 
-        param_data = [
-            [k, str(v)]
-            for k, v in phase.phase_parameter.items()
-        ]
+        param_data = [[k, str(v)] for k, v in phase.phase_parameter.items()]
         
         table1 = ax1.table(
             cellText=param_data,
@@ -52,92 +46,57 @@ def genPhaseResultPDF(phase):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第 2 頁：Orbit vs MinDist 散點圖 + 連線 ========== #
-        csv_files = [f for f in os.listdir(phase.phase_data_path) if f.lower().endswith('.csv')]
-        if not csv_files:
-            print(f"[WARN] No CSV files found in {phase.phase_data_path}.")
-        elif len(csv_files) > 1:
-            print(f"[WARN] More than one CSV found, skipping chart. CSV list: {csv_files}")
+        # ========== 第 2 頁：F vs. MinDist - 折線 + 點 + 數值 ========== #
+        simulation_result = phase.phase_simulation_result
+        if not simulation_result:
+            print("[WARN] phase.phase_simulation_result is empty. No chart generated.")
         else:
-            csv_filename = csv_files[0]
-            csv_path = os.path.join(phase.phase_data_path, csv_filename)
-            print(f"[INFO] Using CSV => {csv_path}")
+            f_min_dist_map = simulation_result.get("multiCsvResult", {})
+            if not f_min_dist_map:
+                print("[WARN] multiCsvResult is empty or not found. No chart generated.")
+            else:
+                # 將 { "F1": 123.45, "F2": 98.76, ... } 轉為 DataFrame
+                df_f = pd.DataFrame(list(f_min_dist_map.items()), columns=["f_key", "min_dist"])
 
-            if os.path.exists(csv_path):
-                try:
-                    df = pd.read_csv(csv_path)
-                    # 假設要用 satId1 // 100 來得到 orbit
-                    if 'satId1' in df.columns and 'minDist' in df.columns:
-                        df['orbit'] = df['satId1'] // 100
+                # 從 f_key (如 'F1') 取出數字部分 (1) 以利排序
+                df_f['f_number'] = df_f['f_key'].str.extract(r'(\d+)').astype(int)
+                df_f.sort_values(by='f_number', inplace=True)
 
-                        # groupby orbit，找出 minDist 最小那筆資料
-                        idx_min = df.groupby('orbit')['minDist'].idxmin()
-                        df_min = df.loc[idx_min].reset_index(drop=True)
+                sns.set_style("whitegrid")
+                fig2, ax2 = plt.subplots(figsize=(10, 6))
 
-                        # 若想轉 observedTime -> HH:MM:SS
-                        if 'observedTime' in df_min.columns:
-                            df_min['observedTime_hms'] = df_min['observedTime'].apply(sec_to_hms)
+                # 折線圖 (lineplot) + marker='o' 顯示每個點
+                sns.lineplot(
+                    data=df_f,
+                    x='f_number',
+                    y='min_dist',
+                    marker='o',   # 用圓點當 marker
+                    ax=ax2
+                )
 
-                        # 為了讓連線正確依 orbit 由小到大順序繪製
-                        df_min.sort_values(by='orbit', inplace=True)
+                ax2.set_xlabel("F Value", fontsize=14)
+                ax2.set_ylabel("Min Distance", fontsize=14)
+                ax2.set_title("Minimum Distance for Each F", fontsize=16, pad=15)
 
-                        sns.set_style("whitegrid")
-                        fig2, ax2 = plt.subplots(figsize=(10, 6))
+                # x 軸顯示 "F1", "F2", ...
+                ax2.set_xticks(df_f['f_number'])
+                ax2.set_xticklabels(df_f['f_key'])
 
-                        # 先畫散點圖
-                        sns.scatterplot(
-                            data=df_min,
-                            x='orbit',
-                            y='minDist',
-                            s=150,
-                            alpha=0.9,
-                            color='blue',
-                            ax=ax2
-                        )
+                # === 在點上方加註數值 ===
+                for i, row in df_f.iterrows():
+                    ax2.annotate(
+                        # 顯示到小數點後2位，您可視需求調整
+                        text=f"{row['min_dist']:.2f}",  
+                        xy=(row['f_number'], row['min_dist']),
+                        xytext=(0, 6),          # 在 y 軸方向上偏移 6 pt
+                        textcoords="offset points",
+                        ha='center',
+                        va='bottom'
+                    )
 
-                        # 再畫連線
-                        sns.lineplot(
-                            data=df_min,
-                            x='orbit',
-                            y='minDist',
-                            color='blue',
-                            ax=ax2
-                        )
-
-                        ax2.set_xlabel("Orbit Number", fontsize=14)
-                        ax2.set_ylabel("Min Distance", fontsize=14)
-                        ax2.set_title("Minimum Distance per Orbit", fontsize=16, pad=15)
-
-                        # x 軸刻度依 df_min['orbit'].unique() 而定
-                        unique_orbits = sorted(df_min['orbit'].unique())
-                        ax2.set_xticks(unique_orbits)
-
-                        # === 範例：若想顯示 satId1 / satId2 / observedTime，可用 annotate() ===
-                        # for i, row in df_min.iterrows():
-                        #     if 'satId2' in df_min.columns:
-                        #         label_str = f"satId1={row['satId1']}, satId2={row['satId2']}"
-                        #     else:
-                        #         label_str = f"satId1={row['satId1']}"
-                        #
-                        #     if 'observedTime_hms' in row:
-                        #         label_str += f"\nT={row['observedTime_hms']}"
-                        #
-                        #     ax2.annotate(
-                        #         label_str,
-                        #         xy=(row['orbit'], row['minDist']),
-                        #         xytext=(5, 10),
-                        #         textcoords='offset points',
-                        #         fontsize=10,
-                        #         arrowprops=dict(arrowstyle='-', color='gray', alpha=0.5)
-                        #     )
-
-                        plt.tight_layout()
-                        pdf_pages.savefig(fig2)
-                        plt.close(fig2)
-                    else:
-                        print("[WARN] CSV missing 'satId1' or 'minDist' columns, cannot plot orbit chart.")
-                except Exception as e:
-                    print(f"[WARN] Failed to generate Phase scatter chart. Detail: {str(e)}")
+                plt.tight_layout()
+                pdf_pages.savefig(fig2)
+                plt.close(fig2)
 
     except Exception as e:
         print(f"[ERROR] genPhaseResultPDF => {str(e)}")
