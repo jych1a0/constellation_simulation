@@ -2,9 +2,9 @@ from main.utils.logger import log_trigger, log_writer
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 import os
 from main.utils.update_parameter import update_parameter
+
 @log_trigger('INFO')
 def genConstellationStrategyResultPDF(constellationStrategy):
     pdf_path = os.path.join(
@@ -12,15 +12,19 @@ def genConstellationStrategyResultPDF(constellationStrategy):
         "constellationStrategy_simulation_report.pdf"
     )
     pdf_pages = PdfPages(pdf_path)
+
     base_dir = os.path.dirname(os.path.abspath(__file__))  
     config_path = os.path.join(base_dir, "update_parameter", "dynamic_config.json")
+
+    # 更新動態參數
     constellationStrategy.constellationStrategy_parameter = update_parameter(
         constellationStrategy.constellationStrategy_parameter,
         config_path=config_path,
         process_name="constellationStrategy_process"
     )
+
     try:
-        # ========== 第 1 頁：Parameters ========== #
+        # ========== Page 1: Parameters ========== #
         fig1, ax1 = plt.subplots(figsize=(10, 6))
         ax1.axis('off')
 
@@ -42,84 +46,144 @@ def genConstellationStrategyResultPDF(constellationStrategy):
         pdf_pages.savefig(fig1)
         plt.close(fig1)
 
-        # ========== 第 2 頁：處理 CSV 生成圖表 ========== #
-        csv_list = [f for f in os.listdir(constellationStrategy.constellationStrategy_data_path) if f.lower().endswith('.csv')]
+        # 掃描目錄下的 CSV
+        csv_list = [f for f in os.listdir(constellationStrategy.constellationStrategy_data_path) 
+                    if f.lower().endswith('.csv')]
         if not csv_list:
             print(f"[WARN] No CSV files found in: {constellationStrategy.constellationStrategy_data_path}")
         else:
-            constellationStrategy_csv_path = os.path.join(constellationStrategy.constellationStrategy_data_path, csv_list[0])
-            print(f"[INFO] Using CSV: {constellationStrategy_csv_path}")
+            print(f"[INFO] Found CSV files: {csv_list}")
 
-        if os.path.exists(constellationStrategy_csv_path):
+        # --------------- Page 2: Max Distance Between Adjacent Orbits --------------- #
+        dist_csv_path = None
+        for csv_filename in csv_list:
+            tmp_path = os.path.join(constellationStrategy.constellationStrategy_data_path, csv_filename)
             try:
-                df = pd.read_csv(constellationStrategy_csv_path)
-                
-                # 先檢查欄位是否包含預期欄位
-                required_cols = {'satId', 'stdDiffA', 'stdDiffE', 'stdDiffR'}
-                df_cols = set(df.columns)
-                
-                if required_cols.issubset(df_cols):
-                    # --------- 舊邏輯：繪製 stdDiffA, stdDiffE, stdDiffR --------- #
-                    fig2, ax2 = plt.subplots(figsize=(10, 6))
-                    sns.set_style("whitegrid")
+                df_temp = pd.read_csv(tmp_path)
+                if {'satId', 'maxDist'}.issubset(df_temp.columns):
+                    dist_csv_path = tmp_path
+                    break  # 只取第一個符合條件的 CSV
+            except:
+                pass
 
-                    ax2.plot(df["satId"], df["stdDiffA"], marker='o', label='stdDiffA')
-                    ax2.plot(df["satId"], df["stdDiffE"], marker='o', label='stdDiffE')
-                    ax2.plot(df["satId"], df["stdDiffR"], marker='o', label='stdDiffR')
+        if dist_csv_path is not None and os.path.exists(dist_csv_path):
+            try:
+                df_dist = pd.read_csv(dist_csv_path)
+                fig2, ax2 = plt.subplots(figsize=(10, 6))
 
-                    # 找出 stdDiffR 最大的那一筆資料
-                    max_r_index = df["stdDiffR"].idxmax()
-                    max_r_sat_id = df.loc[max_r_index, "satId"]
-                    # (可依需求對 max_r_sat_id 做額外標註)
+                ax2.plot(df_dist["satId"], df_dist["maxDist"], marker='o', label='maxDist')
+                ax2.set_xlabel("Satellite ID (satId)", fontsize=12)
+                ax2.set_ylabel("Max Distance", fontsize=12)
+                ax2.set_title("Max Distance Between Adjacent Orbits", fontsize=14)
 
-                    ax2.set_xlabel("Satellite ID (satId)", fontsize=12)
-                    ax2.set_ylabel("Standardized Value", fontsize=12)
-                    ax2.set_title("Adjacent Orbit Satellites AER Variation Range", fontsize=14)
+                # 設置 x 軸刻度
+                ax2.set_xticks(df_dist["satId"])
+                ax2.set_xticklabels(df_dist["satId"], rotation=0)
 
-                    # 設置 x 軸刻度
-                    ax2.set_xticks(df["satId"])
-                    ax2.set_xticklabels(df["satId"], rotation=0)
+                # 在點上標示數值
+                for i, val in enumerate(df_dist["maxDist"]):
+                    x = df_dist["satId"].iloc[i]
+                    ax2.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
 
-                    ax2.grid(True, which='major', linestyle='-', alpha=0.6)
-                    ax2.grid(True, which='minor', linestyle=':', alpha=0.3)
-                    ax2.legend(loc='best')
+                ax2.grid(True, which='major', linestyle='-', alpha=0.6)
+                ax2.grid(True, which='minor', linestyle=':', alpha=0.3)
+                ax2.legend(loc='best')
 
-                    plt.tight_layout()
-                    pdf_pages.savefig(fig2)
-                    plt.close(fig2)
-
-                else:
-                    # --------- 新邏輯：沒有預期欄位，改用 maxDist vs satId --------- #
-                    print(f"[WARN] Missing required columns. Need {required_cols}, found {df.columns.tolist()}")
-                    
-                    # 檢查是否有 satId, maxDist
-                    alt_required_cols = {'satId', 'maxDist'}
-                    if alt_required_cols.issubset(df_cols):
-                        fig3, ax3 = plt.subplots(figsize=(10, 6))
-                        sns.set_style("whitegrid")
-
-                        ax3.plot(df["satId"], df["maxDist"], marker='o', color='red', label='maxDist')
-
-                        ax3.set_xlabel("Satellite ID (satId)", fontsize=12)
-                        ax3.set_ylabel("Max Distance", fontsize=12)
-                        ax3.set_title("Max Dist Variation Range", fontsize=14)
-
-                        ax3.set_xticks(df["satId"])
-                        ax3.set_xticklabels(df["satId"], rotation=0)
-                        ax3.grid(True, which='major', linestyle='-', alpha=0.6)
-                        ax3.grid(True, which='minor', linestyle=':', alpha=0.3)
-                        ax3.legend(loc='best')
-
-                        plt.tight_layout()
-                        pdf_pages.savefig(fig3)
-                        plt.close(fig3)
-                    else:
-                        print(f"[WARN] The CSV also does not contain the alternate required columns => {alt_required_cols}")
+                plt.tight_layout()
+                pdf_pages.savefig(fig2)
+                plt.close(fig2)
 
             except Exception as e:
-                print(f"[WARN] Failed to plot data. Error: {str(e)}")
+                print(f"[WARN] Failed to plot distance data. Error: {str(e)}")
         else:
-            print(f"[WARN] CSV not found => {constellationStrategy_csv_path}")
+            print("[INFO] No CSV file found that contains 'satId' and 'maxDist'. Skipping page 2.")
+
+        # --------------- 找 AER CSV (含 diffA/diffE/diffR 與 stdDiffA/stdDiffE/stdDiffR) --------------- #
+        aer_csv_path = None
+        for csv_filename in csv_list:
+            tmp_path = os.path.join(constellationStrategy.constellationStrategy_data_path, csv_filename)
+            try:
+                df_temp = pd.read_csv(tmp_path)
+                # 是否同時具備 diffA, diffE, diffR，以及 stdDiffA, stdDiffE, stdDiffR
+                if {'satId', 'diffA', 'diffE', 'diffR', 
+                    'stdDiffA', 'stdDiffE', 'stdDiffR'}.issubset(df_temp.columns):
+                    aer_csv_path = tmp_path
+                    break
+            except:
+                pass
+
+        # --------------- Page 3: Non-Standardized AER --------------- #
+        # --------------- Page 4: Standardized AER --------------- #
+        if aer_csv_path is not None and os.path.exists(aer_csv_path):
+            try:
+                df_aer = pd.read_csv(aer_csv_path)
+
+                # --- 第 3 頁：非標準化 AER (diffA, diffE, diffR) ---
+                fig3, ax3 = plt.subplots(figsize=(10, 6))
+                ax3.plot(df_aer["satId"], df_aer["diffA"], marker='o', label='diffA')
+                ax3.plot(df_aer["satId"], df_aer["diffE"], marker='o', label='diffE')
+                ax3.plot(df_aer["satId"], df_aer["diffR"], marker='o', label='diffR')
+
+                ax3.set_xlabel("Satellite ID (satId)", fontsize=12)
+                ax3.set_ylabel("AER values (non-standardized)", fontsize=12)
+                ax3.set_title("AER Variation Range (Non-Standardized) Between Adjacent Orbits", fontsize=14)
+
+                ax3.set_xticks(df_aer["satId"])
+                ax3.set_xticklabels(df_aer["satId"], rotation=0)
+
+                # 在點上標示數值
+                for i, val in enumerate(df_aer["diffA"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax3.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+                for i, val in enumerate(df_aer["diffE"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax3.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+                for i, val in enumerate(df_aer["diffR"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax3.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+
+                ax3.grid(True, which='major', linestyle='-', alpha=0.6)
+                ax3.grid(True, which='minor', linestyle=':', alpha=0.3)
+                ax3.legend(loc='best')
+                plt.tight_layout()
+                pdf_pages.savefig(fig3)
+                plt.close(fig3)
+
+                # --- 第 4 頁：標準化 AER (stdDiffA, stdDiffE, stdDiffR) ---
+                fig4, ax4 = plt.subplots(figsize=(10, 6))
+                ax4.plot(df_aer["satId"], df_aer["stdDiffA"], marker='o', label='stdDiffA')
+                ax4.plot(df_aer["satId"], df_aer["stdDiffE"], marker='o', label='stdDiffE')
+                ax4.plot(df_aer["satId"], df_aer["stdDiffR"], marker='o', label='stdDiffR')
+
+                ax4.set_xlabel("Satellite ID (satId)", fontsize=12)
+                ax4.set_ylabel("AER values (standardized)", fontsize=12)
+                ax4.set_title("AER Variation Range (Standardized) Between Adjacent Orbits", fontsize=14)
+
+                ax4.set_xticks(df_aer["satId"])
+                ax4.set_xticklabels(df_aer["satId"], rotation=0)
+
+                # 在點上標示數值
+                for i, val in enumerate(df_aer["stdDiffA"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax4.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+                for i, val in enumerate(df_aer["stdDiffE"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax4.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+                for i, val in enumerate(df_aer["stdDiffR"]):
+                    x = df_aer["satId"].iloc[i]
+                    ax4.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+
+                ax4.grid(True, which='major', linestyle='-', alpha=0.6)
+                ax4.grid(True, which='minor', linestyle=':', alpha=0.3)
+                ax4.legend(loc='best')
+                plt.tight_layout()
+                pdf_pages.savefig(fig4)
+                plt.close(fig4)
+
+            except Exception as e:
+                print(f"[WARN] Failed to plot AER data. Error: {str(e)}")
+        else:
+            print("[INFO] No CSV file found that contains both diffA/diffE/diffR and stdDiffA/stdDiffE/stdDiffR. Skipping pages 3 & 4.")
 
     except Exception as e:
         print(f"[ERROR] genConstellationStrategyResultPDF => {str(e)}")
