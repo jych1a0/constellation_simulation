@@ -20,10 +20,6 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
 
     report_metrics = {
         'Metric': [
-            'handover_strategy',
-            'handover_decision',
-            'beam_count',
-            'handover_count',
             'throughput',
             'latency',
             'hop',
@@ -31,14 +27,8 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
             'loss',
             'access_loss',
             'feeder_loss',
-            'rx_buffer',
-            'tx_buffer'
         ],
-        'Value': [
-            str(sim_results['handover_strategy']),       
-            str(sim_results['handover_decision']),       
-            str(sim_results['beam_count']),              
-            str(sim_results['handover_count']),          
+        'Value': [                           
             f"{float(sim_results['throughput']):.4f}",   
             f"{float(sim_results['latency']):.4f}",
             f"{float(sim_results['hop']):.4f}",
@@ -46,8 +36,6 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
             f"{float(sim_results['loss']):.4f}",
             f"{float(sim_results['access_loss']):.4f}",
             f"{float(sim_results['feeder_loss']):.4f}",
-            str(sim_results['rx_buffer']),               # 可能為整數
-            str(sim_results['tx_buffer'])                # 可能為整數
         ]
     }
 

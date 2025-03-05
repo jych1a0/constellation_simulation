@@ -111,16 +111,34 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
         start_time = time.time()
 
         while True:
+            # 檢查是否超時
             if time.time() - start_time > timeout:
                 print(f"Simulation timeout for endToEndRouting_uid: {endToEndRouting_uid}")
                 terminate_endToEndRouting_sim_job(endToEndRouting_uid)
                 return
 
-            container_check = subprocess.run(['docker', 'ps', '-q', '-f', f'name={container_name}'],
-                                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            # 檢查容器是否存在
+            container_check = subprocess.run(
+                ['docker', 'ps', '-q', '-f', f'name={container_name}'],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
             container_exists = bool(container_check.stdout.decode().strip())
 
+            # 檢查是否有結果資料夾與檔案
             results_exist = os.path.exists(simulation_result_dir) and os.listdir(simulation_result_dir)
+
+            # == 這裡加上除錯訊息 ==
+            print("=== Debug Info ===")
+            print(f"Time elapsed: {time.time() - start_time:.2f}s / Timeout: {timeout}s")
+            print(f"container_exists: {container_exists}")
+            print(f"simulation_result_dir: {simulation_result_dir}")
+            if os.path.exists(simulation_result_dir):
+                print(f"simulation_result_dir contents: {os.listdir(simulation_result_dir)}")
+            else:
+                print("simulation_result_dir does not exist yet.")
+            print(f"results_exist: {bool(results_exist)}")
+            print("==================\n")
 
             if results_exist and not container_exists:
                 try:
@@ -147,6 +165,7 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
                     error_message = f"Error processing simulation results: {str(e)}"
                     obj.endToEndRouting_status = "error"
                     obj.save()
+                    print(error_message)
 
             if not container_exists and not results_exist:
                 raise Exception("Container stopped but no results found, simulation_failed")
