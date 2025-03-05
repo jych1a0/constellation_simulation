@@ -60,10 +60,15 @@ def main():
     endToEndRouting_payload = {
         "endToEndRouting_name": "Project A endToEndRouting",
         "endToEndRouting_parameter": {
-            "useCaseVersion": "237UTsSatelliteLB",
-            "TLE_inputFileName": "TLE_6P_22Sats_29deg_F1.txt",
-            "handoverDecision": "SatelliteLoadBalancing",
-            "beamBandwidth": "216000000"
+            "TLE_inputFileName": "TLE_12P_22Sats_29deg_F7.txt",
+            "cell_ut": "31Cell",
+            "flBeamCount": "1",
+            "islBandwidth": "0.1",
+            "gsoProtection": "1",
+            "beamCount": "16",
+            "handoverStrategy": "MaxVisibleTimeCoverage",
+            "handoverDecision": "HybridLoadBalancing",
+            "trafficDirection": "2"
         },
         "f_user_uid": user_uid
     }
