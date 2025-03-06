@@ -134,30 +134,30 @@ def genIslHoppingResultPDF(islHopping):
                         print(f"[WARN] 缺少欄位: {required_cols_3}, 無法生成第 3 頁圖表。")
 
                     # ========== 第四頁：ISLBreak vs runtime ========== #
-                    required_cols_4 = {"ISLBreak", "runtime"}
-                    if required_cols_4.issubset(df.columns):
-                        fig4, ax4 = plt.subplots(figsize=(10, 6))
-                        sns.set_style("whitegrid")
+                    # required_cols_4 = {"ISLBreak", "runtime"}
+                    # if required_cols_4.issubset(df.columns):
+                    #     fig4, ax4 = plt.subplots(figsize=(10, 6))
+                    #     sns.set_style("whitegrid")
 
-                        ax4.plot(
-                            df["ISLBreak"],
-                            df["runtime"],
-                            color='red',
-                            marker='o',
-                            linewidth=2,
-                            label='runtime'
-                        )
-                        ax4.set_xlabel('ISLBreak', fontsize=14)
-                        ax4.set_ylabel('Runtime', fontsize=14)
-                        ax4.tick_params(axis='both', labelsize=12)
-                        ax4.legend(loc='upper left', fontsize=12)
+                    #     ax4.plot(
+                    #         df["ISLBreak"],
+                    #         df["runtime"],
+                    #         color='red',
+                    #         marker='o',
+                    #         linewidth=2,
+                    #         label='runtime'
+                    #     )
+                    #     ax4.set_xlabel('ISLBreak', fontsize=14)
+                    #     ax4.set_ylabel('Runtime', fontsize=14)
+                    #     ax4.tick_params(axis='both', labelsize=12)
+                    #     ax4.legend(loc='upper left', fontsize=12)
 
-                        plt.title('ISLBreak vs. runtime', fontsize=16, pad=15)
-                        plt.tight_layout()
-                        pdf_pages.savefig(fig4)
-                        plt.close(fig4)
-                    else:
-                        print(f"[WARN] 缺少欄位: {required_cols_4}, 無法生成第 4 頁圖表。")
+                    #     plt.title('ISLBreak vs. runtime', fontsize=16, pad=15)
+                    #     plt.tight_layout()
+                    #     pdf_pages.savefig(fig4)
+                    #     plt.close(fig4)
+                    # else:
+                    #     print(f"[WARN] 缺少欄位: {required_cols_4}, 無法生成第 4 頁圖表。")
 
                 except Exception as e:
                     print(f"[WARN] Failed to generate ISL Hopping charts. Detail: {str(e)}")
