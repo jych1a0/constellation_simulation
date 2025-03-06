@@ -57,6 +57,7 @@ def main():
     oneToMulti_payload = {
         "oneToMulti_name": "Project A oneToMulti",  # 自行決定一個名稱
         "oneToMulti_parameter": {
+            "constellation": "3x22",
             "multiPathCriteria": "throughput",
             "ratio": 0.0001
         },

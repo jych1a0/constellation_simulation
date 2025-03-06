@@ -57,6 +57,7 @@ def main():
     multiToMulti_payload = {
         "multiToMulti_name": "Project A multiToMulti",
         "multiToMulti_parameter": {
+            "constellation": "3x22",
             "multiPathCriteria": "throughput",
             "ratio": 0.0001
         },
