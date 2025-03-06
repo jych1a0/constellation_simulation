@@ -57,23 +57,26 @@ def genHandoverResultPDF(handover):
 
         # 創建實驗條件表格
         condition_data = [
-            [k,
-            str(v)
-            .replace('TLE_6P_22Sats_29deg_F1', '6 * 22')
-            .replace('TLE_3P_22Sats_29deg_F1', '3 * 22')
-            .replace('TLE_12P_22Sats_29deg_F7', '12 * 22')
-            .replace('35Cell_237UT', '38Cell_237UT')
-            .replace('35Cell_300UT', '38Cell_300UT')
+            [
+                k,
+                str(v)
+                .replace('TLE_6P_22Sats_29deg_F1', '6 * 22')
+                .replace('TLE_3P_22Sats_29deg_F1', '3 * 22')
+                .replace('TLE_12P_22Sats_29deg_F7', '12 * 22')
+                .replace('35Cell_237UT', '38Cell_237UT')
+                .replace('35Cell_300UT', '38Cell_300UT')
             ]
             for k, v in handover.handover_parameter.items()
-            if not (k == "gso_protection_csv" and not v)  # 直接跳過空的 gso_protection_csv
+            if k != "gso_protection_csv"  # 當鍵為 gso_protection_csv 時就不加入
         ]
 
-        table1 = ax1.table(cellText=condition_data,
-                          colLabels=['Parameter', 'Value'],
-                          cellLoc='center',
-                          loc='center',
-                          colWidths=[0.4, 0.4])
+        table1 = ax1.table(
+            cellText=condition_data,
+            colLabels=['Parameter', 'Value'],
+            cellLoc='center',
+            loc='center',
+            colWidths=[0.4, 0.4]
+        )
 
         # 設置表格樣式
         table1.auto_set_font_size(False)
