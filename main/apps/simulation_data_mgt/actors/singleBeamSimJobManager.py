@@ -87,7 +87,7 @@ def run_singleBeam_simulation_async(singleBeam_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'handoversimulationimage_test:latest',
+            'handoverImage',
             'bash', '-c', simulation_command
         ]
 

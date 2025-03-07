@@ -87,7 +87,7 @@ def run_oneToMulti_simulation_async(oneToMulti_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'chiao2',
+            'routingImage',
             'bash', '-c', simulation_command
         ]
 

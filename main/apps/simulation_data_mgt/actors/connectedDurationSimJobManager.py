@@ -87,7 +87,7 @@ def run_connectedDuration_simulation_async(connectedDuration_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'handoversimulationimage_test',
+            'handoverImage',
             'bash', '-c', simulation_command
         ]
 
