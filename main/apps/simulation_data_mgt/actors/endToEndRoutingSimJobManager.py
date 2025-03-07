@@ -87,7 +87,7 @@ def run_endToEndRouting_simulation_async(endToEndRouting_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'routingImage',
+            'routingimage',
             'bash', '-c', simulation_command
         ]
 

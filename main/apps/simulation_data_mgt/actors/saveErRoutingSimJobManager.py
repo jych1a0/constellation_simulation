@@ -87,7 +87,7 @@ def run_saveErRouting_simulation_async(saveErRouting_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'routingImage',
+            'routingimage',
             'bash', '-c', simulation_command
         ]
 

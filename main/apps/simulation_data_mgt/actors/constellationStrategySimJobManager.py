@@ -87,7 +87,7 @@ def run_constellationStrategy_simulation_async(constellationStrategy_uid):
             '--rm',
             f'--name={container_name}',
             '-v', f'{os.path.abspath(simulation_result_dir)}:/root/mercury/build/service/output',
-            'handoverImage',
+            'handoverimage',
             'bash', '-c', simulation_command
         ]
 
