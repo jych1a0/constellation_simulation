@@ -69,7 +69,7 @@ def main():
         "gso_protection_csv": "38cell_6x22.csv",
         "beams_per_satellite": "4",
         "frequencies_per_satellite": "8",
-        "cell_ut": "31Cell_223UT",
+        "cell_ut": "31Cell_220UT",
         "simStartTime": "0",
         "simEndTime": "1",
         "cell_topology_mode": "static",
