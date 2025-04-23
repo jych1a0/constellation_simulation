@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+分析 MultiToMulti（多對多路由）模組的模擬結果，提供統計、視覺化等功能。
+"""
 from main.utils.logger import log_trigger, log_writer
 import os
 import pandas as pd

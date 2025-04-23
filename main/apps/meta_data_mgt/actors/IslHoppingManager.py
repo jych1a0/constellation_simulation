@@ -9,6 +9,10 @@ import os
 import threading
 
 class IslHoppingManager:
+    """
+    負責處理 ISL（星間鏈路跳接）相關的業務邏輯與 API 請求，
+    包含建立、查詢、更新、刪除等操作。
+    """
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

@@ -5,11 +5,14 @@ import json
 from main.apps.meta_data_mgt.models.UserModel import User
 from main.apps.meta_data_mgt.models.HandoverModel import Handover
 from main.utils.logger import log_trigger, log_writer
-from django.views.decorators.csrf import csrf_exempt
 import os
 import threading
 
 class HandoverManager:
+    """
+    負責處理 Handover（切換）相關的業務邏輯與 API 請求，
+    包含建立、查詢、更新、刪除等操作。
+    """
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

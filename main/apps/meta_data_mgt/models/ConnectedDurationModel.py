@@ -3,8 +3,10 @@ import uuid
 from django.utils import timezone
 from main.apps.meta_data_mgt.models.UserModel import User
 
-
 class ConnectedDuration(models.Model):
+    """
+    連線時長資料模型，記錄每個使用者的模擬參數、狀態、結果與資料路徑。
+    """
     id = models.AutoField(primary_key=True)
     connectedDuration_uid = models.UUIDField(default=uuid.uuid4, unique=True)
     connectedDuration_name = models.CharField(max_length=255)

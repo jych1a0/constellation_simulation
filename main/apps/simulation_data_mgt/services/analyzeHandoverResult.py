@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+分析 Handover（切換）模組的模擬結果，提供統計、視覺化等功能。
+"""
 from main.utils.logger import log_trigger, log_writer
 import os
 import pandas as pd
@@ -158,4 +162,3 @@ def analyzeHandoverResult(simulation_result_dir):
     except Exception as e:
         print(f"Error calculating results: {str(e)}")
         return
-

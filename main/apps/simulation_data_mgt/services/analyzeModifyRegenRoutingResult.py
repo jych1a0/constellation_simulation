@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+分析 ModifyRegenRouting（再生路由修改）模組的模擬結果，提供統計、視覺化等功能。
+"""
 import os
 import pandas as pd
 

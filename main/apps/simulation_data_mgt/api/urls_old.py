@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+（舊版）simulation_data_mgt 應用的 API 路由，保留歷史相容性用。
+"""
 from django.urls import path
 from main.apps.simulation_data_mgt.actors.handoverSimJobManager import handoverSimJobManager
 

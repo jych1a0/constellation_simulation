@@ -3,6 +3,9 @@ import uuid
 from django.utils import timezone
 
 class User(models.Model):
+    """
+    使用者資料模型，包含帳號、密碼、信箱、建立與登入時間等屬性。
+    """
     id = models.AutoField(primary_key=True)
     user_uid = models.UUIDField(default=uuid.uuid4, unique=True)
     user_name = models.CharField(max_length=255, unique=True)

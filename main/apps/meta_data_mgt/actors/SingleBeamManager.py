@@ -9,6 +9,10 @@ import os
 import threading
 
 class SingleBeamManager:
+    """
+    負責處理 SingleBeam（單波束）相關的業務邏輯與 API 請求，
+    包含建立、查詢、更新、刪除等操作。
+    """
     @log_trigger('INFO')
     @require_http_methods(["POST"])
     @csrf_exempt

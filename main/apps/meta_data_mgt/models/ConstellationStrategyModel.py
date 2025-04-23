@@ -3,8 +3,10 @@ import uuid
 from django.utils import timezone
 from main.apps.meta_data_mgt.models.UserModel import User
 
-
 class ConstellationStrategy(models.Model):
+    """
+    星座策略資料模型，記錄策略參數、狀態、結果與資料路徑。
+    """
     id = models.AutoField(primary_key=True)
     constellationStrategy_uid = models.UUIDField(default=uuid.uuid4, unique=True)
     constellationStrategy_name = models.CharField(max_length=255)

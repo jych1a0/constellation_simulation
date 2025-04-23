@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+定義 meta_data_mgt 應用的 API 路由，負責將 HTTP 請求導向對應的 view 處理函式。
+"""
 from django.urls import path
 from main.apps.meta_data_mgt.actors.UserManager import UserManager
 from main.apps.meta_data_mgt.actors.HandoverManager import HandoverManager

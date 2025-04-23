@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""
+分析 ConnectedDuration（連線時長）模組的模擬結果，提供統計、視覺化等功能。
+"""
 from main.utils.logger import log_trigger, log_writer
 import pandas as pd
 import os

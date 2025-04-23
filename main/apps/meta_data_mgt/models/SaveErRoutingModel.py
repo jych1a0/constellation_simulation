@@ -3,8 +3,10 @@ import uuid
 from django.utils import timezone
 from main.apps.meta_data_mgt.models.UserModel import User
 
-
 class SaveErRouting(models.Model):
+    """
+    ER 路由儲存資料模型，記錄每個使用者的模擬參數、狀態、結果與資料路徑。
+    """
     id = models.AutoField(primary_key=True)
     saveErRouting_uid = models.UUIDField(default=uuid.uuid4, unique=True)
     saveErRouting_name = models.CharField(max_length=255)
