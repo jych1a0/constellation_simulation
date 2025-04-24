@@ -22,11 +22,11 @@ def genMultiToMultiResultPDF(multiToMulti):
     # 以下示範列出 throughput, latency, hop, distance, path_switch
     report_metrics = {
         'Metric': [
-            'Throughput',
-            'Latency',
-            'Hop',
-            'Distance',
-            'Path Switch'
+            'Throughput (Mbps)',
+            'Latency (ms)',
+            'Hop (count)',
+            'Distance (km)',
+            'Path Switch (count)'
         ],
         'Value': [
             f"{float(sim_results['throughput']):.4f}",

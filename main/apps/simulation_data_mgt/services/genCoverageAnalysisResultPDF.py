@@ -82,7 +82,7 @@ def genCoverageAnalysisResultPDF(coverage):
                     )
 
                     ax2.set_xlabel('Latitude (°)', fontsize=14)
-                    ax2.set_ylabel('Daily Coverage Time (seconds)', fontsize=14)
+                    ax2.set_ylabel('Daily Coverage Time (s)', fontsize=14)
                     ax2.tick_params(axis='both', labelsize=12)
 
                     # 1) 根據檔案動態決定刻度範圍
@@ -113,7 +113,7 @@ def genCoverageAnalysisResultPDF(coverage):
 
                     # 第二軸（小時）
                     ax3 = ax2.twinx()
-                    ax3.set_ylabel('Time (hours)', fontsize=14)
+                    ax3.set_ylabel('Time (hr)', fontsize=14)
                     ax3.tick_params(axis='y', labelsize=12)
                     ax3.set_ylim(0, 24)
 

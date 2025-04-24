@@ -20,13 +20,13 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
 
     report_metrics = {
         'Metric': [
-            'throughput',
-            'latency',
-            'hop',
-            'distance',
-            'loss',
-            'access_loss',
-            'feeder_loss',
+            'Throughput (Mbps)',
+            'Latency (ms)',
+            'Hop (count)',
+            'Distance (km)',
+            'Loss',
+            'Access Loss',
+            'Feeder Loss',
         ],
         'Value': [                           
             f"{float(sim_results['throughput']):.4f}",   

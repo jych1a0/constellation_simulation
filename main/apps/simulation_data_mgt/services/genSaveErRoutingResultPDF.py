@@ -21,10 +21,10 @@ def genSaveErRoutingResultPDF(saveErRouting):
     # (注意某些鍵有前置空白，如 ' loss (isl pkt drop)'，請確認在實際字典中確實存在)
     report_metrics = {
         'Metric': [
-            'throughput',
-            'latency',
-            'hop',
-            'distance',
+            'Throughput (Mbps)',
+            'Latency (ms)',
+            'Hop (count)',
+            'Distance (km)',
             'loss (total)',
             'loss (isl break)',
             'loss (buffer full)',
@@ -37,7 +37,7 @@ def genSaveErRoutingResultPDF(saveErRouting):
             'rx_buffer',
             'tx_buffer',
             'blcc',
-            'path_switch'
+            'path_switch (count)'
         ],
         'Value': [
             f"{float(sim_results['throughput']):.4f}",

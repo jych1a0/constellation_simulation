@@ -73,8 +73,8 @@ def genConstellationStrategyResultPDF(constellationStrategy):
 
                 ax2.plot(df_dist["satId"], df_dist["maxDist"], marker='o', label='maxDist')
                 ax2.set_xlabel("Satellite ID (satId)", fontsize=12)
-                ax2.set_ylabel("Max Distance", fontsize=12)
-                ax2.set_title("Max Distance Between Adjacent Orbits", fontsize=14)
+                ax2.set_ylabel("Max Distance (km)", fontsize=12)
+                ax2.set_title("Max Distance Between Adjacent Orbits (km)", fontsize=14)
 
                 # 設置 x 軸刻度
                 ax2.set_xticks(df_dist["satId"])
@@ -83,7 +83,7 @@ def genConstellationStrategyResultPDF(constellationStrategy):
                 # 在點上標示數值
                 for i, val in enumerate(df_dist["maxDist"]):
                     x = df_dist["satId"].iloc[i]
-                    ax2.text(x, val, f"{val:.2f}", ha="center", va="bottom", fontsize=9)
+                    ax2.text(x, val, f"{val:.2f} km", ha="center", va="bottom", fontsize=9)
 
                 ax2.grid(True, which='major', linestyle='-', alpha=0.6)
                 ax2.grid(True, which='minor', linestyle=':', alpha=0.3)

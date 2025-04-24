@@ -75,8 +75,8 @@ def genPhaseResultPDF(phase):
                 )
 
                 ax2.set_xlabel("F Value", fontsize=14)
-                ax2.set_ylabel("Min Distance", fontsize=14)
-                ax2.set_title("Minimum Distance for Each F", fontsize=16, pad=15)
+                ax2.set_ylabel("Min Distance (km)", fontsize=14)
+                ax2.set_title("Minimum Distance for Each F (km)", fontsize=16, pad=15)
 
                 # x 軸顯示 "F1", "F2", ...
                 ax2.set_xticks(df_f['f_number'])

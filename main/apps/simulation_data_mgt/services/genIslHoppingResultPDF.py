@@ -122,11 +122,11 @@ def genIslHoppingResultPDF(islHopping):
                             label='avgDistance'
                         )
                         ax3.set_xlabel('ISLBreak', fontsize=14)
-                        ax3.set_ylabel('Average Distance', fontsize=14)
+                        ax3.set_ylabel('Average Distance (km)', fontsize=14)
                         ax3.tick_params(axis='both', labelsize=12)
                         ax3.legend(loc='upper left', fontsize=12)
 
-                        plt.title('ISLBreak vs. avgDistance', fontsize=16, pad=15)
+                        plt.title('ISLBreak vs. avgDistance (km)', fontsize=16, pad=15)
                         plt.tight_layout()
                         pdf_pages.savefig(fig3)
                         plt.close(fig3)
