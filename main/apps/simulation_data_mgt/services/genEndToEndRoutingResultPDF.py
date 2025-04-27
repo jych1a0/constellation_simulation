@@ -20,7 +20,7 @@ def genEndToEndRoutingResultPDF(endToEndRouting):
 
     report_metrics = {
         'Metric': [
-            'Throughput (Mbps)',
+            'Throughput (bps)',
             'Latency (ms)',
             'Hop (count)',
             'Distance (km)',

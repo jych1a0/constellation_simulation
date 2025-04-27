@@ -22,7 +22,7 @@ def genOneToMultiResultPDF(oneToMulti):
     # 以下示範列出 throughput, latency, hop, distance, path_switch
     report_metrics = {
         'Metric': [
-            'Throughput (Mbps)',
+            'Throughput (bps)',
             'Latency (ms)',
             'Hop (count)',
             'Distance (km)',

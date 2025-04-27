@@ -21,7 +21,7 @@ def genSaveErRoutingResultPDF(saveErRouting):
     # (注意某些鍵有前置空白，如 ' loss (isl pkt drop)'，請確認在實際字典中確實存在)
     report_metrics = {
         'Metric': [
-            'Throughput (Mbps)',
+            'Throughput (bps)',
             'Latency (ms)',
             'Hop (count)',
             'Distance (km)',
